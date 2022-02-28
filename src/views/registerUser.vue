@@ -71,7 +71,7 @@
                   v-model="zipCode"
                 />
                 <label for="zipcode">郵便番号</label>
-                <button class="btn" type="button">
+                <button class="btn" type="button" v-on:click="getAddress">
                   <span>住所検索</span>
                 </button>
               </div>
@@ -239,6 +239,20 @@ export default class XXXComponent extends Vue {
       this.errorMessage = "登録できませんでした";
     }
   }
+
+  async getAddress(): Promise<void> {
+    require("axios");
+
+    const response = await axios.get("https://zipcoda.net/api", {
+      adapter: require("axios-jsonp"),
+      params: {
+        zipcode: this.zipCode.replace("-", ""),
+      },
+    });
+
+    this.address = response.data.items[0].address;
+  }
+
   reset(): void {
     this.lastName = "";
     this.firstName = "";
