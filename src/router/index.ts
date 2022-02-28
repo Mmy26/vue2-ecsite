@@ -14,6 +14,10 @@ const routes: Array<RouteConfig> = [
     path: "*",
     component: () => import("../views/About.vue"),
   },
+  {
+    path: "resisterUser",
+    component: () => import("../views/resisterUser.vue"),
+  },
 ];
 
 const router = new VueRouter({
