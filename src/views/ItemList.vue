@@ -38,16 +38,25 @@ import { Item } from "@/type/item";
 import { Component, Vue } from "vue-property-decorator";
 @Component
 export default class ItemList extends Vue {
+  //現在の商品リスト
   private currentItemList = new Array<Item>();
+  //検索キーワード
   private serchText = "";
+  //エラーメッセージ
   private errorMesage = "";
-
+  /**
+   * ページ遷移時、現在の商品一覧を取得するメソッド.
+   * @returns プロミスオブジェクト
+   */
   async created(): Promise<void>{
     await this.$store.dispatch("asyncGetItemList");
 
     this.currentItemList = this.$store.getters.getItemList
   }
-
+  /**
+   * 商品を安い順に並べるメソッド.
+   * @returns 商品を並べ替えた後の配列
+   */
   get orderInexpensiveItemList(): Array<Item>{
     let copiedArray = this.currentItemList.slice();
     copiedArray.sort(function(a: Item, b: Item){
@@ -61,7 +70,9 @@ export default class ItemList extends Vue {
     });
     return copiedArray;
   }
-
+  /**
+   * 検索結果を表示するメソッド.
+   */
   serchResultList(): void{
     this.errorMesage = ""
     this.currentItemList = this.$store.getters.getItemList
