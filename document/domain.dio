@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="91QkuJvfcBkw0_UWqF4J" name="1-1.ユーザー登録">
-        <mxGraphModel dx="2078" dy="680" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
+        <mxGraphModel dx="1783" dy="510" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -213,7 +213,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="EyuVHIVoqNiwpzXAZM63" name="1-2.ログイン">
-        <mxGraphModel dx="682" dy="510" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
+        <mxGraphModel dx="614" dy="510" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
             <root>
                 <mxCell id="iVFCtjfJq4Yx4DA4iJ7C-0"/>
                 <mxCell id="iVFCtjfJq4Yx4DA4iJ7C-1" parent="iVFCtjfJq4Yx4DA4iJ7C-0"/>
@@ -275,7 +275,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="0aJxYFS4KX39cBGj6npc" name="1-3商品一覧の表示">
-        <mxGraphModel dx="682" dy="510" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
+        <mxGraphModel dx="614" dy="510" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
             <root>
                 <mxCell id="iS40yYiM1ePwNztEy5PK-0"/>
                 <mxCell id="iS40yYiM1ePwNztEy5PK-1" parent="iS40yYiM1ePwNztEy5PK-0"/>
@@ -316,7 +316,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="dRtXGDgnn2yRGKHWtulO" name="1-4.商品詳細">
-        <mxGraphModel dx="682" dy="510" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="614" dy="510" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="Ia4ylGvipv_UN721ocfG-0"/>
                 <mxCell id="Ia4ylGvipv_UN721ocfG-1" parent="Ia4ylGvipv_UN721ocfG-0"/>
@@ -362,7 +362,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="o-qBqUW1IN_Z3qIHcku9" name="1-5.ショッピングカート表示">
-        <mxGraphModel dx="682" dy="510" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
+        <mxGraphModel dx="614" dy="510" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
             <root>
                 <mxCell id="A0n8Hgd9mK-pJu0OB5NF-0"/>
                 <mxCell id="A0n8Hgd9mK-pJu0OB5NF-1" parent="A0n8Hgd9mK-pJu0OB5NF-0"/>
