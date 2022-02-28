@@ -14,6 +14,10 @@ export default new Vuex.Store({
     itemList: new Array<Item>(),
   },
   actions: {
+    /**
+     * 商品リストを非同期通信で取得するメソッド.
+     * @param context - コンテクスト
+     */
     async asyncGetItemList(context){
       const response = await axios.get("http://153.127.48.168:8080/ecsite-api/item/items/coffee");
       console.dir("response: " + JSON.stringify(response));
@@ -22,6 +26,11 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    /**
+     * 商品リストをpayloadから
+     * @param state 
+     * @param payload 
+     */
     showItemList(state, payload){
       state.itemList = new Array<Item>();
       console.log(payload.items);
