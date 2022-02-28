@@ -13,20 +13,15 @@
         </form>
       </div>
     </div>
-        <div class="items">
-          <div class="item">
+        <div class="items row">
+          <div class="item col s12 m6 l4" v-for="item of orderInexpensiveItemList" v-bind:key="item.id">
             <div class="item-icon">
-              <img src="" /> 
-            </div>
-          <div class="item" v-for="item of orderInexpensiveItemList" v-bind:key="item.id">
-            <div class="item-icon">
-              <img v-bind:src="item.imagePath" />
+              <img v-bind:src="item.imagePath" class="responsive-img"/>
             </div>
             <router-link v-bind:to="'/itemDetail/' + item.id">{{ item.name }}</router-link><br />
             <span class="price">M</span>{{ item.priceM }}円(税抜)<br />
             <span class="price">L</span>{{ item.priceL }}円(税抜)<br />
           </div>
-        </div>
       </div>
     </div>
   </div>
