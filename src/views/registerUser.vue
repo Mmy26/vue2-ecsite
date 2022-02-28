@@ -22,8 +22,10 @@
     <div class="top-wrapper">
       <div class="container">
         <div class="row register-page">
-          <div class="error">エラーメッセージ</div>
+          <div class="error">{{ errorMessage }}</div>
           <div class="row">
+            <div class="error">{{ errorLastName }}</div>
+            <div class="error">{{ errorFirstName }}</div>
             <div class="input-field col s6">
               <input
                 id="last_name"
@@ -46,6 +48,7 @@
             </div>
           </div>
           <div class="row">
+            <div class="error">{{ errorMailAddress }}</div>
             <div class="input-field col s12">
               <input
                 id="email"
@@ -57,9 +60,15 @@
               <label for="email">メールアドレス</label>
             </div>
           </div>
+          <div class="error">{{ errorZipCode }}</div>
           <div class="row">
             <div class="input-field col s12">
-              <input id="zipcode" type="text" maxlength="7" v-model="zipCode" />
+              <input
+                id="zipcode"
+                type="text"
+                maxlength="7"
+                v-model.number="zipCode"
+              />
               <label for="zipcode">郵便番号(ハイフンなし)</label>
               <button class="btn" type="button">
                 <span>住所検索</span>
@@ -67,18 +76,26 @@
             </div>
           </div>
           <div class="row">
+            <div class="error">{{ errorAddress }}</div>
             <div class="input-field col s12">
               <input id="address" type="text" v-model="address" />
               <label for="address">住所</label>
             </div>
           </div>
           <div class="row">
+            <div class="error">{{ errorTelephone }}</div>
             <div class="input-field col s12">
-              <input id="tel" type="tel" v-model="telephone" />
+              <input
+                id="tel"
+                type="tel"
+                maxlength="11"
+                v-model.number="telephone"
+              />
               <label for="tel">電話番号</label>
             </div>
           </div>
           <div class="row">
+            <div class="error">{{ errorPassword }}</div>
             <div class="input-field col s12">
               <input
                 id="password"
@@ -92,6 +109,7 @@
             </div>
           </div>
           <div class="row">
+            <div class="error">{{ errorPasswordConfirmation }}</div>
             <div class="input-field col s12">
               <input
                 id="confirmation_password"
@@ -117,8 +135,97 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import axios from "axios";
+
 @Component
-export default class XXXComponent extends Vue {}
+export default class XXXComponent extends Vue {
+  private lastName = "";
+  private firstName = "";
+  private mailAddress = "";
+  private zipCode = "";
+  private address = "";
+  private telephone = "";
+  private password = "";
+  private passwordConfirmation = "";
+  private errorMessage = "";
+  private errorLastName = "";
+  private errorFirstName = "";
+  private errorMailAddress = "";
+  private errorZipCode = "";
+  private errorAddress = "";
+  private errorTelephone = "";
+  private errorPassword = "";
+  private errorPasswordConfirmation = "";
+  private errorChecker = true;
+
+  async registerUser(): Promise<void> {
+    const response = await axios.post(
+      `http://153.127.48.168:8080/ecsite-api/user`,
+      {
+        name: this.lastName + " " + this.firstName,
+        email: this.mailAddress,
+        password: this.password,
+        zipcode: this.zipCode,
+        address: this.address,
+        telephone: this.telephone,
+      }
+    );
+    console.dir("response" + JSON.stringify(response));
+
+    if (this.lastName === "") {
+      this.errorLastName = "姓が入力されていません";
+      this.errorChecker = false;
+    }
+    if (this.firstName === "") {
+      this.errorFirstName = "名が入力されていません";
+      this.errorChecker = false;
+    }
+    if (this.mailAddress === "") {
+      this.errorMailAddress = "メールアドレスが入力されていません";
+      this.errorChecker = false;
+    }
+    if (this.zipCode === "") {
+      this.errorZipCode = "郵便番号が入力されていません";
+      this.errorChecker = false;
+    }
+    if (this.address === "") {
+      this.errorAddress = "住所が入力されていません";
+      this.errorChecker = false;
+    }
+    if (this.telephone === "") {
+      this.errorTelephone = "電話番号が入力されていません";
+      this.errorChecker = false;
+    }
+    if (this.password === "") {
+      this.errorPassword = "パスワードが入力されていません";
+      this.errorChecker = false;
+    }
+    if (this.passwordConfirmation === "") {
+      this.errorPasswordConfirmation = "確認用パスワードが入力されていません";
+      this.errorChecker = false;
+    }
+    if (this.password != this.passwordConfirmation) {
+      this.errorPassword = "パスワードと確認用パスワードが一致していません";
+    }
+
+    if (this.errorChecker === false) {
+      return;
+    }
+
+    if (response.data.status === "success") {
+      this.$router.push("login");
+    } else if (
+      response.data.message.includes(
+        "そのメールアドレスはすでに使われています。"
+      )
+    ) {
+      this.errorMessage =
+        "メールアドレスがすでに使われているため、登録できませんでした";
+    } else {
+      this.errorMessage = "登録できませんでした";
+    }
+  }
+}
 </script>
 
 <style scoped></style>
