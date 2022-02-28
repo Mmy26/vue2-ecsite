@@ -94,8 +94,14 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import { Order } from "@/type/order";
 @Component
-export default class XXXComponent extends Vue {}
+export default class XXXComponent extends Vue {
+  // 合計金額
+  private totalPrice = 0;
+  // 注文内容
+  private currentOrder = new Array<Order>();
+}
 </script>
 
 <style scoped></style>
