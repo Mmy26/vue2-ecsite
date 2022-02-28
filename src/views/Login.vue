@@ -10,13 +10,10 @@
           </div>
 
           <div class="header-right">
-            <a href="item_list.html">商品一覧</a>
-            <a href="register_admin.html">会員登録</a>
-            <router-link to="/login" class="login"
+            <router-link to="/itemList/">商品一覧</router-link>
+            <router-link to="/registerUser/">会員登録</router-link>
+            <router-link to="/login/" class="login"
               ><i class="fas fa-sign-in-alt"></i>ログイン</router-link
-            >
-            <router-link to="/login" class="login"
-              ><i class="fas fa-sign-in-alt"></i>ログアウト</router-link
             >
           </div>
         </div>
@@ -54,12 +51,7 @@
                 </div>
               </div>
               <div class="row login-btn">
-                <button
-                  class="btn"
-                  type="button"
-                  onclick="location.href='item_list.html'"
-                  v-on:click="loginUser"
-                >
+                <button class="btn" type="button" v-on:click="loginUser">
                   <span>ログイン</span>
                 </button>
               </div>
@@ -119,4 +111,8 @@ export default class Login extends Vue {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.error {
+  color: red;
+}
+</style>
