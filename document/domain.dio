@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="91QkuJvfcBkw0_UWqF4J" name="1-1.ユーザー登録">
-        <mxGraphModel dx="2078" dy="680" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
+        <mxGraphModel dx="1507" dy="510" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -213,7 +213,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="EyuVHIVoqNiwpzXAZM63" name="1-2.ログイン">
-        <mxGraphModel dx="682" dy="510" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
+        <mxGraphModel dx="338" dy="510" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
             <root>
                 <mxCell id="iVFCtjfJq4Yx4DA4iJ7C-0"/>
                 <mxCell id="iVFCtjfJq4Yx4DA4iJ7C-1" parent="iVFCtjfJq4Yx4DA4iJ7C-0"/>
