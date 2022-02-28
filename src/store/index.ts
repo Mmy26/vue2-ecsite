@@ -39,7 +39,6 @@ export default new Vuex.Store({
             item.toppingList
           )
         );
-        console.log(item);
       }
     }
   },
