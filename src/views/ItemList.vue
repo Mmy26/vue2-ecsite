@@ -22,7 +22,7 @@
             <div class="item-icon">
               <img v-bind:src="item.imagePath" />
             </div>
-            <router-link v-bind:to="'http://153.127.48.168:8080/ecsite-api/item/items/coffee' + item.id">{{ item.name }}</router-link><br />
+            <router-link v-bind:to="'/itemDetail/' + item.id">{{ item.name }}</router-link><br />
             <span class="price">M</span>{{ item.priceM }}円(税抜)<br />
             <span class="price">L</span>{{ item.priceL }}円(税抜)<br />
           </div>
