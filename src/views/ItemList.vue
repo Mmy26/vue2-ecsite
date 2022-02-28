@@ -1,10 +1,24 @@
 <template>
   <div class="itemList">
-    <h1>ItemList</h1>
-    <span>{{ orderInexpensiveItemList[0] }}</span><br>
-    <span>{{ orderInexpensiveItemList[1] }}</span><br>
-    <span>{{ orderInexpensiveItemList[2] }}</span><br>
-    <span>{{ orderInexpensiveItemList[3] }}</span>
+    <div class="item-wrapper">
+      <div class="container">
+        <div class="items">
+          <div class="item">
+            <div class="item-icon">
+              <img src="" />
+            </div>
+          <div class="item" v-for="item of orderInexpensiveItemList" v-bind:key="item.id">
+            <div class="item-icon">
+              <img v-bind:src="item.imagePath" />
+            </div>
+            <router-link v-bind:to="'http://153.127.48.168:8080/ecsite-api/item/items/coffee' + item.id">{{ item.name }}</router-link><br />
+            <span class="price">M</span>{{ item.priceM }}円(税抜)<br />
+            <span class="price">L</span>{{ item.priceL }}円(税抜)<br />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   </div>
 </template>
 
@@ -31,7 +45,7 @@ export default class ItemList extends Vue {
       } else {
         return 0
       }
-    })
+    });
     return copiedArray;
   }
 }
