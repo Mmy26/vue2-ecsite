@@ -14,6 +14,10 @@ const routes: Array<RouteConfig> = [
     path: "*",
     component: () => import("../views/About.vue"),
   },
+  {
+    path: "/logout",
+    component: () => import("../views/Logout.vue"),
+  },
 ];
 
 const router = new VueRouter({
