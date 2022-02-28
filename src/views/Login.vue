@@ -1,30 +1,29 @@
 <template>
   <div id="login">
     <header>
-      <div class="container">
-        <div class="header">
-          <div class="header-left">
-            <router-link :to="/top/"
-              ><img class="headerlogo" src="img/header_logo.png"
-            /></router-link>
+      <div class="header">
+        <div class="header-left">
+          <router-link :to="/top/"
+            ><img class="headerlogo" src="img/header_logo.png"
+          /></router-link>
+        </div>
+        <div class="header-right">
+          <div>
+            <router-link to="/itemList/"
+              ><span class="category">商品一覧</span></router-link
+            >
           </div>
-          <div class="header-right">
-            <div>
-              <router-link to="/itemList/"
-                ><span class="category">商品一覧</span></router-link
-              >
-            </div>
-            <div>
-              <router-link to="/registerUser/"
-                ><span class="category">会員登録</span></router-link
-              >
-            </div>
-            <div>
-              <router-link to="/login/" class="login"
-                ><span class="category"><i class="fas fa-sign-in-alt"></i
-                >ログイン</span></router-link
-              >
-            </div>
+          <div>
+            <router-link to="/registerUser/"
+              ><span class="category">会員登録</span></router-link
+            >
+          </div>
+          <div>
+            <router-link to="/login/" class="login"
+              ><span class="category"
+                ><i class="fas fa-sign-in-alt"></i>ログイン</span
+              ></router-link
+            >
           </div>
         </div>
       </div>
@@ -81,10 +80,8 @@
     </div>
     <!-- end top-wrapper -->
     <footer>
-      <div class="container">
-        <img class="footerlogo" src="img/header_logo.png" />
-        <p class="text">アロハな気分をあなたにお届け！</p>
-      </div>
+      <img class="footerlogo" src="img/header_logo.png" />
+      <p class="text">アロハな気分をあなたにお届け！</p>
     </footer>
   </div>
 </template>
@@ -127,8 +124,9 @@ export default class Login extends Vue {
 </script>
 
 <style scoped>
-#login {
-  width: 100%;
+#login{
+  margin-left: 10px;
+  margin-right: 20px;
 }
 .header {
   display: flex;
