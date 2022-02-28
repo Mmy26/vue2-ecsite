@@ -44,14 +44,20 @@
           <div class="row topping-list">トッピング:M200円L300円</div>
           <div class="row topping-name">
             <label class="checkbox topping">
-              <input type="checkbox" value="" />
+              <input
+                type="checkbox"
+                id="toppingId"
+                value="toppingId"
+                v-model="selectTopping"
+              />
               {{ selectItem.topping }}
             </label>
+            <span>選択したトッピング:{{ selectTopping }}</span>
           </div>
 
           <div class="row item-amount">
             数量:
-            <select class="amount">
+            <select class="amount" v-model="selectItemAmount">
               <option value="not select">選択してください</option>
               <option value="1">1</option>
               <option value="2">2</option>
