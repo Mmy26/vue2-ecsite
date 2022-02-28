@@ -1,4 +1,4 @@
-import { Topping } from "./topping";
+import { Topping } from "./topping2";
 
 export class orderTopping {
   constructor(

@@ -16,8 +16,8 @@ const routes: Array<RouteConfig> = [
     component: () => import("../views/ItemList.vue"),
   },
   {
-    path: "/itemDetail",
-    component: () => import("../views/ItemDetail.vue"),
+    path: "/itemDetail/:id",
+    component: () => import("../views/ItemDetail2.vue"),
   },
 ];
 

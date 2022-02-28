@@ -1,4 +1,4 @@
-import { Topping } from "./Topping";
+import { Topping } from "./topping2";
 export class Item {
   constructor(
     private _id: number,
