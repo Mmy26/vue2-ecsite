@@ -91,6 +91,10 @@ export default class Login extends Vue {
   // パスワード
   private password = "";
 
+  /**
+   * ログイン情報をWebAPIに送信する.
+   * @returns JSON形式のresponse
+   */
   async loginUser(): Promise<void> {
     const response = await axios.post(
       "http://153.127.48.168:8080/ecsite-api/user/login",
@@ -100,10 +104,11 @@ export default class Login extends Vue {
       }
     );
     console.dir("response:" + JSON.stringify(response));
+    // ログインが成功したら商品一覧ページに遷移する
     if (response.data.status === "success") {
       this.$router.push("/itemList");
     }
-
+    // ログインに失敗したらエラーメッセージを出す
     if (response.data.status === "error") {
       this.errorMessage = "メールアドレスもしくはパスワードが間違っています";
     }
