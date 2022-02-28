@@ -1,20 +1,30 @@
 <template>
-  <div>
+  <div id="login">
     <header>
       <div class="container">
         <div class="header">
           <div class="header-left">
-            <a href="top.html">
-              <img class="logo" src="img/header_logo.png" />
-            </a>
+            <router-link :to="/top/"
+              ><img class="headerlogo" src="img/header_logo.png"
+            /></router-link>
           </div>
-
           <div class="header-right">
-            <router-link to="/itemList/">商品一覧</router-link>
-            <router-link to="/registerUser/">会員登録</router-link>
-            <router-link to="/login/" class="login"
-              ><i class="fas fa-sign-in-alt"></i>ログイン</router-link
-            >
+            <div>
+              <router-link to="/itemList/"
+                ><span class="category">商品一覧</span></router-link
+              >
+            </div>
+            <div>
+              <router-link to="/registerUser/"
+                ><span class="category">会員登録</span></router-link
+              >
+            </div>
+            <div>
+              <router-link to="/login/" class="login"
+                ><i class="fas fa-sign-in-alt"></i
+                ><span class="category">ログイン</span></router-link
+              >
+            </div>
           </div>
         </div>
       </div>
@@ -72,8 +82,8 @@
     <!-- end top-wrapper -->
     <footer>
       <div class="container">
-        <img src="img/header_logo.png" />
-        <p>アロハな気分をあなたにお届け！</p>
+        <img class="footerlogo" src="img/header_logo.png" />
+        <p class="text">アロハな気分をあなたにお届け！</p>
       </div>
     </footer>
   </div>
@@ -117,7 +127,44 @@ export default class Login extends Vue {
 </script>
 
 <style scoped>
+#login {
+  margin: auto;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.top-wrapper {
+  margin: 50px;
+}
+.headerlogo {
+  height: 30px;
+  margin: 10px;
+}
+.footerlogo {
+  height: 20px;
+  margin: 10px;
+}
+.category {
+  color: gray;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+}
 .error {
   color: red;
+}
+.login-page {
+  width: 600px;
+}
+
+.login-btn {
+  text-align: center;
+}
+.text {
+  font-size: 11px;
+  color: gainsboro;
 }
 </style>
