@@ -15,8 +15,8 @@ const routes: Array<RouteConfig> = [
     component: () => import("../views/About.vue"),
   },
   {
-    path: "resisterUser",
-    component: () => import("../views/resisterUser.vue"),
+    path: "registerUser",
+    component: () => import("../views/registerUser.vue"),
   },
 ];
 
