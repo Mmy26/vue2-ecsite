@@ -21,8 +21,8 @@
             </div>
             <div>
               <router-link to="/login/" class="login"
-                ><i class="fas fa-sign-in-alt"></i
-                ><span class="category">ログイン</span></router-link
+                ><span class="category"><i class="fas fa-sign-in-alt"></i
+                >ログイン</span></router-link
               >
             </div>
           </div>
@@ -128,7 +128,7 @@ export default class Login extends Vue {
 
 <style scoped>
 #login {
-  margin: auto;
+  width: 100%;
 }
 .header {
   display: flex;
@@ -152,6 +152,7 @@ export default class Login extends Vue {
 .header-right {
   display: flex;
   align-items: center;
+  gap: 0px 35px;
 }
 .error {
   color: red;
