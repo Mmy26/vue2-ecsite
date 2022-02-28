@@ -87,7 +87,14 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 @Component
-export default class XXXComponent extends Vue {}
+export default class XXXComponent extends Vue {
+  // エラーメッセージ
+  private errorMessage = "";
+  // メールアドレス
+  private email = "";
+  // パスワード
+  private password = "";
+}
 </script>
 
 <style scoped></style>
