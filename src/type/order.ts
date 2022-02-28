@@ -1,21 +1,37 @@
 import { User } from "./user";
 import { OrderItem } from "./orderItem";
-
+/**
+*注文を表すドメインクラス.
+*/
 export class Order {
   constructor(
+    //orderID
     private _id: number,
+    //ユーザーID
     private _userId: number,
+    //入金状況
     private _status: number,
+    //合計金額
     private _totalPrice: number,
+    //注文日
     private _orderDate: Date,
+    //宛先氏名
     private _distinationName: string,
+    //宛先Eメールアドレス
     private _distinationEmail: string,
-    private _distinationZipcode: number,
+    //宛先郵便番号
+    private _distinationZipcode: string,
+    //宛先住所
     private _distinationAddress: string,
+    //宛先電話番号
     private _distinationTel: string,
+    //配達日時
     private _deliveryTime: Date,
+    //支払い方法
     private _paymentMethod: number,
+    //ユーザー
     private _user: User,
+    //注文商品リスト
     private _orderItemList: Array<OrderItem>
   ) {}
 
@@ -75,11 +91,11 @@ export class Order {
     this._distinationEmail = distinationEmail;
   }
 
-  public get distinationZipcode(): number {
+  public get distinationZipcode(): string {
     return this._distinationZipcode;
   }
 
-  public set distinationZipcode(distinationZipcode: number) {
+  public set distinationZipcode(distinationZipcode: string) {
     this._distinationZipcode = distinationZipcode;
   }
 
