@@ -27,9 +27,9 @@ export default new Vuex.Store({
   },
   mutations: {
     /**
-     * 商品リストをpayloadから
-     * @param state 
-     * @param payload 
+     * 商品リストを作成し、stateにセットするメソッド.
+     * @param state - ステイト
+     * @param payload - 商品一覧情報のペイロード
      */
     showItemList(state, payload){
       state.itemList = new Array<Item>();
@@ -54,6 +54,11 @@ export default new Vuex.Store({
   modules: {
   },
   getters: {
+    /**
+     * 商品一覧を表すgetter.
+     * @param state - ステイト
+     * @returns 商品一覧
+     */
     getItemList(state) {
       return state.itemList;
     }
