@@ -12,9 +12,12 @@
           <div class="header-right">
             <a href="item_list.html">商品一覧</a>
             <a href="register_admin.html">会員登録</a>
-            <a href="login.html" class="login">
-              <i class="fas fa-sign-in-alt"></i>ログイン
-            </a>
+            <router-link to="/login" class="login"
+              ><i class="fas fa-sign-in-alt"></i>ログイン</router-link
+            >
+            <router-link to="/login" class="login"
+              ><i class="fas fa-sign-in-alt"></i>ログアウト</router-link
+            >
           </div>
         </div>
       </div>
@@ -107,7 +110,9 @@ export default class Login extends Vue {
     console.dir("response:" + JSON.stringify(response));
     if (response.data.status === "success") {
       this.$router.push("/itemList");
-    } else {
+    }
+
+    if (response.data.status === "error") {
       this.errorMessage = "メールアドレスもしくはパスワードが間違っています";
     }
   }
