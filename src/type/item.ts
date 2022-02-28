@@ -4,7 +4,7 @@ export class Item {
     private _id: number,
     private _type: string,
     private _name: string,
-    private _discription: string,
+    private _description: string,
     private _priceM: number,
     private _priceL: number,
     private _imagePath: string,
@@ -36,12 +36,12 @@ export class Item {
     this._name = name;
   }
 
-  public get discription(): string {
-    return this._discription;
+  public get description(): string {
+    return this._description;
   }
 
-  public set discription(discription: string) {
-    this._discription = discription;
+  public set description(description: string) {
+    this._description = description;
   }
 
   public get priceM(): number {
