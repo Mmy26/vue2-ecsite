@@ -275,7 +275,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="0aJxYFS4KX39cBGj6npc" name="1-3商品一覧の表示">
-        <mxGraphModel dx="682" dy="510" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
+        <mxGraphModel dx="614" dy="510" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
             <root>
                 <mxCell id="iS40yYiM1ePwNztEy5PK-0"/>
                 <mxCell id="iS40yYiM1ePwNztEy5PK-1" parent="iS40yYiM1ePwNztEy5PK-0"/>

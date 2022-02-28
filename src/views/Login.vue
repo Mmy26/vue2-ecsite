@@ -86,14 +86,31 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import axios from "axios";
 @Component
-export default class XXXComponent extends Vue {
+export default class Login extends Vue {
   // エラーメッセージ
   private errorMessage = "";
   // メールアドレス
   private email = "";
   // パスワード
   private password = "";
+
+  async loginUser(): Promise<void> {
+    const response = await axios.post(
+      "http://153.127.48.168:8080/ecsite-api/user/login",
+      {
+        email: this.email,
+        password: this.password,
+      }
+    );
+    console.dir("response:" + JSON.stringify(response));
+    if (response.data.status === "success") {
+      this.$router.push("/itemList");
+    } else {
+      this.errorMessage = "メールアドレスもしくはパスワードが間違っています";
+    }
+  }
 }
 </script>
 
