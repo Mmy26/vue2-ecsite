@@ -9,10 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.26.0",
-<<<<<<< HEAD
-=======
     "axios-jsonp": "^1.0.4",
->>>>>>> develop
     "core-js": "^3.6.5",
     "materialize-css": "^1.0.0-rc.2",
     "vue": "^2.6.11",
