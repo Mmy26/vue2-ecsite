@@ -4,7 +4,7 @@
     <div class="top-wrapper">
       <router-view />
     </div>
-    <Footer />
+    <!-- <Footer /> -->
   </div>
 </template>
 
@@ -12,12 +12,12 @@
 import { Component, Vue } from "vue-property-decorator";
 import M from "materialize-css/dist/js/materialize.min";
 import Header from "./components/Header.vue";
-import Footer from "./components/Footer.vue";
+// import Footer from "./components/Footer.vue";
 
 @Component({
   components: {
     Header,
-    Footer,
+    // Footer,
   },
 })
 export default class App extends Vue {
