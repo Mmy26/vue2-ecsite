@@ -19,6 +19,19 @@ const routes: Array<RouteConfig> = [
     path: "/itemDetail/:id",
     component: () => import("../views/ItemDetail2.vue"),
   },
+  {
+    path: "/registerUser",
+    component: () => import("../views/registerUser.vue"),
+  },
+  {
+    path: "/logout",
+    component: () => import("../views/Logout.vue"),
+  },
+
+  {
+    path: "/login",
+    component: () => import("../views/Login.vue"),
+  },
 ];
 
 const router = new VueRouter({
