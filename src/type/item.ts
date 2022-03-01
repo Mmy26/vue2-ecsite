@@ -1,14 +1,28 @@
+/**
+ * アイテムクラス.
+ * @remarks
+ * 商品情報を表します。
+ */
 import { Topping } from "./Topping";
 export class Item {
   constructor(
+    // id
     private _id: number,
+    // タイプ
     private _type: string,
+    // 名前
     private _name: string,
+    // 説明
     private _discription: string,
+    // Mの価格
     private _priceM: number,
+    // Lの価格
     private _priceL: number,
+    // 画像パス
     private _imagePath: string,
+    // 削除フラグ
     private _deleted: boolean,
+    // トッピングリスト
     private _toppingList: Array<Topping>
   ) {}
 

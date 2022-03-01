@@ -1,13 +1,26 @@
+/**
+ * オーダーアイテムクラス.
+ * @remarks
+ * 注文商品情報を表します。
+ */
 import { orderTopping } from "./OrderTopping";
 import { Item } from "./Item";
 
 export class OrderItem {
   constructor(
+    // id
     private _id: number,
+    // 商品ID
+    private _itemId: number,
+    // 注文ID
     private _orderId: number,
+    // 数量
     private _quantity: number,
+    // サイズ
     private _size: string,
+    // 商品
     private _item: Item,
+    // 注文トッピングリスト
     private _orderToppingList: Array<orderTopping>
   ) {}
 
@@ -17,6 +30,14 @@ export class OrderItem {
 
   public set id(id: number) {
     this._id = id;
+  }
+
+  public get itemId(): number {
+    return this._itemId;
+  }
+
+  public set itemId(itemId: number) {
+    this._itemId = itemId;
   }
 
   public get orderId(): number {
