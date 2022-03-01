@@ -57,6 +57,14 @@ export default new Vuex.Store({
   getters: {
     getItemList(state) {
       return state.itemList;
-    }
+    },
+    /**
+     * 注文商品リストを取得する.
+     * @param state - ステート
+     * @returns Orderオブジェクト
+     */
+    getOrder(state){
+      return state.order.orderItemList;
+    },
   }
 })

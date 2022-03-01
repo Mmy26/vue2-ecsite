@@ -37,22 +37,26 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr v-for="orderItem of orderItems" v-bind:key="orderItem.id">
                 <td class="cart-item-name">
                   <div class="cart-item-icon">
-                    <img src="img/1.jpg" />
+                    <img v-bind:src="orderItem.item.imagePath" />
                   </div>
-                  <span>ハワイアンパラダイス</span>
+                  <span>{{ orderItem.item.name }}</span>
                 </td>
                 <td>
-                  <span class="price">&nbsp;Ｌ</span>&nbsp;&nbsp;2,380円
-                  &nbsp;&nbsp;1個
+                  <span class="price">&nbsp;{{ orderItem.size }}</span
+                  >&nbsp;&nbsp;2,380円 &nbsp;&nbsp;{{ orderItem.quantity }}個
                 </td>
                 <td>
                   <ul>
-                    <li>ピーマン300円</li>
-                    <li>オニオン300円</li>
-                    <li>あらびきソーセージ300円</li>
+                    <li
+                      v-for="orderTopping of orderToppings"
+                      v-bind:key="orderTopping.id"
+                    >
+                      {{ orderTopping.topping.name
+                      }}{{ orderTopping.topping.price }}円
+                    </li>
                   </ul>
                 </td>
                 <td><div class="text-center">3,280円</div></td>
@@ -71,11 +75,7 @@
           <div>ご注文金額合計：38,000円 (税込)</div>
         </div>
         <div class="row order-confirm-btn">
-          <button
-            class="btn"
-            type="button"
-            onclick="location.href='order_confirm.html'"
-          >
+          <button class="btn" type="button">
             <span>注文に進む</span>
           </button>
         </div>
@@ -101,6 +101,14 @@ export default class XXXComponent extends Vue {
   private totalPrice = 0;
   // 注文内容
   private currentOrder = new Array<Order>();
+
+  /**
+   * ショッピングカート一覧を表示させる.
+   */
+  created(): void {
+    this.currentOrder = this.$store.getters.getOrder;
+
+  }
 }
 </script>
 

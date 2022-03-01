@@ -1,8 +1,8 @@
 import { User } from "./user";
 import { OrderItem } from "./orderItem";
 /**
-*注文を表すドメインクラス.
-*/
+ *注文を表すドメインクラス.
+ */
 export class Order {
   constructor(
     //orderID
