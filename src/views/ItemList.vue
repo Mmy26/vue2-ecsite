@@ -1,7 +1,6 @@
 <template>
   <div class="itemList">
     <h1>ItemList</h1>
-    <router-link :to="'/itemDetail/' + item.id">{{ item.name }}</router-link>
     <div class="item-wrapper">
       <div class="container">
         <div class="search-wrapper">
@@ -89,6 +88,7 @@ export default class ItemList extends Vue {
         return 0;
       }
     });
+    // for文でidがはiっているか確認
     return copiedArray;
   }
   /**
