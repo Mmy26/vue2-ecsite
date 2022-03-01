@@ -50,7 +50,7 @@ export class Order {
    * 消費税を計算する.
    * @returns 消費税
    */
-  public getTax(): number {
+  public get tax(): number {
     const taxPrice = this.getItemListSubTotalPrice() * 0.1;
     // 小数点を切り捨てる
     return Math.floor(taxPrice);
@@ -59,8 +59,8 @@ export class Order {
    * 合計金額を計算する.
    * @returns 合計金額
    */
-  public getCalcTotalPrice(): number {
-    const totalPrice = this.getItemListSubTotalPrice() + this.getTax();
+  public get calcTotalPrice(): number {
+    const totalPrice = this.getItemListSubTotalPrice() + this.tax;
     return totalPrice;
   }
 

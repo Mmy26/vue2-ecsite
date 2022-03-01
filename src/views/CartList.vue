@@ -25,6 +25,7 @@
     <div class="top-wrapper">
       <div class="container">
         <h1 class="page-title">ショッピングカート</h1>
+        <div>{{ errorMessage }}</div>
         <!-- table -->
         <div class="row">
           <table class="striped">
@@ -37,7 +38,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="orderItem of orderItems" v-bind:key="orderItem.id">
+              <tr
+                v-for="orderItem of this.currentOrder.orderItemList"
+                v-bind:key="orderItem.id"
+              >
                 <td class="cart-item-name">
                   <div class="cart-item-icon">
                     <img v-bind:src="orderItem.item.imagePath" />
@@ -46,14 +50,13 @@
                 </td>
                 <td>
                   <span class="price">&nbsp;{{ orderItem.size }}</span
-                  >&nbsp;&nbsp;{{ getItemPrice() }}円 &nbsp;&nbsp;{{
-                    orderItem.quantity
-                  }}個
+                  ><span>&nbsp;&nbsp;1200円</span
+                  ><span> &nbsp;&nbsp;{{ orderItem.quantity }}個</span>
                 </td>
                 <td>
                   <ul>
                     <li
-                      v-for="orderTopping of orderToppings"
+                      v-for="orderTopping of orderItem.orderToppingList"
                       v-bind:key="orderTopping.id"
                     >
                       {{ orderTopping.topping.name
@@ -62,9 +65,7 @@
                   </ul>
                 </td>
                 <td>
-                  <div class="text-center">
-                    {{ orderItem.getCalcSubTotalPrice() }}円
-                  </div>
+                  <div class="text-center">10000円</div>
                 </td>
                 <td>
                   <button class="btn" type="button">
@@ -77,8 +78,8 @@
         </div>
 
         <div class="row cart-total-price">
-          <div>消費税：8,000円</div>
-          <div>ご注文金額合計：38,000円 (税込)</div>
+          <div>消費税：8000円</div>
+          <div>ご注文金額合計：67000円 (税込)</div>
         </div>
         <div class="row order-confirm-btn">
           <button class="btn" type="button" v-on:click="onOrderClick">
@@ -101,18 +102,115 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { Order } from "@/type/order";
+import { User } from "@/type/user";
+import { OrderItem } from "@/type/orderItem";
+import { Item } from "@/type/item";
+import { Topping } from "@/type/topping";
 @Component
 export default class XXXComponent extends Vue {
   // 合計金額
   private totalPrice = 0;
   // 注文内容
-  private currentOrder = new Array<Order>();
-
+  private currentOrder = new Order(
+    0,
+    0,
+    0,
+    0,
+    new Date(),
+    "",
+    "",
+    "",
+    "",
+    "",
+    new Date(),
+    0,
+    new User(0, "", "", "", "", "", ""),
+    new Array<OrderItem>()
+  );
+  // エラーメッセージ
+  private errorMessage = "";
+  // 注文商品
+  private item = new OrderItem(
+    0,
+    0,
+    0,
+    0,
+    "",
+    new Item(0, "", "", "", 0, 0, "", true, []),
+    []
+  );
   /**
    * ショッピングカート一覧を表示させる.
    */
   created(): void {
-    this.currentOrder = this.$store.getters.getOrder;
+    this.currentOrder = new Order(
+      0,
+      0,
+      0,
+      0,
+      new Date(),
+      "",
+      "",
+      "",
+      "",
+      "",
+      new Date(),
+      0,
+      new User(0, "", "", "", "", "", ""),
+      [
+        new OrderItem(
+          21,
+          1,
+          1,
+          1,
+          "M",
+          new Item(
+            21,
+            "coffee",
+            "Gorgeous4サンド",
+            "",
+            480,
+            700,
+            "/img_coffee/1.jpg",
+            false,
+            []
+          ),
+          []
+        ),
+        new OrderItem(
+          21,
+          1,
+          1,
+          2,
+          "L",
+          new Item(
+            21,
+            "coffee",
+            "コーヒー",
+            "",
+            480,
+            700,
+            "/img_coffee/1.jpg",
+            false,
+            []
+          ),
+          []
+        ),
+      ]
+    );
+    // //サイズによって出力する値を変える
+    // let itemPrice = 0;
+    // for (let i = 0; i <= this.currentOrder.orderItemList.length; i++) {
+    //   if (this.currentItem.size === "M") {
+    //     itemPrice = this.currentItem.item.priceM;
+    //   } else if (this.currentItem.size === "L") {
+    //     itemPrice = this.currentItem.item.priceL;
+    //   }
+    // }
+    // //カート内に何も入っていない場合はエラーメッセージを出す
+    // if (this.currentOrder.orderItemList.length === 0) {
+    //   this.errorMessage = "カートに商品がありません";
+    // }
   }
   /**
    * 注文に進む.

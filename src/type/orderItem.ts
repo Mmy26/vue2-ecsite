@@ -1,10 +1,11 @@
-import { orderTopping } from "./OrderTopping";
-import { Item } from "./Item";
-import { Topping } from "./Topping";
+import { orderTopping } from "./orderTopping";
+import { Item } from "./item";
+import { Topping } from "./topping";
 
 export class OrderItem {
   constructor(
     private _id: number,
+    private _itemId: number,
     private _orderId: number,
     private _quantity: number,
     private _size: string,
@@ -39,6 +40,14 @@ export class OrderItem {
 
   public set id(id: number) {
     this._id = id;
+  }
+
+  public get itemId(): number {
+    return this._itemId;
+  }
+
+  public set itemId(itemId: number) {
+    this._itemId = itemId;
   }
 
   public get orderId(): number {
