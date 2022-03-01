@@ -11,6 +11,9 @@ import { OrderItem } from "@/type/orderItem";
 import { Order } from "@/type/order";
 import  axios  from "axios";
 import { getHours } from "date-fns"
+import { getYear } from "date-fns/esm";
+import getMonth from "date-fns/fp/getMonth";
+import getDate from "date-fns/fp/getDate/index";
 
 @Component
 export default class OrderConfirm extends Vue {
@@ -113,7 +116,13 @@ export default class OrderConfirm extends Vue {
       this.telErrorMessage = "電話番号を入力してください。";
       this.hasError = true;
     }
-    if( getHours(this.deliveryTime) <= getHours( new Date()) + 3 ){
+    const hoursCheck = (): boolean => {
+      let currentDate = new Date();
+      return (
+        this.deliveryTime <= new Date( getYear(currentDate), getMonth(currentDate), getDate(currentDate), getHours(currentDate) + 3)
+      )
+    }
+    if(hoursCheck()){
       this.delivelyErrorMessage = "今から3時間後の日時をご入力ください";
       this.hasError = true;
     }
