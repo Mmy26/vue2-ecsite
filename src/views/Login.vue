@@ -1,33 +1,5 @@
 <template>
   <div id="login">
-    <header>
-      <div class="header">
-        <div class="header-left">
-          <router-link :to="/top/"
-            ><img class="headerlogo" src="img/header_logo.png"
-          /></router-link>
-        </div>
-        <div class="header-right">
-          <div>
-            <router-link to="/itemList/"
-              ><span class="category">商品一覧</span></router-link
-            >
-          </div>
-          <div>
-            <router-link to="/registerUser/"
-              ><span class="category">会員登録</span></router-link
-            >
-          </div>
-          <div>
-            <router-link to="/login/" class="login"
-              ><span class="category"
-                ><i class="fas fa-sign-in-alt"></i>ログイン</span
-              ></router-link
-            >
-          </div>
-        </div>
-      </div>
-    </header>
     <div class="top-wrapper">
       <div class="container">
         <div class="row login-page">
@@ -78,11 +50,6 @@
         </div>
       </div>
     </div>
-    <!-- end top-wrapper -->
-    <footer>
-      <img class="footerlogo" src="img/header_logo.png" />
-      <p class="text">アロハな気分をあなたにお届け！</p>
-    </footer>
   </div>
 </template>
 
@@ -124,34 +91,6 @@ export default class Login extends Vue {
 </script>
 
 <style scoped>
-#login{
-  margin-left: 10px;
-  margin-right: 20px;
-}
-.header {
-  display: flex;
-  justify-content: space-between;
-}
-
-.top-wrapper {
-  margin: 50px;
-}
-.headerlogo {
-  height: 30px;
-  margin: 10px;
-}
-.footerlogo {
-  height: 20px;
-  margin: 10px;
-}
-.category {
-  color: gray;
-}
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 0px 35px;
-}
 .error {
   color: red;
 }
@@ -161,9 +100,5 @@ export default class Login extends Vue {
 
 .login-btn {
   text-align: center;
-}
-.text {
-  font-size: 11px;
-  color: gainsboro;
 }
 </style>
