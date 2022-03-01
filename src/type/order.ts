@@ -1,6 +1,5 @@
 import { User } from "./user";
 import { OrderItem } from "./orderItem";
-import { Item } from "./item";
 /**
  *注文を表すドメインクラス.
  */
@@ -36,22 +35,33 @@ export class Order {
     private _orderItemList: Array<OrderItem>
   ) {}
   /**
+   * 注文商品の小計の合計金額を計算する.
+   * @returns 注文商品の小計の合計金額
+   */
+  public getItemListSubTotalPrice(): number {
+    //注文した商品の配列の小計の合計に0.1をかける
+    let itemListTotalPrice = 0;
+    for (let i = 0; i <= this.orderItemList.length; i++) {
+      itemListTotalPrice += this.orderItemList[i].getCalcSubTotalPrice();
+    }
+    return itemListTotalPrice;
+  }
+  /**
    * 消費税を計算する.
    * @returns 消費税
    */
   public getTax(): number {
-    //orderItemオブジェクトを生成
-    const orderItem = new OrderItem(
-      0,
-      0,
-      0,
-      "",
-      new Item(0, "", "", "", 0, 0, "", true, []),
-      []
-    );
-    const taxPrice = orderItem.getCalcSubTotalPrice() * 0.1;
-    // 小数点を切り下げる
+    const taxPrice = this.getItemListSubTotalPrice() * 0.1;
+    // 小数点を切り捨てる
     return Math.floor(taxPrice);
+  }
+  /**
+   * 合計金額を計算する.
+   * @returns 合計金額
+   */
+  public getCalcTotalPrice(): number {
+    const totalPrice = this.getItemListSubTotalPrice() + this.getTax();
+    return totalPrice;
   }
 
   public get id(): number {
