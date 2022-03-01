@@ -13,6 +13,8 @@
         </form>
       </div>
     </div>
+    <div>
+    </div>
         <div class="items">
           <div class="item">
             <div class="item-icon">
@@ -36,6 +38,7 @@
 <script lang="ts">
 import { Item } from "@/type/item";
 import { Component, Vue } from "vue-property-decorator";
+
 @Component
 export default class ItemList extends Vue {
   //現在の商品リスト
