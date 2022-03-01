@@ -14,5 +14,10 @@ import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
     HelloWorld,
   },
 })
-export default class Home extends Vue {}
+export default class Home extends Vue {
+  created(): void{
+    console.log("@@@@@@@@@@@@@@@@@@@")
+    console.log(this.$store.getters.getItemList);
+  }
+}
 </script>
