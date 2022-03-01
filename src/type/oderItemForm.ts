@@ -1,7 +1,13 @@
+/**
+ * 注文時にサーバーに送るオブジェクトを表すドメインクラス.
+ */
 export class OrderItemForm {
   constructor(
+    //商品ID
     private _itemId: number,
+    //商品の数量
     private _quantity: number,
+    //商品のサイズ
     private _size: string
   ) {}
 
