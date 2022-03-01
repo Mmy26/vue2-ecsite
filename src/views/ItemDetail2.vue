@@ -35,21 +35,37 @@
               <img v-bind:src="selectItemImage" />
             </div>
             <div class="item-intro">
-              {{ selectItem.description }}
+              {{ selectItem.discription }}
             </div>
           </div>
+
           <div class="row item-size">
             <div class="item-hedding">サイズ</div>
             <div>
               <label>
-                <input id="size-m" name="size" type="radio" checked="checked" />
+                <input
+                  id="size-m"
+                  name="size"
+                  type="radio"
+                  value="M"
+                  v-model="selectSize"
+                  v-on:change="calcSubTotalPrice"
+                  checked="checked"
+                />
                 <span>
                   &nbsp;<span class="price">Ｍ</span
                   >{{ selectItem.priceM }}円(税抜)</span
                 >
               </label>
               <label>
-                <input id="size-l" name="size" type="radio" />
+                <input
+                  id="size-l"
+                  name="size"
+                  value="L"
+                  v-model="selectSize"
+                  v-on:change="calcSubTotalPrice"
+                  type="radio"
+                />
                 <span>
                   &nbsp;<span class="price">Ｌ</span
                   >{{ selectItem.priceL }}円(税抜)</span
@@ -64,40 +80,45 @@
               <span>&nbsp;Ｌ</span>&nbsp;&nbsp;300円(税抜)
             </div>
 
-            <div>
+            <label class="item-topping">
               <label class="item-topping">
-                <input type="checkbox" />
+                <input
+                  type="checkbox"
+                  v-model="selectTopping"
+                  v-on:change="calcSubTotalPrice"
+                />
                 <span>ハワイアンソルト</span>
               </label>
               <label class="item-topping">
-                <input type="checkbox" />
+                <input
+                  type="checkbox"
+                  v-model="selectTopping"
+                  v-on:change="calcSubTotalPrice"
+                />
                 <span>ハワイアンマヨネーズ</span>
               </label>
-              <label class="item-topping">
-                <input type="checkbox" />
-                <span>ハワイアントマト</span>
-              </label>
-              <label class="item-topping">
-                <input type="checkbox" />
-                <span>ブルーチーズ</span>
-              </label>
-              <label class="item-topping">
-                <input type="checkbox" />
-                <span>ハワイアンチョコレート</span>
-              </label>
-            </div>
-
-            <!-- <label class="item-topping">
-              <div v-for="topping of toppings" v-bind:key="topping.id"></div>
-              <input type="checkbox" />
-              <span>{{ topping.name }}</span>
-            </label> -->
+              <!-- <div
+                v-for="topping of selectItem.toppingList"
+                v-bind:key="topping.id"
+              ></div>
+              <input
+                type="checkbox"
+                v-on:change="calcSubTotalPrice"
+                v-model="selectTopping"
+              />
+              <span>{{ topping.name }}</span> -->
+            </label>
           </div>
+
           <div class="row item-quantity">
             <div class="item-hedding item-hedding-quantity">数量</div>
             <div class="item-quantity-selectbox">
               <div class="input-field col s12">
-                <select class="browser-default" v-model="selectItemAmount">
+                <select
+                  class="browser-default"
+                  v-on:change="calcSubTotalPrice"
+                  v-model="selectItemQuantity"
+                >
                   <option value="" disabled>選択して下さい</option>
                   <option value="1" selected>1</option>
                   <option value="2">2</option>
@@ -116,7 +137,7 @@
             </div>
           </div>
           <div class="row item-total-price">
-            <span>この商品金額： {{ TotalSubPrice }}円(税抜)</span>
+            <span>この商品金額： {{ subTotalPrice }}円(税抜)</span>
           </div>
           <div class="row item-cart-btn">
             <button
@@ -159,9 +180,11 @@ export default class ItemDetail extends Vue {
   );
 
   selectItem!: Item;
-  selectSize = 0;
-  selectItemImage = "";
-  finalPrice: any;
+  private selectSize = "";
+  private selectTopping = 0;
+  private selectItemQuantity = 1;
+  private selectItemImage = "";
+  private currentToppingList = new Array<Topping>();
 
   /**
    * webAPIからIDを用いて１件の商品情報を取得する.
@@ -212,50 +235,22 @@ export default class ItemDetail extends Vue {
    * 選択された商品の小計を求める
    * @returns -数量、サイズ、トッピングの合計金額
    */
-
-  private currentToppingList = new Array<Topping>();
-
-  get TotalSubPrice(): number {
-    // 選択されたサイズを求める
-    let finalPrice = 0;
-    let toppingAmount = 0;
-    let toppingSubprice = 0;
-    let selectItemAmount = 0;
-    if (this.selectSize === this.currentItem.priceM) {
-      let finalSize = this.selectItem.priceM;
-
-      this.currentItem.toppingList.push(
-        this.$store.getters.getToppingById(Topping)
-      );
-      this.currentItem.toppingList.length = toppingAmount;
-      toppingSubprice = toppingAmount * 200;
-
-      finalPrice = finalSize + toppingSubprice * selectItemAmount;
+  private subTotalPrice = 0;
+  calcSubTotalPrice(): number {
+    if (this.selectSize === "M") {
+      let sizePrice = 0;
+      let toppingPrice = 0;
+      sizePrice = this.selectItem.priceM;
+      toppingPrice = 200 * this.selectTopping;
+      this.subTotalPrice = (sizePrice + toppingPrice) * this.selectItemQuantity;
     } else {
-      if (this.selectSize === this.currentItem.priceL) {
-        let finalSize = this.selectItem.priceL;
-        let toppingAmount = 0;
-        let toppingSubprice = 0;
-        let selectItemAmount = 0;
-
-        this.currentItem.toppingList.push(
-          this.$store.getters.getToppingById(Topping)
-        );
-        this.currentItem.toppingList.length = toppingAmount;
-        toppingSubprice = toppingAmount * 300;
-        finalPrice = finalSize + toppingSubprice * selectItemAmount;
-      }
+      let sizePrice = 0;
+      let toppingPrice = 0;
+      sizePrice = this.selectItem.priceL;
+      toppingPrice = 200 * this.selectTopping;
+      this.subTotalPrice = (sizePrice + toppingPrice) * this.selectItemQuantity;
     }
-    return finalPrice;
-  }
-
-  /**
-   * 非同期で取得したVuexストア内のトッピングを取得し返す.
-   *
-   * @returns トッピング情報
-   */
-  get toppings(): Array<Topping> {
-    return this.$store.getters.getToppings;
+    return this.subTotalPrice;
   }
 }
 </script>

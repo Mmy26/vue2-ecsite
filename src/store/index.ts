@@ -106,16 +106,6 @@ export default new Vuex.Store({
     },
 
     /**
-     * トッピングを返す.
-     *
-     * @param state ステート
-     * @returns トッピング
-     */
-    getToppings(state) {
-      return state.toppings;
-    },
-
-    /**
      * IDからトッピングを検索し返す.
      *
      * @param state ステート
