@@ -12,6 +12,7 @@
             <div class="error-message  red-text">{{ errorMesage }}</div>
         </form>
       </div>
+      <CompFixedButton/>
     </div>
         <div class="items row">
           <div class="item col s12 m6 l4" v-for="item of orderInexpensiveItemList" v-bind:key="item.id">
@@ -31,7 +32,12 @@
 <script lang="ts">
 import { Item } from "@/type/item";
 import { Component, Vue } from "vue-property-decorator";
-@Component
+import CompFixedButton from "@/components/CompFixedButton.vue";
+@Component({
+  components: {
+    CompFixedButton
+  }
+})
 export default class ItemList extends Vue {
   //現在の商品リスト
   private currentItemList = new Array<Item>();
