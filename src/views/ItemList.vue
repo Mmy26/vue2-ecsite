@@ -5,6 +5,14 @@
         <div class="search-wrapper">
       <div class="container">
         <form method="post" class="search-form">
+            <label>
+              <input type="checkbox" />
+              <span>Drink</span>
+            </label>&nbsp;&nbsp;&nbsp;
+            <label>
+              <input type="checkbox" />
+              <span>Food</span>
+            </label>
           <input type="text" name="name" class="search-name-input" v-model="serchText"/>
           <button class="btn search-btn" type="button" v-on:click="serchResultList">
             <span>検索</span>
