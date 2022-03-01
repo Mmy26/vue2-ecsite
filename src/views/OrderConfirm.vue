@@ -10,28 +10,48 @@ import { User } from "@/type/user";
 import { OrderItem } from "@/type/orderItem";
 import { Order } from "@/type/order";
 import  axios  from "axios";
-import {getHours} from "date-fns"
+import { getHours } from "date-fns"
 
 @Component
 export default class OrderConfirm extends Vue {
+  //現在の注文
   private currentOrder = new Order(0, 0, 0, 0, new Date(), "", "", "", "", "", new Date(), 0, new User(0, "", "", "", "", "", ""), new Array<OrderItem>());
+  //注文者の名前
   private destinationName = "";
+  //注文者のメールアドレス
   private destinationEmail = "";
+  //注文者の郵便番号
   private destinationZipcode = "";
+  //注文者の住所
   private destinationAddress = "";
+  //注文者の電話番号
   private destinationTel = "";
+  //配達日時
   private deliveryTime = new Date();
+  //支払い方法
   private paymentMethod = 0;
+  //エラーFrag
   private hasError = false;
+  //注文時のエラーメッセージ
   private errorMessage = "";
+  //名前入力フォームのエラーメッセージ
   private nameErrorMessage = "";
+  //メールアドレス入力フォームのエラーメッセージ
   private emailErrorMessage = "";
+  //郵便番号入力フォームのエラーメッセージ
   private zipcodeErrorMessage = "";
+  //住所入力フォームのエラーメッセージ
   private addressErrorMessage = "";
+  //電話番号入力フォームのエラーメッセージ
   private telErrorMessage = "";
+  //配達日時入力フォームのエラーメッセージ
   private delivelyErrorMessage = "";
-
+  /**
+   * 注文ボタンが押下されたときのメソッド.
+   * @returns プロミスオブジェクト
+   */
   async order(): Promise<void> {
+    //入力値チェック
     if( this.destinationName === "" ){
       this.nameErrorMessage = "名前を入力して下さい";
       this.hasError = true;
@@ -104,7 +124,7 @@ export default class OrderConfirm extends Vue {
       return;
     }
 
-
+    //注文をする機能のメインの処理
     const response = await axios.post(
       "http://153.127.48.168:8080/ecsite-api/order",
       {
