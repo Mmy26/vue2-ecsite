@@ -49,6 +49,7 @@ export default class OrderConfirm extends Vue {
   private telErrorMessage = "";
   //配達日時入力フォームのエラーメッセージ
   private delivelyErrorMessage = "";
+  
   /**
    * 注文ボタンが押下されたときのメソッド.
    * @returns プロミスオブジェクト
