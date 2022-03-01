@@ -60,7 +60,7 @@
                       v-bind:key="orderTopping.id"
                     >
                       {{ orderTopping.topping.name
-                      }}{{ orderTopping.topping.price }}円
+                      }}{{ orderTopping.toppingPrice }}円
                     </li>
                   </ul>
                 </td>
@@ -206,19 +206,6 @@ export default class XXXComponent extends Vue {
         ),
       ]
     );
-    // //サイズによって出力する値を変える
-    // let itemPrice = 0;
-    // for (let i = 0; i <= this.currentOrder.orderItemList.length; i++) {
-    //   if (this.currentItem.size === "M") {
-    //     itemPrice = this.currentItem.item.priceM;
-    //   } else if (this.currentItem.size === "L") {
-    //     itemPrice = this.currentItem.item.priceL;
-    //   }
-    // }
-    // //カート内に何も入っていない場合はエラーメッセージを出す
-    // if (this.currentOrder.orderItemList.length === 0) {
-    //   this.errorMessage = "カートに商品がありません";
-    // }
   }
   /**
    * 注文に進む.
