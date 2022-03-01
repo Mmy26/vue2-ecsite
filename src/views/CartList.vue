@@ -46,7 +46,9 @@
                 </td>
                 <td>
                   <span class="price">&nbsp;{{ orderItem.size }}</span
-                  >&nbsp;&nbsp;2,380円 &nbsp;&nbsp;{{ orderItem.quantity }}個
+                  >&nbsp;&nbsp;{{ getItemPrice() }}円 &nbsp;&nbsp;{{
+                    orderItem.quantity
+                  }}個
                 </td>
                 <td>
                   <ul>
@@ -59,7 +61,11 @@
                     </li>
                   </ul>
                 </td>
-                <td><div class="text-center">3,280円</div></td>
+                <td>
+                  <div class="text-center">
+                    {{ orderItem.getCalcSubTotalPrice() }}円
+                  </div>
+                </td>
                 <td>
                   <button class="btn" type="button">
                     <span>削除</span>
@@ -107,7 +113,6 @@ export default class XXXComponent extends Vue {
    */
   created(): void {
     this.currentOrder = this.$store.getters.getOrder;
-
   }
 }
 </script>
