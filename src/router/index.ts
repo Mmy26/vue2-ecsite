@@ -15,6 +15,10 @@ const routes: Array<RouteConfig> = [
     name: "ItemList",
     component: () => import("../views/ItemList.vue"),
   },
+  {
+    path: "/registerUser",
+    component: () => import("../views/registerUser.vue"),
+  },
 ];
 
 const router = new VueRouter({
