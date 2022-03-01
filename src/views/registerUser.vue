@@ -170,6 +170,16 @@ export default class XXXComponent extends Vue {
     );
     console.dir("response" + JSON.stringify(response));
 
+    this.errorMessage = "";
+    this.errorLastName = "";
+    this.errorFirstName = "";
+    this.errorMailAddress = "";
+    this.errorZipCode = "";
+    this.errorAddress = "";
+    this.errorTelephone = "";
+    this.errorPassword = "";
+    this.errorPasswordConfirmation = "";
+
     if (this.lastName === "") {
       this.errorLastName = "姓が入力されていません";
       this.errorChecker = false;
@@ -190,7 +200,10 @@ export default class XXXComponent extends Vue {
       this.errorZipCode = "郵便番号が入力されていません";
       this.errorChecker = false;
     }
-    if (/^[0-9]{3}-[0-9]{4}$/.test(this.zipCode) === false) {
+    if (
+      this.zipCode != "" &&
+      /^[0-9]{3}-[0-9]{4}$/.test(this.zipCode) === false
+    ) {
       this.errorZipCode = "郵便番号はXXX-XXXXの形式で入力してください";
       this.errorChecker = false;
     }
@@ -202,7 +215,10 @@ export default class XXXComponent extends Vue {
       this.errorTelephone = "電話番号が入力されていません";
       this.errorChecker = false;
     }
-    if (/\d{2,4}-\d{2,4}-\d{4}/.test(this.telephone) === false) {
+    if (
+      this.telephone != "" &&
+      /\d{2,4}-\d{2,4}-\d{4}/.test(this.telephone) === false
+    ) {
       this.errorTelephone = "電話番号はXXXX-XXXX-XXXXの形式で入力してください";
       this.errorChecker = false;
     }
@@ -262,6 +278,15 @@ export default class XXXComponent extends Vue {
     this.telephone = "";
     this.password = "";
     this.passwordConfirmation = "";
+    this.errorMessage = "";
+    this.errorLastName = "";
+    this.errorFirstName = "";
+    this.errorMailAddress = "";
+    this.errorZipCode = "";
+    this.errorAddress = "";
+    this.errorTelephone = "";
+    this.errorPassword = "";
+    this.errorPasswordConfirmation = "";
   }
 }
 </script>
