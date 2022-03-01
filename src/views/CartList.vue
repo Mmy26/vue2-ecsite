@@ -81,7 +81,7 @@
           <div>ご注文金額合計：38,000円 (税込)</div>
         </div>
         <div class="row order-confirm-btn">
-          <button class="btn" type="button">
+          <button class="btn" type="button" v-on:click="onOrderClick">
             <span>注文に進む</span>
           </button>
         </div>
@@ -113,6 +113,13 @@ export default class XXXComponent extends Vue {
    */
   created(): void {
     this.currentOrder = this.$store.getters.getOrder;
+  }
+  /**
+   * 注文に進む.
+   */
+  onOrderClick(): void {
+    //注文確認画面に遷移する
+    this.$router.push("/orderConfirm");
   }
 }
 </script>
