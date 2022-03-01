@@ -32,7 +32,7 @@
         <div class="row">
           <div class="row item-detail">
             <div class="item-icon">
-              <img src="/img_coffee/1.jpg" />
+              <img v-bind:src="selectItemImage" />
             </div>
             <div class="item-intro">
               {{ selectItem.description }}
@@ -64,20 +64,42 @@
               <span>&nbsp;Ｌ</span>&nbsp;&nbsp;300円(税抜)
             </div>
 
-            <div v-for="topping of currentToppingList" v-bind:key="topping.id">
+            <div>
               <label class="item-topping">
-                <input type="checkbox" id="toppingId" value="toppingId" />
-                <span>{{ topping.name }}</span>
+                <input type="checkbox" />
+                <span>ハワイアンソルト</span>
+              </label>
+              <label class="item-topping">
+                <input type="checkbox" />
+                <span>ハワイアンマヨネーズ</span>
+              </label>
+              <label class="item-topping">
+                <input type="checkbox" />
+                <span>ハワイアントマト</span>
+              </label>
+              <label class="item-topping">
+                <input type="checkbox" />
+                <span>ブルーチーズ</span>
+              </label>
+              <label class="item-topping">
+                <input type="checkbox" />
+                <span>ハワイアンチョコレート</span>
               </label>
             </div>
+
+            <!-- <label class="item-topping">
+              <div v-for="topping of toppings" v-bind:key="topping.id"></div>
+              <input type="checkbox" />
+              <span>{{ topping.name }}</span>
+            </label> -->
           </div>
           <div class="row item-quantity">
             <div class="item-hedding item-hedding-quantity">数量</div>
             <div class="item-quantity-selectbox">
               <div class="input-field col s12">
                 <select class="browser-default" v-model="selectItemAmount">
-                  <option value="" disabled selected>選択して下さい</option>
-                  <option value="1">1</option>
+                  <option value="" disabled>選択して下さい</option>
+                  <option value="1" selected>1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
                   <option value="4">4</option>
@@ -94,7 +116,7 @@
             </div>
           </div>
           <div class="row item-total-price">
-            <span>この商品金額：{{ TotalSubPrice }} 円(税抜)</span>
+            <span>この商品金額： {{ TotalSubPrice }}円(税抜)</span>
           </div>
           <div class="row item-cart-btn">
             <button
@@ -138,7 +160,8 @@ export default class ItemDetail extends Vue {
 
   selectItem!: Item;
   selectSize = 0;
-  private selectItemImage = "";
+  selectItemImage = "";
+  finalPrice: any;
 
   /**
    * webAPIからIDを用いて１件の商品情報を取得する.
@@ -151,6 +174,8 @@ export default class ItemDetail extends Vue {
     const itemId = this.$route.params.id;
     // getItemList()メソッドに先ほど取得したIDを渡し、１件の商品情報を取得し、戻り値をselectItemに代入する
     this.selectItem = this.$store.getters.getItemId(itemId);
+    // 今取得した商品情報から画像パスを取り出し、selectItemImage属性に代入する
+    this.selectItemImage = `${this.selectItem.imagePath}`;
 
     const response = await axios.get(
       `http://153.127.48.168:8080/ecsite-api/item/${itemId}`
@@ -168,7 +193,13 @@ export default class ItemDetail extends Vue {
       currentItem.deleted,
       currentItem.toppingList
     );
+
     {
+      /**
+       * トッピングを表示する.
+       *
+       * @returns Promiseオブジェクト
+       */
       const response = await axios.get(
         `http://153.127.48.168:8080/ecsite-api/item/toppings/coffee`
       );
@@ -176,30 +207,29 @@ export default class ItemDetail extends Vue {
       this.currentToppingList = response.data.toppingList;
     }
   }
-  /**
-   * トッピングを表示する.
-   *
-   * @returns Promiseオブジェクト
-   */
-  private currentToppingList = new Array<Topping>();
 
   /**
    * 選択された商品の小計を求める
+   * @returns -数量、サイズ、トッピングの合計金額
    */
-  public TotalSubPrice(): number {
+
+  private currentToppingList = new Array<Topping>();
+
+  get TotalSubPrice(): number {
     // 選択されたサイズを求める
     let finalPrice = 0;
+    let toppingAmount = 0;
+    let toppingSubprice = 0;
+    let selectItemAmount = 0;
     if (this.selectSize === this.currentItem.priceM) {
       let finalSize = this.selectItem.priceM;
-      let toppingAmount = 0;
-      let toppingSubprice = 0;
-      let selectItemAmount = 0;
-      // サイズMの場合のtopping単価
+
       this.currentItem.toppingList.push(
         this.$store.getters.getToppingById(Topping)
       );
       this.currentItem.toppingList.length = toppingAmount;
       toppingSubprice = toppingAmount * 200;
+
       finalPrice = finalSize + toppingSubprice * selectItemAmount;
     } else {
       if (this.selectSize === this.currentItem.priceL) {
@@ -207,7 +237,7 @@ export default class ItemDetail extends Vue {
         let toppingAmount = 0;
         let toppingSubprice = 0;
         let selectItemAmount = 0;
-        // サイズMの場合のtopping単価
+
         this.currentItem.toppingList.push(
           this.$store.getters.getToppingById(Topping)
         );
@@ -217,6 +247,15 @@ export default class ItemDetail extends Vue {
       }
     }
     return finalPrice;
+  }
+
+  /**
+   * 非同期で取得したVuexストア内のトッピングを取得し返す.
+   *
+   * @returns トッピング情報
+   */
+  get toppings(): Array<Topping> {
+    return this.$store.getters.getToppings;
   }
 }
 </script>

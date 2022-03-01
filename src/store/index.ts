@@ -5,6 +5,7 @@ import { Order } from "@/type/order";
 import { User } from "@/type/user";
 import { OrderItem } from "@/type/orderItem";
 import axios from "axios";
+import { Topping } from "@/type/topping2";
 
 Vue.use(Vuex);
 
@@ -27,6 +28,7 @@ export default new Vuex.Store({
       new Array<OrderItem>()
     ),
     itemList: new Array<Item>(),
+    toppings: new Array<Topping>(),
   },
   actions: {
     /**
@@ -84,6 +86,16 @@ export default new Vuex.Store({
         const items = state.itemList.filter((Item) => Item.id == itemId);
         return items[0];
       };
+    },
+
+    /**
+     * トッピングを返す.
+     *
+     * @param state ステート
+     * @returns トッピング
+     */
+    getToppings(state) {
+      return state.toppings;
     },
 
     /**
