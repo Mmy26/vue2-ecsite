@@ -1,5 +1,6 @@
 import { User } from "./user";
 import { OrderItem } from "./orderItem";
+import { Item } from "./item";
 /**
  *注文を表すドメインクラス.
  */
@@ -34,6 +35,24 @@ export class Order {
     //注文商品リスト
     private _orderItemList: Array<OrderItem>
   ) {}
+  /**
+   * 消費税を計算する.
+   * @returns 消費税
+   */
+  public getTax(): number {
+    //orderItemオブジェクトを生成
+    const orderItem = new OrderItem(
+      0,
+      0,
+      0,
+      "",
+      new Item(0, "", "", "", 0, 0, "", true, []),
+      []
+    );
+    const taxPrice = orderItem.getCalcSubTotalPrice() * 0.1;
+    // 小数点を切り下げる
+    return Math.floor(taxPrice);
+  }
 
   public get id(): number {
     return this._id;
