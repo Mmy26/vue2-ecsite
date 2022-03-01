@@ -135,28 +135,55 @@
 import { Component, Vue } from "vue-property-decorator";
 import axios from "axios";
 
+/**
+ * ユーザー登録をする画面.
+ */
 @Component
 export default class XXXComponent extends Vue {
+  // 姓
   private lastName = "";
+  // 名
   private firstName = "";
+  // メールアドレス
   private mailAddress = "";
+  // 郵便番号
   private zipCode = "";
+  // 住所
   private address = "";
+  // 電話番号
   private telephone = "";
+  // パスワード
   private password = "";
+  // 確認用パスワード
   private passwordConfirmation = "";
+  // エラーメッセージ
   private errorMessage = "";
+  // 姓のエラーメッセージ
   private errorLastName = "";
+  // 名のエラーメッセージ
   private errorFirstName = "";
+  // メールアドレスのエラーメッセージ
   private errorMailAddress = "";
+  // 郵便番号のエラーメッセージ
   private errorZipCode = "";
+  // 住所のエラーメッセージ
   private errorAddress = "";
+  // 電話番号のエラーメッセージ
   private errorTelephone = "";
+  // パスワードのエラーメッセージ
   private errorPassword = "";
+  // 確認用パスワードのエラーメッセージ
   private errorPasswordConfirmation = "";
+  // フォームチェッカー
   private errorChecker = true;
 
+  /**
+   * ユーザー情報を登録する.
+   *
+   * @returns Promiseオブジェクト
+   */
   async registerUser(): Promise<void> {
+    // 管理者登録処理
     const response = await axios.post(
       `http://153.127.48.168:8080/ecsite-api/user`,
       {
@@ -256,6 +283,11 @@ export default class XXXComponent extends Vue {
     }
   }
 
+  /**
+   * 住所情報をAPIから取得する.
+   *
+   * @returns Promiseオブジェクト
+   */
   async getAddress(): Promise<void> {
     require("axios");
 
@@ -269,6 +301,9 @@ export default class XXXComponent extends Vue {
     this.address = response.data.items[0].address;
   }
 
+  /**
+   * フォームに入力された内容をリセットする.
+   */
   reset(): void {
     this.lastName = "";
     this.firstName = "";
