@@ -153,7 +153,6 @@
       <!-- end container -->
     </div>
     <!-- end top-wrapper -->
-
     <!-- Compiled and minified JavaScript -->
   </div>
 </template>
@@ -179,11 +178,17 @@ export default class ItemDetail extends Vue {
     new Array<Topping>()
   );
 
+  // 選択された商品
   selectItem!: Item;
+  // 選択された商品のサイズ
   private selectSize = "";
+  // 選択されたトッピング
   private selectTopping = 0;
+  // 選択された商品のオーダー数量
   private selectItemQuantity = 1;
+  // 画像パス
   private selectItemImage = "";
+  // トッピングリスト
   private currentToppingList = new Array<Topping>();
 
   /**
