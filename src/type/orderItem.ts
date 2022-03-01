@@ -1,5 +1,6 @@
 import { orderTopping } from "./OrderTopping";
 import { Item } from "./Item";
+import { Topping } from "./Topping";
 
 export class OrderItem {
   constructor(
@@ -10,6 +11,27 @@ export class OrderItem {
     private _item: Item,
     private _orderToppingList: Array<orderTopping>
   ) {}
+  /**
+   * 小計を計算する.
+   * @returns 小計
+   */
+  public getCalcSubTotalPrice(): number {
+    let subTotalPrice = 0;
+    //トッピングオブジェクトを生成
+    const topping = new Topping(0, "", "", 0, 0);
+    if (this.size === "M") {
+      //トッピングの合計金額
+      const toppingSubTotalM = this.orderToppingList.length * topping.priceM;
+      //Mサイズの場合の小計
+      subTotalPrice = (this.item.priceM + toppingSubTotalM) * this.quantity;
+    } else if (this.size === "L") {
+      //トッピングの合計金額
+      const toppingSubTotalL = this.orderToppingList.length * topping.priceL;
+      //Lサイズの場合の小計
+      subTotalPrice = (this.item.priceL + toppingSubTotalL) * this.quantity;
+    }
+    return subTotalPrice;
+  }
 
   public get id(): number {
     return this._id;
