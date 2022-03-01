@@ -20,8 +20,13 @@ const routes: Array<RouteConfig> = [
     component: () => import("../views/registerUser.vue"),
   },
   {
+    path: "/logout",
+    component: () => import("../views/Logout.vue")},
+
+  {
     path: "/login",
     component: () => import("../views/Login.vue"),
+
   },
 ];
 
