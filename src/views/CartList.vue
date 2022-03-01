@@ -107,6 +107,7 @@ import { Order } from "@/type/order";
 import { User } from "@/type/user";
 import { OrderItem } from "@/type/orderItem";
 import { Item } from "@/type/item";
+import { Topping } from "@/type/topping";
 @Component
 export default class XXXComponent extends Vue {
   // 合計金額
@@ -174,7 +175,10 @@ export default class XXXComponent extends Vue {
             700,
             "/img_coffee/1.jpg",
             false,
-            []
+            [
+              new Topping(-1, "coffee", "ピクルス", 200, 300),
+              new Topping(-1, "coffee", "チーズ", 200, 300),
+            ]
           ),
           []
         ),
@@ -193,7 +197,10 @@ export default class XXXComponent extends Vue {
             700,
             "/img_coffee/1.jpg",
             false,
-            []
+            [
+              new Topping(-1, "coffee", "ピクルス", 200, 300),
+              new Topping(-1, "coffee", "チーズ", 200, 300),
+            ]
           ),
           []
         ),
