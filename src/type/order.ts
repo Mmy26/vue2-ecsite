@@ -1,5 +1,6 @@
 import { User } from "./user";
 import { OrderItem } from "./orderItem";
+import { OrderItemForm } from "./oderItemForm"
 /**
 *注文を表すドメインクラス.
 */
@@ -16,15 +17,15 @@ export class Order {
     //注文日
     private _orderDate: Date,
     //宛先氏名
-    private _distinationName: string,
+    private _destinationName: string,
     //宛先Eメールアドレス
-    private _distinationEmail: string,
+    private _destinationEmail: string,
     //宛先郵便番号
-    private _distinationZipcode: string,
+    private _destinationZipcode: string,
     //宛先住所
-    private _distinationAddress: string,
+    private _destinationAddress: string,
     //宛先電話番号
-    private _distinationTel: string,
+    private _destinationTel: string,
     //配達日時
     private _deliveryTime: Date,
     //支払い方法
@@ -34,6 +35,24 @@ export class Order {
     //注文商品リスト
     private _orderItemList: Array<OrderItem>
   ) {}
+  /**
+   * 注文をする際に利用するフォームリストを作成するgetter.
+   * @returns オーダー表の配列
+   */
+  public get makeOrderFormList(): Array<OrderItemForm>{
+    const newArray = new Array<OrderItemForm>();
+    for( const orderItem of this.orderItemList ){
+      newArray.push(
+        new OrderItemForm(
+          orderItem.id,
+          orderItem.quantity,
+          orderItem.size
+        )
+      )
+    }
+    console.log(newArray);
+    return newArray
+  }
 
   public get id(): number {
     return this._id;
@@ -75,44 +94,44 @@ export class Order {
     this._orderDate = orderDate;
   }
 
-  public get distinationName(): string {
-    return this._distinationName;
+  public get destinationName(): string {
+    return this._destinationName;
   }
 
-  public set distinationName(distinationName: string) {
-    this._distinationName = distinationName;
+  public set destinationName(destinationName: string) {
+    this._destinationName = destinationName;
   }
 
-  public get distinationEmail(): string {
-    return this._distinationEmail;
+  public get destinationEmail(): string {
+    return this._destinationEmail;
   }
 
-  public set distinationEmail(distinationEmail: string) {
-    this._distinationEmail = distinationEmail;
+  public set destinationEmail(destinationEmail: string) {
+    this._destinationEmail = destinationEmail;
   }
 
-  public get distinationZipcode(): string {
-    return this._distinationZipcode;
+  public get destinationZipcode(): string {
+    return this._destinationZipcode;
   }
 
-  public set distinationZipcode(distinationZipcode: string) {
-    this._distinationZipcode = distinationZipcode;
+  public set destinationZipcode(destinationZipcode: string) {
+    this._destinationZipcode = destinationZipcode;
   }
 
-  public get distinationAddress(): string {
-    return this._distinationAddress;
+  public get destinationAddress(): string {
+    return this._destinationAddress;
   }
 
-  public set distinationAddress(distinationAddress: string) {
-    this._distinationAddress = distinationAddress;
+  public set destinationAddress(destinationAddress: string) {
+    this._destinationAddress = destinationAddress;
   }
 
-  public get distinationTel(): string {
-    return this._distinationTel;
+  public get destinationTel(): string {
+    return this._destinationTel;
   }
 
-  public set distinationTel(distinationTel: string) {
-    this._distinationTel = distinationTel;
+  public set destinationTel(destinationTel: string) {
+    this._destinationTel = destinationTel;
   }
 
   public get deliveryTime(): Date {
