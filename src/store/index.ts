@@ -78,6 +78,14 @@ export default new Vuex.Store({
     getItemList(state) {
       return state.itemList;
     },
+
+    getItemId(state) {
+      return (itemId: number) => {
+        const items = state.itemList.filter((Item) => Item.id == itemId);
+        return items[0];
+      };
+    },
+
     /**
      * IDからトッピングを検索し返す.
      *
