@@ -38,11 +38,11 @@ export class Order {
    * 注文商品の小計の合計金額を計算する.
    * @returns 注文商品の小計の合計金額
    */
-  public getItemListSubTotalPrice(): number {
+  public get itemListSubTotalPrice(): number {
     //注文した商品の配列の小計の合計に0.1をかける
     let itemListTotalPrice = 0;
     for (let i = 0; i <= this.orderItemList.length; i++) {
-      itemListTotalPrice += this.orderItemList[i].getCalcSubTotalPrice();
+      itemListTotalPrice += this.orderItemList[i].calcSubTotalPrice;
     }
     return itemListTotalPrice;
   }
@@ -51,7 +51,7 @@ export class Order {
    * @returns 消費税
    */
   public get tax(): number {
-    const taxPrice = this.getItemListSubTotalPrice() * 0.1;
+    const taxPrice = this.itemListSubTotalPrice * 0.1;
     // 小数点を切り捨てる
     return Math.floor(taxPrice);
   }
@@ -60,7 +60,7 @@ export class Order {
    * @returns 合計金額
    */
   public get calcTotalPrice(): number {
-    const totalPrice = this.getItemListSubTotalPrice() + this.tax;
+    const totalPrice = this.itemListSubTotalPrice + this.tax;
     return totalPrice;
   }
 

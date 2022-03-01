@@ -50,7 +50,7 @@
                 </td>
                 <td>
                   <span class="price">&nbsp;{{ orderItem.size }}</span
-                  ><span>&nbsp;&nbsp;1200円</span
+                  ><span>&nbsp;&nbsp;{{ orderItem.orderItemPrice }}円</span
                   ><span> &nbsp;&nbsp;{{ orderItem.quantity }}個</span>
                 </td>
                 <td>
@@ -65,7 +65,9 @@
                   </ul>
                 </td>
                 <td>
-                  <div class="text-center">10000円</div>
+                  <div class="text-center">
+                    {{ orderItem.calcSubTotalPrice }}円
+                  </div>
                 </td>
                 <td>
                   <button class="btn" type="button">
@@ -105,7 +107,6 @@ import { Order } from "@/type/order";
 import { User } from "@/type/user";
 import { OrderItem } from "@/type/orderItem";
 import { Item } from "@/type/item";
-import { Topping } from "@/type/topping";
 @Component
 export default class XXXComponent extends Vue {
   // 合計金額

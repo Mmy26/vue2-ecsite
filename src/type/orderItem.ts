@@ -16,7 +16,7 @@ export class OrderItem {
    * 小計を計算する.
    * @returns 小計
    */
-  public getCalcSubTotalPrice(): number {
+  public get calcSubTotalPrice(): number {
     let subTotalPrice = 0;
     //トッピングオブジェクトを生成
     const topping = new Topping(0, "", "", 0, 0);
@@ -32,6 +32,19 @@ export class OrderItem {
       subTotalPrice = (this.item.priceL + toppingSubTotalL) * this.quantity;
     }
     return subTotalPrice;
+  }
+  /**
+   * サイズごとに表示する値段を変える.
+   * @returns 商品1個の値段
+   */
+  public get orderItemPrice(): number {
+    let itemPrice = 0;
+    if (this.size === "M") {
+      itemPrice = this.item.priceM;
+    } else if (this.size === "L") {
+      itemPrice = this.item.priceL;
+    }
+    return itemPrice;
   }
 
   public get id(): number {
