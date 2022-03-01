@@ -93,5 +93,5 @@ export default class ItemList extends Vue {
 </script>
 
 <style scoped>
-
+@import url("/css/item_list.css");
 </style>
