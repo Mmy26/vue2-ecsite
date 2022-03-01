@@ -13,7 +13,7 @@
               <input type="checkbox" />
               <span>Food</span>
             </label>
-          <input type="text" name="name" class="search-name-input" v-model="serchText"/>
+          <input type="text" name="name" class="search-name-input tooltipped" data-position="right" data-tooltip="お腹空いた？？" v-model="serchText"/>
           <button class="btn search-btn" type="button" v-on:click="serchResultList">
             <span>検索</span>
           </button>
