@@ -56,11 +56,11 @@
                 <td>
                   <ul>
                     <li
-                      v-for="orderTopping of orderItem.orderToppingList"
-                      v-bind:key="orderTopping.id"
+                      v-for="topping of orderItem.item.toppingList"
+                      v-bind:key="topping.id"
                     >
-                      {{ orderTopping.topping.name
-                      }}{{ orderTopping.toppingPrice }}円
+                      {{ topping.name
+                      }}{{ topping.toppingPrice }}円
                     </li>
                   </ul>
                 </td>
