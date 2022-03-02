@@ -42,11 +42,11 @@ export class Order {
   public get itemListSubTotalPrice(): number {
     //注文した商品の配列の小計の合計に0.1をかける
     let itemListTotalPrice = 0;
-    for (let i = 0; i <= this.orderItemList.length; i++) {
-      itemListTotalPrice += this.orderItemList[i].calcSubTotalPrice;
+    for (const orderItem of this.orderItemList) {
+      itemListTotalPrice += orderItem.calcSubTotalPrice;
     }
     return itemListTotalPrice;
-  }
+  } 
   /**
    * 消費税を計算する.
    * @returns 消費税
