@@ -13,7 +13,7 @@
   <div id="modal1" class="modal bottom-sheet">
     <div class="modal-content">
       <h4>何かお困りですか？</h4>
-      <a class="waves-effect waves-light btn green darken-1">よくある質問ページはこちら!</a>
+      <router-link to="/faq" class="waves-effect waves-light btn green darken-1">よくある質問ページはこちら!</router-link>
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-green btn-flat">閉じる</a>
@@ -26,7 +26,7 @@
 import { Component, Vue } from "vue-property-decorator";
 @Component
 export default class CompFixedButton extends Vue {
-
+  
 }
 </script>
 
