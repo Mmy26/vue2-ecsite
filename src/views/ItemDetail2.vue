@@ -73,6 +73,7 @@
               </label>
             </div>
           </div>
+
           <label>
             <div class="row item-toppings">
               <div class="item-hedding">
@@ -80,7 +81,6 @@
                 <span>&nbsp;Ｍ&nbsp;</span>&nbsp;&nbsp;200円(税抜)
                 <span>&nbsp;Ｌ</span>&nbsp;&nbsp;300円(税抜)
               </div>
-
               <div
                 v-for="topping of selectItem.toppingList"
                 v-bind:key="topping.id"
@@ -93,6 +93,7 @@
               <span>{{ topping.name }}</span>
             </div>
           </label>
+
           <div class="row item-quantity">
             <div class="item-hedding item-hedding-quantity">数量</div>
             <div class="item-quantity-selectbox">
@@ -173,8 +174,6 @@ export default class ItemDetail extends Vue {
   private selectItemImage = "";
   // トッピングリスト
   private currentToppingList = new Array<Topping>();
-  // 取得したトッピングリストをから配列で初期化
-  private displayToppingList!: Topping[];
 
   /**
    * webAPIからIDを用いて１件の商品情報を取得する.
@@ -212,6 +211,7 @@ export default class ItemDetail extends Vue {
     console.dir("①response:" + JSON.stringify(responseTopping));
 
     const displayToppingList = new Array<Topping>();
+
     for (const topping of response.data.toppingList) {
       displayToppingList.push(
         new Topping(
@@ -222,7 +222,7 @@ export default class ItemDetail extends Vue {
           topping.priceL
         )
       );
-      this.selectItem.toppingList = this.displayToppingList;
+      this.selectItem.toppingList = displayToppingList;
     }
   }
 
