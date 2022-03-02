@@ -107,7 +107,7 @@ import { Order } from "@/type/order";
 import { User } from "@/type/user";
 import { OrderItem } from "@/type/orderItem";
 import { Item } from "@/type/item";
-import { Topping } from "@/type/topping";
+import { Topping } from "@/type/topping2";
 @Component
 export default class XXXComponent extends Vue {
   // 合計金額
