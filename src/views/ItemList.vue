@@ -48,11 +48,11 @@
       <div class="container">
         <form method="post" class="search-form">
             <label>
-              <input type="checkbox" />
+              <input type="checkbox" v-model="drinkList" v-on:change="switchList" />
               <span>Drink</span>
             </label>&nbsp;&nbsp;&nbsp;
             <label>
-              <input type="checkbox" />
+              <input type="checkbox" v-model="foodList" v-on:change="switchList" />
               <span>Food</span>
             </label>
           <input type="text" name="name" class="search-name-input tooltipped" data-position="right" data-tooltip="お腹空いた？？" v-model="serchText"/>
@@ -79,7 +79,6 @@
             ><br />
             <span class="price">M</span>{{ item.priceM }}円(税抜)<br />
             <span class="price">L</span>{{ item.priceL }}円(税抜)<br />
->>>>>>> develop
           </div>
       </div>
     </div>
@@ -102,7 +101,11 @@ export default class ItemList extends Vue {
   private errorMesage = "";
   //現在の商品リスト
   private currentItemList = new Array<Item>();
-
+  //飲み物商品一覧
+  private drinkList = false;
+  //食べ物商品一覧
+  private foodList = false;
+  
   /**
    * ページ遷移時、現在の商品一覧を取得するメソッド.
    * @returns プロミスオブジェクト
@@ -136,6 +139,7 @@ export default class ItemList extends Vue {
    * 検索結果を表示するメソッド.
    */
   serchResultList(): void {
+    console.log(this.drinkList);
     this.errorMesage = "";
     this.currentItemList = this.$store.getters.getItemList;
     let initArray = this.orderInexpensiveItemList;
@@ -150,6 +154,33 @@ export default class ItemList extends Vue {
       this.currentItemList = this.$store.getters.getItemList;
     }
     this.serchText = "";
+  }
+  switchList(): void {
+    this.errorMesage = "";
+    this.currentItemList = this.$store.getters.getItemList;
+    let initArray = this.orderInexpensiveItemList;
+    this.currentItemList = new Array<Item>();
+    const foodOrNot = (item: Item): boolean => {
+      return (item.name.includes("ドーナッツ") || item.name.includes("クッキー")  || item.name.includes("サンド"))
+    }
+    for (let item of initArray) {
+      if (this.foodList) {
+        if(foodOrNot(item)){
+          this.currentItemList.push(item);
+        }
+      } else if (this.drinkList){
+        if(!foodOrNot(item)){
+          this.currentItemList.push(item);
+        }
+      } else {
+        this.currentItemList.push(item);
+      }
+    }
+    // if (this.currentItemList.length === 0) {
+    //   this.errorMesage = "1件もありませんでしたので全件表示します";
+    //   this.currentItemList = this.$store.getters.getItemList;
+    // }
+    // this.serchText = "";
   }
 }
 </script>
