@@ -1,19 +1,25 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
-import Home from "../views/Home.vue";
 
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
+  // {
+  //   path: "*",
+  //   name: "Home",
+  //   component: Home,
+  // },
   {
-    path: "*",
-    name: "Home",
-    component: Home,
+    path: "/cartList",
+    component: () => import("../views/CartList.vue"),
   },
   {
     path: "/itemList",
-    name: "ItemList",
     component: () => import("../views/ItemList.vue"),
+  },
+  {
+    path: "/itemDetail/:id",
+    component: () => import("../views/ItemDetail2.vue"),
   },
   {
     path: "/registerUser",
@@ -21,7 +27,9 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: "/logout",
-    component: () => import("../views/Logout.vue")},
+
+    component: () => import("../views/Logout.vue"),
+  },
   {
     path: "/login",
     component: () => import("../views/Login.vue"),
