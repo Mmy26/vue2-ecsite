@@ -186,5 +186,5 @@ export default new Vuex.Store({
     getOrder(state) {
       return state.order;
     },
-  },
+  }
 });
