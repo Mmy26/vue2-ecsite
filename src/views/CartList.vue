@@ -85,7 +85,7 @@ import { Order } from "@/type/order";
 import { User } from "@/type/user";
 import { OrderItem } from "@/type/orderItem";
 import { Item } from "@/type/item";
-import { Topping } from "@/type/topping";
+import { Topping } from "@/type/topping2";
 @Component
 export default class XXXComponent extends Vue {
   // 合計金額
@@ -192,6 +192,7 @@ export default class XXXComponent extends Vue {
       this.errorMessage = "カートに商品がありません";
       this.canShow = false;
     }
+    // this.currentOrder = this.$store.getters.getOrder;
   }
   /**
    * 注文に進む.
@@ -199,6 +200,16 @@ export default class XXXComponent extends Vue {
   onOrderClick(): void {
     //注文確認画面に遷移する
     this.$router.push("/orderConfirm");
+  }
+
+  /**
+   * 商品を削除する.
+   */
+  removeFromCart(index: number): void {
+    console.log(this.currentOrder.orderItemList);
+
+    this.$store.commit("removeItem", { itemIndex: index });
+    console.log(this.$store.getters.getOrder);
   }
 }
 </script>
