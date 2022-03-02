@@ -39,7 +39,7 @@
             </thead>
             <tbody>
               <tr
-                v-for="orderItem of this.currentOrder.orderItemList"
+                v-for="(orderItem, index) of this.currentOrder.orderItemList"
                 v-bind:key="orderItem.id"
               >
                 <td class="cart-item-name">
@@ -69,7 +69,11 @@
                   </div>
                 </td>
                 <td>
-                  <button class="btn" type="button">
+                  <button
+                    class="btn"
+                    type="button"
+                    v-on:click="removeFromCart(index)"
+                  >
                     <span>削除</span>
                   </button>
                 </td>
@@ -145,67 +149,7 @@ export default class XXXComponent extends Vue {
    * ショッピングカート一覧を表示させる.
    */
   created(): void {
-    this.currentOrder = new Order(
-      0,
-      0,
-      0,
-      0,
-      new Date(),
-      "",
-      "",
-      "",
-      "",
-      "",
-      new Date(),
-      0,
-      new User(0, "", "", "", "", "", ""),
-      [
-        new OrderItem(
-          21,
-          1,
-          1,
-          1,
-          "M",
-          new Item(
-            21,
-            "coffee",
-            "Gorgeous4サンド",
-            "",
-            480,
-            700,
-            "/img_coffee/1.jpg",
-            false,
-            [
-              new Topping(-1, "coffee", "ピクルス", 200, 300),
-              new Topping(-1, "coffee", "チーズ", 200, 300),
-            ]
-          ),
-          []
-        ),
-        new OrderItem(
-          21,
-          1,
-          1,
-          2,
-          "L",
-          new Item(
-            21,
-            "coffee",
-            "コーヒー",
-            "",
-            480,
-            700,
-            "/img_coffee/1.jpg",
-            false,
-            [
-              new Topping(-1, "coffee", "ピクルス", 200, 300),
-              new Topping(-1, "coffee", "チーズ", 200, 300),
-            ]
-          ),
-          []
-        ),
-      ]
-    );
+    this.currentOrder = this.$store.getters.getOrder;
   }
   /**
    * 注文に進む.
@@ -213,6 +157,16 @@ export default class XXXComponent extends Vue {
   onOrderClick(): void {
     //注文確認画面に遷移する
     this.$router.push("/orderConfirm");
+  }
+
+  /**
+   * 商品を削除する.
+   */
+  removeFromCart(index: number): void {
+    console.log(this.currentOrder.orderItemList);
+
+    this.$store.commit("removeItem", { itemIndex: index });
+    console.log(this.$store.getters.getOrder);
   }
 }
 </script>
