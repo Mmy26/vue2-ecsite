@@ -31,12 +31,7 @@ export default class CompFixedButton extends Vue {
 </script>
 
 <style scoped>
-.help-box{
-  color: black;
-  padding-right: 10px;
-  text-align: left;
-  height: 500px;
-  width: 20px;
-  z-index: 1;
+.modal-content{
+  text-align: center;
 }
 </style>

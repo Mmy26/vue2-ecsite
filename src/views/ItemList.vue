@@ -55,7 +55,13 @@
           </button>
           <div>
             <ul class="collection">
-              <li class="collection-item" v-for="(name, index) of makeSuggestArray" v-bind:key="index">{{ name }}</li>
+              <li
+                class="collection-item"
+                v-for="(name, index) of makeSuggestArray"
+                v-bind:key="index"
+              >
+                {{ name }}
+              </li>
             </ul>
           </div>
           <div class="error-message">{{ errorMesage }}</div>
@@ -86,6 +92,60 @@
         </div>
       </div>
     </div>
+    <ul class="pagination ">
+      <span v-if="currentPageNum === 1">
+        <li class="disabled">
+          <router-link to="/itemList">
+            <i class="material-icons">chevron_left</i>
+          </router-link>
+        </li>
+      </span>
+      <span v-if="currentPageNum !== 1">
+        <li>
+          <router-link
+            to="/itemList"
+            v-on:click.native="pagingLinkClick(currentPageNum - 1)"
+          >
+            <i class="material-icons">chevron_left</i>
+          </router-link>
+        </li>
+      </span>
+      <span v-for="pageNum of pageNums" v-bind:key="pageNum">
+        <li v-if="pageNum === currentPageNum" class="active blue darken-3">
+          <router-link
+            to="/itemList"
+            v-on:click.native="pagingLinkClick(pageNum)"
+          >
+            {{ pageNum }}
+          </router-link>
+        </li>
+        <li v-if="pageNum !== currentPageNum" class="waves-effect">
+          <router-link
+            to="/itemList"
+            v-on:click.native="pagingLinkClick(pageNum)"
+          >
+            {{ pageNum }}
+          </router-link>
+        </li>
+      </span>
+      <span v-if="currentPageNum === maxPageNum">
+        <li class="disabled">
+          <router-link to="/itemList">
+            <i class="material-icons">chevron_right</i>
+          </router-link>
+        </li>
+      </span>
+      <span v-if="currentPageNum !== maxPageNum">
+        <li>
+          <router-link
+            to="/itemList"
+            v-on:click.native="pagingLinkClick(currentPageNum + 1)"
+          >
+            <i class="material-icons">chevron_right</i>
+          </router-link>
+        </li>
+      </span>
+    </ul>
     <CompFixedButton />
   </div>
 </template>
@@ -110,6 +170,14 @@ export default class ItemList extends Vue {
   private drinkList = "";
   //食べ物商品一覧
   private foodList = "";
+  //1ページに表示される最大人数
+  private readonly MAX_ITEM_COUNT = 6;
+  // 画面下に表示されるページ番号
+  private pageNums: Array<number> = [];
+  // 現在表示されているページ数
+  private currentPageNum = 1;
+  // 最大のページ数
+  private maxPageNum = 0;
 
   /**
    * ページ遷移時、現在の商品一覧を取得するメソッド.
@@ -119,18 +187,21 @@ export default class ItemList extends Vue {
     await this.$store.dispatch("asyncGetItemList");
 
     this.currentItemList = this.$store.getters.getItemList;
+
+    this.createLinkNumberForPaging();
+    this.initialDisplay();
   }
   /**
    * サジェストキーワードの配列を作成する.
    */
-  get makeSuggestArray(): Array<string>{
-    if( this.serchText === "" ){
+  get makeSuggestArray(): Array<string> {
+    if (this.serchText === "") {
       return new Array<string>();
     }
     let suggestKeywordArray = new Array<string>();
-    let initText = this.serchText
+    let initText = this.serchText;
     let initArray = this.currentItemList;
-      for (let item of initArray) {
+    for (let item of initArray) {
       if (item.name.includes(initText)) {
         suggestKeywordArray.push(item.name);
       }
@@ -228,6 +299,67 @@ export default class ItemList extends Vue {
       }
     }
   }
+
+  /**
+   * ページネーション.
+   *
+   * @param pageNum クリックされたページ番号
+   */
+  pagingLinkClick(pageNum: number): void {
+    this.serchText = "";
+    // 現在のページ数をクリックされたページ数に変更
+    this.currentPageNum = pageNum;
+    if (this.serchText === "") {
+      // 検索入力欄に何も書かれていなかった場合、全従業員一覧情報をVuexストアから取得
+      this.currentItemList = this.$store.getters.getItemList;
+    }
+    // 対象ページに出力する従業員一覧を作成する
+    this.createItemListForOnePage(pageNum, this.currentItemList);
+  }
+
+  /**
+   * 下のページング用のリンク数値を作成する.
+   *
+   */
+  private createLinkNumberForPaging(): void {
+    this.pageNums = [];
+    this.maxPageNum = Math.ceil(
+      this.currentItemList.length / this.MAX_ITEM_COUNT
+    );
+    for (let i = 1; i <= this.maxPageNum; i++) {
+      this.pageNums.push(i);
+    }
+  }
+  /*
+   * 対象ページに出力する商品一覧を作成する.
+   *
+   * @param targetPageNum 表示させる対象ページ番号
+   * @param targetList 切り出す元の商品一覧
+   */
+  private createItemListForOnePage(
+    targetPageNum: number,
+    targetList: Array<Item>
+  ): void {
+    // 開始位置を計算(1の場合は0、2の場合は10、3の場合は20・・・)
+    let starNum = (targetPageNum - 1) * this.MAX_ITEM_COUNT;
+    // 終了位置を計算(開始位置からMAX_EMPLOYEE_COUNT個取得)
+    let endNum = starNum + this.MAX_ITEM_COUNT;
+    console.log("startNum:" + starNum + "/endNum" + endNum);
+    // 開始から終了までを切り出して表示用リストに格納
+    this.currentItemList = targetList.slice(starNum, endNum);
+  }
+
+  /*
+   * 初期表示用共通メソッド.
+   *
+   * @remarks
+   * ・初期表示は0からMAX_ITEM_COUNT個表示
+   * ・ページ番号を１に初期化
+   */
+  private initialDisplay(): void {
+    this.currentItemList = this.currentItemList.slice(0, this.MAX_ITEM_COUNT);
+    this.currentPageNum = 1;
+  }
 }
 </script>
 
@@ -235,5 +367,8 @@ export default class ItemList extends Vue {
 @import url("/css/item_list.css");
 .error-message {
   color: red;
+}
+.pagination{
+  text-align: center;
 }
 </style>
