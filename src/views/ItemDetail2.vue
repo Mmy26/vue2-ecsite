@@ -21,12 +21,11 @@
               <label>
                 <input
                   id="size-m"
-                  name="size"
+                  name="sizeM"
                   type="radio"
                   value="M"
                   v-model="selectSize"
                   v-on:change="calcSubTotalPrice"
-                  checked="checked"
                 />
                 <span>
                   &nbsp;<span class="price">Ｍ</span
@@ -36,7 +35,7 @@
               <label>
                 <input
                   id="size-l"
-                  name="size"
+                  name="sizeL"
                   value="L"
                   v-model="selectSize"
                   v-on:change="calcSubTotalPrice"
@@ -57,19 +56,20 @@
                 <span>&nbsp;Ｍ&nbsp;</span>&nbsp;&nbsp;200円(税抜)
                 <span>&nbsp;Ｌ</span>&nbsp;&nbsp;300円(税抜)
               </div>
-              <div
+              <span
                 v-for="topping of selectItem.toppingList"
                 v-bind:key="topping.id"
               >
-                <label>
+                <label class="item-topping">
                   <input
                     type="checkbox"
-                    v-on:change="calcSubTotalPrice"
+                    v-bind:value="topping.id"
                     v-model="selectTopping"
+                    v-on:change="calcSubTotalPrice"
                   />
-                  <span>{{ topping.name }}</span></label
-                >
-              </div>
+                  <span>{{ topping.name }}</span>
+                </label>
+              </span>
             </div>
           </label>
 
@@ -109,8 +109,9 @@
           </div>
         </div>
       </div>
+
+      <!-- end container -->
     </div>
-    <!-- end container -->
   </div>
   <!-- end top-wrapper -->
   <!-- Compiled and minified JavaScript -->
@@ -151,7 +152,7 @@ export default class ItemDetail extends Vue {
     new Array<Topping>()
   );
   // 選択された商品のサイズ
-  private selectSize = "";
+  private selectSize = "M";
   // 選択されたトッピング
   private selectTopping = 0;
   // 選択された商品のオーダー数量
@@ -247,4 +248,8 @@ export default class ItemDetail extends Vue {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.item-toppings {
+  display: inline-block;
+}
+</style>
