@@ -233,27 +233,28 @@ export default class ItemDetail extends Vue {
     if (this.selectSize === "M") {
       let sizePrice = 0;
       sizePrice = this.selectItem.priceM;
-      //   if (this.selectTopping.length === 0) {
-      //     this.subTotalPrice = sizePrice * this.selectItemQuantity;
-      //   } else if (this.selectTopping.length >= 1) {
-      //     let toppingAmount = 0;
-      //     toppingAmount = this.selectTopping.length * 200;
-      //     this.subTotalPrice =
-      //       (sizePrice + toppingAmount) * this.selectItemQuantity;
-      //   }
-      // } else if (this.selectSize === "L") {
-      //   let sizePrice = 0;
-      //   sizePrice = this.selectItem.priceL;
-      //   if (this.selectTopping.length === 0) {
-      //     this.subTotalPrice = sizePrice * this.selectItemQuantity;
-      //   } else if (this.selectTopping.length >= 1) {
-      //     let toppingAmount = 0;
-      //     toppingAmount = this.selectTopping.length * 300;
-      //     this.subTotalPrice =
-      //       (sizePrice + toppingAmount) * this.selectItemQuantity;
-      //   }
+        if (this.selectTopping.length === 0) {
+          this.subTotalPrice = sizePrice * this.selectItemQuantity;
+        } else if (this.selectTopping.length >= 1) {
+          let toppingAmount = 0;
+          toppingAmount = this.selectTopping.length * 200;
+          this.subTotalPrice =
+            (sizePrice + toppingAmount) * this.selectItemQuantity;
+        }
+      } else if (this.selectSize === "L") {
+        let sizePrice = 0;
+        sizePrice = this.selectItem.priceL;
+        if (this.selectTopping.length === 0) {
+          this.subTotalPrice = sizePrice * this.selectItemQuantity;
+        } else if (this.selectTopping.length >= 1) {
+          let toppingAmount = 0;
+          toppingAmount = this.selectTopping.length * 300;
+          this.subTotalPrice =
+            (sizePrice + toppingAmount) * this.selectItemQuantity;
+        }
+      }
+      return this.subTotalPrice;
     }
-    return this.subTotalPrice;
   }
 
   /**
