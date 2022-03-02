@@ -19,6 +19,21 @@ const routes: Array<RouteConfig> = [
     path: "/registerUser",
     component: () => import("../views/registerUser.vue"),
   },
+  {
+    path: "/logout",
+    component: () => import("../views/Logout.vue")},
+  {
+    path: "/login",
+    component: () => import("../views/Login.vue"),
+  },
+  {
+    path: "/faq",
+    component: () => import("../views/Faq.vue"),
+  },
+  {
+    path: "/orderFinished",
+    component: () => import("../views/OrderFinished.vue"),
+  },
 ];
 
 const router = new VueRouter({

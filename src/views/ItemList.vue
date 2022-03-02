@@ -22,18 +22,25 @@
       </div>
       <CompFixedButton/>
     </div>
-        <div class="items row">
-          <div class="item col s12 m6 l4" v-for="item of orderInexpensiveItemList" v-bind:key="item.id">
+        <div class="items">
+          <div
+            class="item"
+            v-for="item of orderInexpensiveItemList"
+            v-bind:key="item.id"
+          >
             <div class="item-icon">
-              <img v-bind:src="item.imagePath" class="responsive-img"/>
+              <img v-bind:src="item.imagePath" />
             </div>
-            <router-link v-bind:to="'/itemDetail/' + item.id">{{ item.name }}</router-link><br />
+            <router-link v-bind:to="'/itemDetail/' + item.id">{{
+              item.name
+            }}</router-link
+            ><br />
             <span class="price">M</span>{{ item.priceM }}円(税抜)<br />
             <span class="price">L</span>{{ item.priceL }}円(税抜)<br />
           </div>
       </div>
     </div>
-  </div>
+    </div>
   </div>
 </template>
 
@@ -57,24 +64,24 @@ export default class ItemList extends Vue {
    * ページ遷移時、現在の商品一覧を取得するメソッド.
    * @returns プロミスオブジェクト
    */
-  async created(): Promise<void>{
+  async created(): Promise<void> {
     await this.$store.dispatch("asyncGetItemList");
 
-    this.currentItemList = this.$store.getters.getItemList
+    this.currentItemList = this.$store.getters.getItemList;
   }
   /**
    * 商品を安い順に並べるメソッド.
    * @returns 商品を並べ替えた後の配列
    */
-  get orderInexpensiveItemList(): Array<Item>{
+  get orderInexpensiveItemList(): Array<Item> {
     let copiedArray = this.currentItemList.slice();
-    copiedArray.sort(function(a: Item, b: Item){
-      if(a.priceM < b.priceM){
-        return -1
-      } else if(a.priceM > b.priceM) {
-        return 1
+    copiedArray.sort(function (a: Item, b: Item) {
+      if (a.priceM < b.priceM) {
+        return -1;
+      } else if (a.priceM > b.priceM) {
+        return 1;
       } else {
-        return 0
+        return 0;
       }
     });
     return copiedArray;
@@ -82,21 +89,21 @@ export default class ItemList extends Vue {
   /**
    * 検索結果を表示するメソッド.
    */
-  serchResultList(): void{
-    this.errorMesage = ""
-    this.currentItemList = this.$store.getters.getItemList
+  serchResultList(): void {
+    this.errorMesage = "";
+    this.currentItemList = this.$store.getters.getItemList;
     let initArray = this.orderInexpensiveItemList;
     this.currentItemList = new Array<Item>();
-      for(let item of initArray){
-        if(item.name.includes(this.serchText)){
-          this.currentItemList.push(item);
-        }
+    for (let item of initArray) {
+      if (item.name.includes(this.serchText)) {
+        this.currentItemList.push(item);
       }
-      if(this.currentItemList.length === 0){
-        this.errorMesage = "1件もありませんでしたので全件表示します"
-        this.currentItemList = this.$store.getters.getItemList
-      }
-      this.serchText = "";
+    }
+    if (this.currentItemList.length === 0) {
+      this.errorMesage = "1件もありませんでしたので全件表示します";
+      this.currentItemList = this.$store.getters.getItemList;
+    }
+    this.serchText = "";
   }
 }
 </script>
