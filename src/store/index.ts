@@ -74,6 +74,7 @@ export default new Vuex.Store({
         ),
       ]
     ),
+  
     itemList: new Array<Item>(),
     toppings: new Array<Topping>(),
   },
@@ -178,13 +179,15 @@ export default new Vuex.Store({
         return toppings[0];
       };
     },
+
     /**
      * 注文商品リストを取得する.
      * @param state - ステート
      * @returns Orderオブジェクト
      */
     getOrder(state) {
-      return state.order;
+      return state.order.orderItemList;
     },
-  }
+  },
 });
+
