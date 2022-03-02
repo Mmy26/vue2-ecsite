@@ -6,7 +6,7 @@ import { User } from '@/type/user';
 import { OrderItem } from '@/type/orderItem';
 import axios from "axios";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
@@ -27,9 +27,9 @@ export default new Vuex.Store({
   },
   mutations: {
     /**
-     * 商品リストをpayloadから
-     * @param state 
-     * @param payload 
+     * 商品リストを作成し、stateにセットするメソッド.
+     * @param state - ステイト
+     * @param payload - 商品一覧情報のペイロード
      */
     showItemList(state, payload){
       state.itemList = new Array<Item>();
@@ -37,7 +37,7 @@ export default new Vuex.Store({
       for(const item of payload.items){
         state.itemList.push(
           new Item(
-            item.jd,
+            item.id,
             item.type,
             item.name,
             item.description,
@@ -48,13 +48,32 @@ export default new Vuex.Store({
             item.toppingList
           )
         );
-        console.log(item);
       }
+    },
+    changeOrderStatus(state, payload){
+      // const statusList = {
+      //   targetKey: payload.key,
+      //   targetValue: payload.value
+      // }
+      // state.order.statusList.targetKey = statusList.targetValue;
+      state.order.status = payload.status;
+    },
+    updateOrder(state, payload){
+      state.order.destinationName = payload.destinationName;
+      state.order.destinationEmail = payload.destinationEmail;
+      state.order.destinationZipcode = payload.destinationZipcode;
+      state.order.destinationAddress = payload.destinationAddress;
+      state.order.destinationTel = payload.destinationTel;
     }
   },
   modules: {
   },
   getters: {
+    /**
+     * 商品一覧を表すgetter.
+     * @param state - ステイト
+     * @returns 商品一覧
+     */
     getItemList(state) {
       return state.itemList;
     },
