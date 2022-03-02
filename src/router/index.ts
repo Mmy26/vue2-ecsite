@@ -25,7 +25,10 @@ const routes: Array<RouteConfig> = [
   {
     path: "/login",
     component: () => import("../views/Login.vue"),
-
+  },
+  {
+    path: "/faq",
+    component: () => import("../views/Faq.vue"),
   },
   {
     path: "/orderFinished",
