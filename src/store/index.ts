@@ -87,7 +87,6 @@ export default new Vuex.Store({
       const response = await axios.get(
         "http://153.127.48.168:8080/ecsite-api/item/items/coffee"
       );
-      console.dir("response: " + JSON.stringify(response));
       const payload = response.data;
       context.commit("showItemList", payload);
     },
@@ -100,7 +99,6 @@ export default new Vuex.Store({
      */
     showItemList(state, payload) {
       state.itemList = new Array<Item>();
-      console.log(payload.items);
       for (const item of payload.items) {
         state.itemList.push(
           new Item(
