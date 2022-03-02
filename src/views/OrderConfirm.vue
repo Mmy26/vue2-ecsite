@@ -11,7 +11,7 @@ import { User } from "@/type/user";
 import { OrderItem } from "@/type/orderItem";
 import { Order } from "@/type/order";
 import  axios  from "axios";
-import { getHours } from "date-fns"
+import { getHours } from "date-fns";
 import { getYear } from "date-fns";
 import { getMonth } from "date-fns";
 import { getDate } from "date-fns";

@@ -36,6 +36,7 @@
             v-for="item of orderInexpensiveItemList"
             v-bind:key="item.id"
           >
+          <input type="checkbox" id="">
             <div class="item-icon">
               <img v-bind:src="item.imagePath" />
             </div>

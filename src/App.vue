@@ -26,7 +26,7 @@ export default class App extends Vue {
     //cdnのインストールが必要。mountedだとタイミングが合わないので、時間をずらした。
     setTimeout(() => {
       M.AutoInit();
-    }, 20);
+    }, 100);
   }
 }
 </script>
