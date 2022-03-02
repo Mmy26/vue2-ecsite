@@ -1,29 +1,5 @@
 <template>
   <div>
-    <header>
-      <div class="container">
-        <div class="header">
-          <div class="header-left">
-            <a href="top.html">
-              <img class="logo" src="img/header_logo.png" />
-            </a>
-          </div>
-
-          <div class="header-right">
-            <a href="item_list.html">商品一覧</a>
-            <a href="register_admin.html">会員登録</a>
-            <a href="cart_list.html">
-              <i class="fas fa-shopping-cart"> </i>カート
-            </a>
-            <a href="login.html" class="login">
-              <i class="fas fa-sign-in-alt"></i>ログイン
-            </a>
-
-            <a href="order_history.html">注文履歴</a>
-          </div>
-        </div>
-      </div>
-    </header>
     <div class="top-wrapper">
       <div class="container">
         <h1 class="page-title">
@@ -85,12 +61,14 @@
                 v-for="topping of selectItem.toppingList"
                 v-bind:key="topping.id"
               >
-                <input
-                  type="checkbox"
-                  v-on:change="calcSubTotalPrice"
-                  v-model="selectTopping"
-                />
-                <span>{{ topping.name }}</span>
+                <label>
+                  <input
+                    type="checkbox"
+                    v-on:change="calcSubTotalPrice"
+                    v-model="selectTopping"
+                  />
+                  <span>{{ topping.name }}</span></label
+                >
               </div>
             </div>
           </label>
@@ -125,11 +103,7 @@
             <span>この商品金額： {{ subTotalPrice }}円(税抜)</span>
           </div>
           <div class="row item-cart-btn">
-            <button
-              class="btn"
-              type="button"
-              onclick="location.href='cart_list.html'"
-            >
+            <button class="btn" type="button" v-on:click="addToCart">
               <span>カートに入れる</span>
             </button>
           </div>
@@ -261,6 +235,14 @@ export default class ItemDetail extends Vue {
       this.subTotalPrice = (sizePrice + toppingPrice) * this.selectItemQuantity;
     }
     return this.subTotalPrice;
+  }
+
+  /**
+   * カートに入れる.
+   */
+  addToCart(): void {
+    //注文確認画面に遷移する
+    this.$router.push("/cartList");
   }
 }
 </script>
