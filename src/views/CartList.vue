@@ -61,8 +61,10 @@
           </div>
           <div class="row cart-total-price">
             <!-- this.currentOrder.taxだとエラーが出る -->
-            <div>消費税：8000円</div>
-            <div>ご注文金額合計：67000円 (税込)</div>
+            <div>消費税：{{ this.currentOrder.tax }}円</div>
+            <div>
+              ご注文金額合計：{{ this.currentOrder.calcTotalPrice }}円 (税込)
+            </div>
           </div>
           <div class="row order-confirm-btn">
             <button class="btn" type="button" v-on:click="onOrderClick">
@@ -185,7 +187,7 @@ export default class XXXComponent extends Vue {
         ),
       ]
     );
-     // カートに商品が1個もなければエラーメッセージを出す
+    // カートに商品が1個もなければエラーメッセージを出す
     if (this.currentOrder.orderItemList.length === 0) {
       this.errorMessage = "カートに商品がありません";
       this.canShow = false;
