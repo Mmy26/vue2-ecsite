@@ -16,45 +16,41 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr
+                  v-for="orderItem of this.currentOrder.orderItemList"
+                  v-bind:key="orderItem.id"
+                >
                   <td class="cart-item-name">
                     <div class="cart-item-icon">
-                      <img src="img/1.jpg" />
+                      <img v-bind:src="orderItem.item.imagePath" />
                     </div>
-                    <span>ハワイアンパラダイス</span>
+                    <span>{{ orderItem.item.name }}</span>
                   </td>
                   <td>
-                    <span class="price">&nbsp;Ｌ</span>&nbsp;&nbsp;2,380円
-                    &nbsp;&nbsp;1個
+                    <span class="price">&nbsp;{{ orderItem.size }}</span
+                    ><span>&nbsp;&nbsp;{{ orderItem.orderItemPrice }}円</span
+                    ><span> &nbsp;&nbsp;{{ orderItem.quantity }}個</span>
                   </td>
                   <td>
                     <ul>
-                      <li>ピーマン300円</li>
-                      <li>オニオン300円</li>
-                      <li>あらびきソーセージ300円</li>
+                      <li
+                        v-for="topping of orderItem.item.toppingList"
+                        v-bind:key="topping.id"
+                      >
+                        {{ topping.name }}{{ topping.toppingPrice }}円
+                      </li>
                     </ul>
                   </td>
-                  <td><div class="text-center">3,280円</div></td>
-                </tr>
-                <tr>
-                  <td class="cart-item-name">
-                    <div class="cart-item-icon">
-                      <img src="img/1.jpg" />
+                  <td>
+                    <div class="text-center">
+                      {{ orderItem.calcSubTotalPrice }}円
                     </div>
-                    <span>ハワイアンパラダイス</span>
                   </td>
                   <td>
-                    <span class="price">&nbsp;Ｌ</span>&nbsp;&nbsp;2,380円
-                    &nbsp;&nbsp;1個
+                    <button class="btn" type="button">
+                      <span>削除</span>
+                    </button>
                   </td>
-                  <td>
-                    <ul>
-                      <li>ピーマン300円</li>
-                      <li>オニオン300円</li>
-                      <li>あらびきソーセージ300円</li>
-                    </ul>
-                  </td>
-                  <td><div class="text-center">3,280円</div></td>
                 </tr>
               </tbody>
             </table>
@@ -195,6 +191,8 @@ import { getHours } from "date-fns";
 import { getYear } from "date-fns";
 import { getMonth } from "date-fns";
 import { getDate } from "date-fns";
+import { Item } from "@/type/item";
+import { Topping } from "@/type/topping2";
 
 @Component
 export default class OrderConfirm extends Vue {
@@ -215,6 +213,17 @@ export default class OrderConfirm extends Vue {
     new User(0, "", "", "", "", "", ""),
     new Array<OrderItem>()
   );
+
+  private item = new OrderItem(
+    0,
+    0,
+    0,
+    0,
+    "",
+    new Item(0, "", "", "", 0, 0, "", true, []),
+    []
+  );
+
   //注文者の名前
   private destinationName = "";
   //注文者のメールアドレス
@@ -377,6 +386,72 @@ export default class OrderConfirm extends Vue {
       // 失敗ならエラーメッセージを表示する
       this.errorMessage = "注文できませんでした(" + response.data.message + ")";
     }
+  }
+  /**
+   * ショッピングカート一覧を表示させる.
+   */
+  created(): void {
+    this.currentOrder = new Order(
+      0,
+      0,
+      0,
+      0,
+      new Date(),
+      "",
+      "",
+      "",
+      "",
+      "",
+      new Date(),
+      0,
+      new User(0, "", "", "", "", "", ""),
+      [
+        new OrderItem(
+          21,
+          1,
+          1,
+          1,
+          "M",
+          new Item(
+            21,
+            "coffee",
+            "Gorgeous4サンド",
+            "",
+            480,
+            700,
+            "/img_coffee/1.jpg",
+            false,
+            [
+              new Topping(-1, "coffee", "ピクルス", 200, 300),
+              new Topping(-1, "coffee", "チーズ", 200, 300),
+            ]
+          ),
+          []
+        ),
+        new OrderItem(
+          21,
+          1,
+          1,
+          2,
+          "L",
+          new Item(
+            21,
+            "coffee",
+            "コーヒー",
+            "",
+            480,
+            700,
+            "/img_coffee/1.jpg",
+            false,
+            [
+              new Topping(-1, "coffee", "ピクルス", 200, 300),
+              new Topping(-1, "coffee", "チーズ", 200, 300),
+            ]
+          ),
+          []
+        ),
+      ]
+    );
   }
 }
 </script>
