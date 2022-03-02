@@ -12,6 +12,9 @@ export default class XXXComponent extends Vue {
       "https://153.127.48.168:8080/ecsite-api/user/logout"
     );
     console.dir("response:" + JSON.stringify(response));
+    // ログイン状態をfalseにする
+    this.$store.commit("logouted");
+    // ログアウト後、商品一覧に遷移させる
     this.$router.push("/itemList");
   }
 }
