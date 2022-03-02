@@ -1,8 +1,50 @@
 <template>
   <div class="itemList">
+    <h1>ItemList</h1>
     <div class="item-wrapper">
       <div class="container">
         <div class="search-wrapper">
+
+          <div class="container">
+            <form method="post" class="search-form">
+              <input
+                type="text"
+                name="name"
+                class="search-name-input"
+                v-model="serchText"
+              />
+              <button
+                class="btn search-btn"
+                type="button"
+                v-on:click="serchResultList"
+              >
+                <span>検索</span>
+              </button>
+              <div class="error-message red-text">{{ errorMesage }}</div>
+            </form>
+          </div>
+        </div>
+        <div class="items">
+          <div class="item">
+            <div class="item-icon">
+              <img src="" />
+            </div>
+            <div
+              class="item"
+              v-for="item of orderInexpensiveItemList"
+              v-bind:key="item.id"
+            >
+              <div class="item-icon">
+                <img v-bind:src="item.imagePath" />
+              </div>
+              <router-link v-bind:to="'/itemDetail/' + item.id">{{
+                item.name
+              }}</router-link
+              ><br />
+              <span class="price">M</span>{{ item.priceM }}円(税抜)<br />
+              <span class="price">L</span>{{ item.priceL }}円(税抜)<br />
+            </div>
+
       <div class="container">
         <form method="post" class="search-form">
             <label>
@@ -40,7 +82,6 @@
           </div>
       </div>
     </div>
-    </div>
   </div>
 </template>
 
@@ -54,16 +95,17 @@ import CompFixedButton from "@/components/CompFixedButton.vue";
   }
 })
 export default class ItemList extends Vue {
-  //現在の商品リスト
-  private currentItemList = new Array<Item>();
   //検索キーワード
   private serchText = "";
   //エラーメッセージ
   private errorMesage = "";
+  //現在の商品リスト
+  private currentItemList = new Array<Item>();
   //飲み物商品一覧
   private drinkList = false;
   //食べ物商品一覧
   private foodList = false;
+  
   /**
    * ページ遷移時、現在の商品一覧を取得するメソッド.
    * @returns プロミスオブジェクト
@@ -72,7 +114,9 @@ export default class ItemList extends Vue {
     await this.$store.dispatch("asyncGetItemList");
 
     this.currentItemList = this.$store.getters.getItemList;
+
   }
+
   /**
    * 商品を安い順に並べるメソッド.
    * @returns 商品を並べ替えた後の配列
@@ -88,6 +132,7 @@ export default class ItemList extends Vue {
         return 0;
       }
     });
+    // for文でidがはiっているか確認
     return copiedArray;
   }
   /**
