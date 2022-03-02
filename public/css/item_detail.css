@@ -51,6 +51,7 @@
 
 .item-topping {
   margin-right: 10px;
+  display: inline-block;
 }
 
 .item-hedding-quantity {
