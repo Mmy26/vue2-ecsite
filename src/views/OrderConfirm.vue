@@ -53,8 +53,10 @@
           </div>
 
           <div class="row cart-total-price">
-            <div>消費税：{{ this.getTax }} 円</div>
-            <div>ご注文金額合計：{{ this.getCalcTotalPrice }} 円 (税込)</div>
+            <div>消費税：{{ this.currentOrder.tax }} 円</div>
+            <div>
+              ご注文金額合計：{{ this.currentOrder.calcTotalPrice }} 円 (税込)
+            </div>
           </div>
 
           <h2 class="page-title">お届け先情報</h2>
