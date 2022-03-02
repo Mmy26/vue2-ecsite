@@ -3,25 +3,36 @@
     <div class="item-wrapper">
       <div class="container">
         <div class="search-wrapper">
-      <div class="container">
-        <form method="post" class="search-form">
-            <label>
-              <input type="checkbox" />
-              <span>Drink</span>
-            </label>&nbsp;&nbsp;&nbsp;
-            <label>
-              <input type="checkbox" />
-              <span>Food</span>
-            </label>
-          <input type="text" name="name" class="search-name-input tooltipped" data-position="right" data-tooltip="お腹空いた？？" v-model="serchText"/>
-          <button class="btn search-btn" type="button" v-on:click="serchResultList">
-            <span>検索</span>
-          </button>
-            <div class="error-message  red-text">{{ errorMesage }}</div>
-        </form>
-      </div>
-      <CompFixedButton/>
-    </div>
+          <div class="container">
+            <form method="post" class="search-form">
+              <label>
+                <input type="checkbox" />
+                <span>Drink</span> </label
+              >&nbsp;&nbsp;&nbsp;
+              <label>
+                <input type="checkbox" />
+                <span>Food</span>
+              </label>
+              <input
+                type="text"
+                name="name"
+                class="search-name-input tooltipped"
+                data-position="right"
+                data-tooltip="お腹空いた？？"
+                v-model="serchText"
+              />
+              <button
+                class="btn search-btn"
+                type="button"
+                v-on:click="serchResultList"
+              >
+                <span>検索</span>
+              </button>
+              <div class="error-message red-text">{{ errorMesage }}</div>
+            </form>
+          </div>
+          <CompFixedButton />
+        </div>
         <div class="items">
           <div
             class="item"
@@ -29,17 +40,21 @@
             v-bind:key="item.id"
           >
             <div class="item-icon">
-              <img v-bind:src="item.imagePath" />
+              <router-link v-bind:to="'/itemDetail/' + item.id"
+                ><img v-bind:src="item.imagePath"
+              /></router-link>
             </div>
-            <router-link v-bind:to="'/itemDetail/' + item.id">{{
-              item.name
-            }}</router-link
-            ><br />
+            <div class="item-name">
+              <router-link v-bind:to="'/itemDetail/' + item.id">{{
+                item.name
+              }}</router-link
+              ><br />
+            </div>
             <span class="price">M</span>{{ item.priceM }}円(税抜)<br />
             <span class="price">L</span>{{ item.priceL }}円(税抜)<br />
           </div>
+        </div>
       </div>
-    </div>
     </div>
   </div>
 </template>
@@ -50,8 +65,8 @@ import { Component, Vue } from "vue-property-decorator";
 import CompFixedButton from "@/components/CompFixedButton.vue";
 @Component({
   components: {
-    CompFixedButton
-  }
+    CompFixedButton,
+  },
 })
 export default class ItemList extends Vue {
   //現在の商品リスト
@@ -110,4 +125,13 @@ export default class ItemList extends Vue {
 
 <style scoped>
 @import url("/css/item_list.css");
+.item-icon img:hover {
+  opacity: 0.5;
+  transition: 0.3s;
+}
+
+.item-name:hover {
+  color: violet;
+  transition: 0.3s;
+}
 </style>
