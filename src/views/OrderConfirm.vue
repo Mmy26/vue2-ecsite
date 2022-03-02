@@ -11,9 +11,9 @@ import { OrderItem } from "@/type/orderItem";
 import { Order } from "@/type/order";
 import  axios  from "axios";
 import { getHours } from "date-fns"
-import { getYear } from "date-fns/esm";
-import getMonth from "date-fns/fp/getMonth";
-import getDate from "date-fns/fp/getDate/index";
+import { getYear } from "date-fns";
+import { getMonth } from "date-fns";
+import { getDate } from "date-fns";
 
 @Component
 export default class OrderConfirm extends Vue {
