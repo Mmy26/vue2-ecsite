@@ -4,6 +4,7 @@ import { Item } from "@/type/item";
 import { Order } from "@/type/order";
 import { User } from "@/type/user";
 import { OrderItem } from "@/type/orderItem";
+
 import axios from "axios";
 import { Topping } from "@/type/topping2";
 
@@ -25,7 +26,53 @@ export default new Vuex.Store({
       new Date(),
       0,
       new User(0, "", "", "", "", "", ""),
-      new Array<OrderItem>()
+
+      [
+        new OrderItem(
+          21,
+          1,
+          1,
+          1,
+          "M",
+          new Item(
+            21,
+            "coffee",
+            "Gorgeous4サンド",
+            "",
+            480,
+            700,
+            "/img_coffee/1.jpg",
+            false,
+            [
+              new Topping(-1, "coffee", "ピクルス", 200, 300),
+              new Topping(-1, "coffee", "チーズ", 200, 300),
+            ]
+          ),
+          []
+        ),
+        new OrderItem(
+          21,
+          1,
+          1,
+          2,
+          "L",
+          new Item(
+            21,
+            "coffee",
+            "コーヒー",
+            "",
+            480,
+            700,
+            "/img_coffee/1.jpg",
+            false,
+            [
+              new Topping(-1, "coffee", "ピクルス", 200, 300),
+              new Topping(-1, "coffee", "チーズ", 200, 300),
+            ]
+          ),
+          []
+        ),
+      ]
     ),
     itemList: new Array<Item>(),
     toppings: new Array<Topping>(),
@@ -85,6 +132,17 @@ export default new Vuex.Store({
       state.order.destinationAddress = payload.destinationAddress;
       state.order.destinationTel = payload.destinationTel;
     },
+
+    /**
+     * 商品を削除する.
+     *
+     * @param state - ステート
+     * @param payload - 削除する商品
+     */
+
+    removeItem(state, payload) {
+      state.order.orderItemList.splice(payload.itemIndex, 1);
+    },
   },
 
   modules: {},
@@ -97,7 +155,6 @@ export default new Vuex.Store({
     getItemList(state) {
       return state.itemList;
     },
-<<<<<<< HEAD
 
     getItemId(state) {
       return (itemId: number) => {
@@ -121,17 +178,13 @@ export default new Vuex.Store({
         return toppings[0];
       };
     },
-  },
-});
-=======
     /**
      * 注文商品リストを取得する.
      * @param state - ステート
      * @returns Orderオブジェクト
      */
-    getOrder(state){
-      return state.order.orderItemList;
+    getOrder(state) {
+      return state.order;
     },
-  }
-})
->>>>>>> develop
+  },
+});
