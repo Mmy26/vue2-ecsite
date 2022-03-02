@@ -73,31 +73,15 @@
               </label>
             </div>
           </div>
-          <div class="row item-toppings">
-            <div class="item-hedding">
-              トッピング：&nbsp;1つにつき
-              <span>&nbsp;Ｍ&nbsp;</span>&nbsp;&nbsp;200円(税抜)
-              <span>&nbsp;Ｌ</span>&nbsp;&nbsp;300円(税抜)
-            </div>
+          <label>
+            <div class="row item-toppings">
+              <div class="item-hedding">
+                トッピング：&nbsp;1つにつき
+                <span>&nbsp;Ｍ&nbsp;</span>&nbsp;&nbsp;200円(税抜)
+                <span>&nbsp;Ｌ</span>&nbsp;&nbsp;300円(税抜)
+              </div>
 
-            <label class="item-topping">
-              <label class="item-topping">
-                <input
-                  type="checkbox"
-                  v-model="selectTopping"
-                  v-on:change="calcSubTotalPrice"
-                />
-                <span>ハワイアンソルト</span>
-              </label>
-              <label class="item-topping">
-                <input
-                  type="checkbox"
-                  v-model="selectTopping"
-                  v-on:change="calcSubTotalPrice"
-                />
-                <span>ハワイアンマヨネーズ</span>
-              </label>
-              <!-- <div
+              <div
                 v-for="topping of selectItem.toppingList"
                 v-bind:key="topping.id"
               ></div>
@@ -106,10 +90,9 @@
                 v-on:change="calcSubTotalPrice"
                 v-model="selectTopping"
               />
-              <span>{{ topping.name }}</span> -->
-            </label>
-          </div>
-
+              <span>{{ topping.name }}</span>
+            </div>
+          </label>
           <div class="row item-quantity">
             <div class="item-hedding item-hedding-quantity">数量</div>
             <div class="item-quantity-selectbox">
@@ -150,11 +133,11 @@
           </div>
         </div>
       </div>
-      <!-- end container -->
     </div>
-    <!-- end top-wrapper -->
-    <!-- Compiled and minified JavaScript -->
+    <!-- end container -->
   </div>
+  <!-- end top-wrapper -->
+  <!-- Compiled and minified JavaScript -->
 </template>
 
 <script lang="ts">
@@ -190,6 +173,8 @@ export default class ItemDetail extends Vue {
   private selectItemImage = "";
   // トッピングリスト
   private currentToppingList = new Array<Topping>();
+  // 取得したトッピングリストをから配列で初期化
+  private displayToppingList!: Topping[];
 
   /**
    * webAPIからIDを用いて１件の商品情報を取得する.
@@ -201,7 +186,7 @@ export default class ItemDetail extends Vue {
     // 送られてきたリクエストパラメータのidをnumberに変換して取得する
     const itemId = this.$route.params.id;
     // getItemList()メソッドに先ほど取得したIDを渡し、１件の商品情報を取得し、戻り値をselectItemに代入する
-    this.selectItem = this.$store.getters.getItemId(itemId);
+    // this.selectItem = this.$store.getters.getItemId(itemId);
     // 今取得した商品情報から画像パスを取り出し、selectItemImage属性に代入する
     this.selectItemImage = `${this.selectItem.imagePath}`;
 
@@ -221,18 +206,23 @@ export default class ItemDetail extends Vue {
       currentItem.deleted,
       currentItem.toppingList
     );
+    const responseTopping = await axios.get(
+      `http://153.127.48.168:8080/ecsite-api/item/toppings/coffee`
+    );
+    console.dir("①response:" + JSON.stringify(responseTopping));
 
-    {
-      /**
-       * トッピングを表示する.
-       *
-       * @returns Promiseオブジェクト
-       */
-      const response = await axios.get(
-        `http://153.127.48.168:8080/ecsite-api/item/toppings/coffee`
+    const displayToppingList = new Array<Topping>();
+    for (const topping of response.data.toppingList) {
+      displayToppingList.push(
+        new Topping(
+          topping.id,
+          topping.type,
+          topping.name,
+          topping.priceM,
+          topping.priceL
+        )
       );
-      console.dir("①response:" + JSON.stringify(response));
-      this.currentToppingList = response.data.toppingList;
+      this.selectItem.toppingList = this.displayToppingList;
     }
   }
 
@@ -252,7 +242,7 @@ export default class ItemDetail extends Vue {
       let sizePrice = 0;
       let toppingPrice = 0;
       sizePrice = this.selectItem.priceL;
-      toppingPrice = 200 * this.selectTopping;
+      toppingPrice = 300 * this.selectTopping;
       this.subTotalPrice = (sizePrice + toppingPrice) * this.selectItemQuantity;
     }
     return this.subTotalPrice;
