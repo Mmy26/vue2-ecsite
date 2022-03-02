@@ -106,10 +106,8 @@
             </div>
           </div>
         </div>
-        >>>>>>> origin/develop
       </div>
     </div>
-  </div>
 </template>
 
 <script lang="ts">
