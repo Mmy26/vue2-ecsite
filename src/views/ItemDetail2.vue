@@ -40,7 +40,7 @@
                   v-model="selectSize"
                   v-on:change="calcSubTotalPrice"
                   type="radio"
-                />
+                />&nbsp;&nbsp;
                 <span>
                   &nbsp;<span class="price">Ｌ</span
                   >{{ selectItem.priceL }}円(税抜)</span
@@ -81,6 +81,7 @@
                   class="browser-default"
                   v-on:change="calcSubTotalPrice"
                   v-model="selectItemQuantity"
+                  style="text-align: -webkit-center"
                 >
                   <option value="" disabled>選択して下さい</option>
                   <option value="1" selected>1</option>
