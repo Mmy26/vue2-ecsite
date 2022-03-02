@@ -59,8 +59,7 @@
                       v-for="topping of orderItem.item.toppingList"
                       v-bind:key="topping.id"
                     >
-                      {{ topping.name
-                      }}{{ topping.toppingPrice }}円
+                      {{ topping.name }}{{ topping.toppingPrice }}円
                     </li>
                   </ul>
                 </td>
@@ -80,6 +79,7 @@
         </div>
 
         <div class="row cart-total-price">
+          <!-- this.currentOrder.taxだとエラーが出る -->
           <div>消費税：8000円</div>
           <div>ご注文金額合計：67000円 (税込)</div>
         </div>
