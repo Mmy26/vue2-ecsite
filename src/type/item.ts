@@ -3,6 +3,7 @@
  * @remarks
  * 商品情報を表します。
  */
+
 import { Topping } from "./topping2";
 
 export class Item {

@@ -97,6 +97,7 @@ export default new Vuex.Store({
     getItemList(state) {
       return state.itemList;
     },
+<<<<<<< HEAD
 
     getItemId(state) {
       return (itemId: number) => {
@@ -122,3 +123,15 @@ export default new Vuex.Store({
     },
   },
 });
+=======
+    /**
+     * 注文商品リストを取得する.
+     * @param state - ステート
+     * @returns Orderオブジェクト
+     */
+    getOrder(state){
+      return state.order.orderItemList;
+    },
+  }
+})
+>>>>>>> develop
