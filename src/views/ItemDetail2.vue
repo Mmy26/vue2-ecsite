@@ -27,7 +27,7 @@
     <div class="top-wrapper">
       <div class="container">
         <h1 class="page-title">
-          {{ selectItem.name }}
+          {{ selectItem._name }}
         </h1>
         <div class="row">
           <div class="row item-detail">
@@ -81,16 +81,6 @@
                 <span>&nbsp;Ｍ&nbsp;</span>&nbsp;&nbsp;200円(税抜)
                 <span>&nbsp;Ｌ</span>&nbsp;&nbsp;300円(税抜)
               </div>
-              <div
-                v-for="topping of selectItem.toppingList"
-                v-bind:key="topping.id"
-              ></div>
-              <input
-                type="checkbox"
-                v-on:change="calcSubTotalPrice"
-                v-model="selectTopping"
-              />
-              <span>{{ topping.name }}</span>
             </div>
           </label>
 
@@ -187,7 +177,6 @@ export default class ItemDetail extends Vue {
     // getItemList()メソッドに先ほど取得したIDを渡し、１件の商品情報を取得し、戻り値をselectItemに代入する
     // this.selectItem = this.$store.getters.getItemId(itemId);
     // 今取得した商品情報から画像パスを取り出し、selectItemImage属性に代入する
-    this.selectItemImage = `${this.selectItem.imagePath}`;
 
     const response = await axios.get(
       `http://153.127.48.168:8080/ecsite-api/item/${itemId}`
@@ -208,11 +197,11 @@ export default class ItemDetail extends Vue {
     const responseTopping = await axios.get(
       `http://153.127.48.168:8080/ecsite-api/item/toppings/coffee`
     );
-    console.dir("①response:" + JSON.stringify(responseTopping));
+    console.dir("①response:" + JSON.stringify(this.selectItem));
 
     const displayToppingList = new Array<Topping>();
 
-    for (const topping of response.data.toppingList) {
+    for (const topping of responseTopping.data.toppings) {
       displayToppingList.push(
         new Topping(
           topping.id,
@@ -223,6 +212,7 @@ export default class ItemDetail extends Vue {
         )
       );
       this.selectItem.toppingList = displayToppingList;
+      this.selectItemImage = `${this.selectItem.imagePath}`;
     }
   }
 
