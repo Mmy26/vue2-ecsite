@@ -1,11 +1,10 @@
 import { Topping } from "./topping";
-
 export class orderTopping {
   constructor(
     private _id: number,
     private _toppingId: number,
     private _orderItemId: number,
-    private _topping: Array<Topping>
+    private _topping: Topping
   ) {}
 
   public get id(): number {
@@ -32,11 +31,11 @@ export class orderTopping {
     this._orderItemId = orderItemId;
   }
 
-  public get topping(): Array<Topping> {
+  public get topping(): Topping {
     return this._topping;
   }
 
-  public set topping(topping: Array<Topping>) {
+  public set topping(topping: Topping) {
     this._topping = topping;
   }
 }

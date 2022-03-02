@@ -1,3 +1,5 @@
+import { OrderItem } from "./orderItem";
+import { Item } from "./item";
 /**
  * トッピングクラス.
  * @remarks
@@ -11,6 +13,31 @@ export class Topping {
     private _priceM: number,
     private _priceL: number
   ) {}
+
+   /**
+   * サイズごとのトッピング価格を表示する.
+   * @returns サイズごとのトッピング価格
+   */
+    public get toppingPrice(): number {
+      //orderItemオブジェクトの生成
+      const item = new OrderItem(
+        0,
+        0,
+        0,
+        0,
+        "",
+        new Item(0, "", "", "", 0, 0, "", true, []),
+        []
+      );
+      let toppingPrice = 0;
+      if (item.size === "M") {
+        toppingPrice = this.priceM;
+      } else if (item.size === "L") {
+        toppingPrice = this.priceL;
+      }
+      return toppingPrice;
+    }
+  
 
   public get id(): number {
     return this._id;
