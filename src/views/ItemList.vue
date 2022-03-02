@@ -41,12 +41,26 @@
             v-bind:key="item.id"
           >
             <div class="item-icon">
+
+<!-- ここは競合確認 -->
               <img v-bind:src="item.imagePath" />
             </div>
             <router-link v-bind:to="'/itemDetail/' + item.id">{{
               item.name
             }}</router-link
             ><br />
+<!-- ここは競合確認 -->
+              <router-link v-bind:to="'/itemDetail/' + item.id">
+                <img v-bind:src="item.imagePath" />
+              </router-link>
+            </div>
+            <div class="item-name">
+              <router-link v-bind:to="'/itemDetail/' + item.id">{{
+                item.name
+              }}</router-link
+              ><br />
+            </div>
+<!-- ここは競合確認 -->
           </div>
           <span class="price">M</span>{{ item.priceM }}円(税抜)<br />
           <span class="price">L</span>{{ item.priceL }}円(税抜)<br />
@@ -221,7 +235,7 @@ export default class ItemList extends Vue {
 }
 
 .item-name:hover {
-  color: violet;
+  opacity: 0.7;
   transition: 0.3s;
 }
 </style>

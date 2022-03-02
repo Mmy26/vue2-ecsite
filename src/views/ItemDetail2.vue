@@ -67,6 +67,7 @@
                     type="checkbox"
                     v-on:change="calcSubTotalPrice"
                     v-model="selectTopping"
+                    v-bind:value="topping.id"
                   />
                   <span>{{ topping.name }}</span></label
                 >
@@ -101,7 +102,9 @@
             </div>
           </div>
           <div class="row item-total-price">
-            <span>この商品金額： {{ subTotalPrice }}円(税抜)</span>
+            <span
+              >この商品金額： {{ subTotalPrice.toLocaleString() }}円(税抜)</span
+            >
           </div>
           <div class="row item-cart-btn">
             <button class="btn" type="button" v-on:click="addToCart">
