@@ -131,7 +131,7 @@ export default class ItemList extends Vue {
 }
 
 .item-name:hover {
-  color: violet;
+  opacity: 0.7;
   transition: 0.3s;
 }
 </style>
