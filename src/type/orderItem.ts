@@ -5,7 +5,7 @@
  */
 import { orderTopping } from "./OrderTopping";
 import { Item } from "./item";
-import { Topping } from "./topping";
+import { Topping } from "./topping2";
 
 export class OrderItem {
   constructor(
