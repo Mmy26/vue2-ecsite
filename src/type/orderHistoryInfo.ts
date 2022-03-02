@@ -2,7 +2,7 @@ import { Item } from "./item";
 /**
  * 注文履歴を表示させるための情報を格納するドメインクラス.
  */
-export class orderHistoryInfo {
+export class OrderHistoryInfo {
   constructor(
     //ログインしているユーザーのID
     private _userId: number,

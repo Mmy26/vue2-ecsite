@@ -17,22 +17,18 @@
  
  <script lang="ts">
  import { Component, Vue } from "vue-property-decorator";
- import axios from "axios";
 import { User } from "@/type/user";
+import { OrderHistoryInfo } from "@/type/orderHistoryInfo";
 
  @Component
  export default class OrderHistory extends Vue {
   private currentUser = new User(0, "", "", "", "", "", "");
+  private currentOrderHistoryInfoList = new OrderHistoryInfo(-1, new Date(), "", new Date(), [])
 
-  //ダミーID 129, 134, 139, 148, 150
-  async created(): Promise<void>{
-      const response = await axios.get("http://153.127.48.168:8080/ecsite-api/order/orders/coffee/" + 129);
-      console.log(response.data);
-      for(let order of response.data.orders){
-        for(let orderItem of order.orderItemList){
-        console.log(orderItem.item)
-        }
-      }
+  created(): void{
+    this.$store.dispatch("asyncGetOrderHistoryInfo");
+    this.currentOrderHistoryInfoList = this.$store.getters.getOrderHistoryInfoList;
+    console.log(this.currentOrderHistoryInfoList);
   }
  }
  </script>
