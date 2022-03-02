@@ -28,7 +28,10 @@
                   </td>
                   <td>
                     <span class="price">&nbsp;{{ orderItem.size }}</span
-                    ><span>&nbsp;&nbsp;{{ orderItem.orderItemPrice }}円</span
+                    ><span
+                      >&nbsp;&nbsp;{{
+                        orderItem.orderItemPrice.toLocaleString()
+                      }}円</span
                     ><span> &nbsp;&nbsp;{{ orderItem.quantity }}個</span>
                   </td>
                   <td>
@@ -37,13 +40,14 @@
                         v-for="topping of orderItem.item.toppingList"
                         v-bind:key="topping.id"
                       >
-                        {{ topping.name }}{{ topping.toppingPrice }}円
+                        {{ topping.name
+                        }}{{ topping.toppingPrice.toLocaleString() }}円
                       </li>
                     </ul>
                   </td>
                   <td>
                     <div class="text-center">
-                      {{ orderItem.calcSubTotalPrice }}円
+                      {{ orderItem.calcSubTotalPrice.toLocaleString() }}円
                     </div>
                   </td>
                   <td></td>
@@ -53,9 +57,12 @@
           </div>
 
           <div class="row cart-total-price">
-            <div>消費税：{{ this.currentOrder.tax }} 円</div>
+            <div>消費税：{{ this.currentOrder.tax.toLocaleString() }} 円</div>
             <div>
-              ご注文金額合計：{{ this.currentOrder.calcTotalPrice }} 円 (税込)
+              ご注文金額合計：{{
+                this.currentOrder.calcTotalPrice.toLocaleString()
+              }}
+              円 (税込)
             </div>
           </div>
 
