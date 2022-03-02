@@ -110,6 +110,9 @@ export default class ItemList extends Vue {
     }
     this.serchText = "";
   }
+  /**
+   * カテゴリー表示をするメソッド.
+   */
   switchList(): void {
     this.errorMesage = "";
     this.currentItemList = this.$store.getters.getItemList;

@@ -1,11 +1,12 @@
 <template>
   <div class="order-confirm">
-    
+    <CompCreditCardPayment />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import CompCreditCardPayment from "@/components/CompCreditCardPayment.vue";
 import { User } from "@/type/user";
 import { OrderItem } from "@/type/orderItem";
 import { Order } from "@/type/order";
@@ -15,7 +16,11 @@ import { getYear } from "date-fns";
 import { getMonth } from "date-fns";
 import { getDate } from "date-fns";
 
-@Component
+@Component({
+  components: {
+    CompCreditCardPayment
+  }
+})
 export default class OrderConfirm extends Vue {
   //現在の注文
   private currentOrder = new Order(0, 0, 0, 0, new Date(), "", "", "", "", "", new Date(), 0, new User(0, "", "", "", "", "", ""), new Array<OrderItem>());
