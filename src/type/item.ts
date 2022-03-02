@@ -3,7 +3,9 @@
  * @remarks
  * 商品情報を表します。
  */
-import { Topping } from "./topping";
+
+import { Topping } from "./topping2";
+
 export class Item {
   constructor(
     // id
