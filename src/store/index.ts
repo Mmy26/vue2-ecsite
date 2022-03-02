@@ -4,6 +4,7 @@ import { Item } from "@/type/item";
 import { Order } from "@/type/order";
 import { User } from "@/type/user";
 import { OrderItem } from "@/type/orderItem";
+import { orderHistoryInfo } from "@/type/orderHistoryInfo";
 
 import axios from "axios";
 import { Topping } from "@/type/topping2";
@@ -77,6 +78,7 @@ export default new Vuex.Store({
   
     itemList: new Array<Item>(),
     toppings: new Array<Topping>(),
+    orderHistoryInfo: new orderHistoryInfo(-1, new Date(), "", new Date(), [])
   },
   actions: {
     /**
@@ -90,6 +92,18 @@ export default new Vuex.Store({
       console.dir("response: " + JSON.stringify(response));
       const payload = response.data;
       context.commit("showItemList", payload);
+    },
+    /**
+     * 注文履歴の情報を非同期通信で取得するメソッド.
+     * @param context - コンテクスト
+     */
+     async asyncGetOrderHistoryInfo(context) {
+       //一旦ダミーのIDが入っています。
+      const response = await axios.get(
+        "http://153.127.48.168:8080/ecsite-api/order/orders/coffee/129");
+      console.dir("response: " + JSON.stringify(response));
+      const payload = response.data;
+      context.commit("setOrderHistoryInfo", payload);
     },
   },
   mutations: {
@@ -117,6 +131,7 @@ export default new Vuex.Store({
         );
       }
     },
+    
 
     changeOrderStatus(state, payload) {
       // const statusList = {
