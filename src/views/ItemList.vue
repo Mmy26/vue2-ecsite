@@ -39,10 +39,25 @@
             />
             <span>高い順</span>&nbsp;&nbsp;&nbsp;
           </label>
-          <input type="text" name="name" class="search-name-input" v-model="serchText" />
-          <button class="btn search-btn" type="button" v-on:click="serchResultList">
+          <input
+            type="text"
+            name="name"
+            class="search-name-input"
+            v-on:change="makeSuggestArray()"
+            v-model="serchText"
+          />
+          <button
+            class="btn search-btn"
+            type="button"
+            v-on:click="serchResultList"
+          >
             <span>検 索</span>
           </button>
+          <div>
+            <ul class="collection">
+              <li class="collection-item" v-for="(name, index) of makeSuggestArray" v-bind:key="index">{{ name }}</li>
+            </ul>
+          </div>
           <div class="error-message">{{ errorMesage }}</div>
         </form>
       </div>
@@ -57,7 +72,7 @@
             v-for="item of currentItemList"
             v-bind:key="item.id"
           >
-          <input type="radio" id="">
+            <input type="radio" id="" />
             <div class="item-icon">
               <img v-bind:src="item.imagePath" />
             </div>
@@ -105,12 +120,29 @@ export default class ItemList extends Vue {
 
     this.currentItemList = this.$store.getters.getItemList;
   }
+  /**
+   * サジェストキーワードの配列を作成する.
+   */
+  get makeSuggestArray(): Array<string>{
+    if( this.serchText === "" ){
+      return new Array<string>();
+    }
+    let suggestKeywordArray = new Array<string>();
+    let initText = this.serchText
+    let initArray = this.currentItemList;
+      for (let item of initArray) {
+      if (item.name.includes(initText)) {
+        suggestKeywordArray.push(item.name);
+      }
+    }
+    return suggestKeywordArray;
+  }
 
   /**
    * 商品を安い順に並べるメソッド.
    * @returns 商品を並べ替えた後の配列
    */
-  orderInexpensiveItemList(): void{
+  orderInexpensiveItemList(): void {
     this.currentItemList = this.$store.getters.getItemList;
     let copiedArray = this.currentItemList.slice();
     copiedArray.sort(function (a: Item, b: Item) {
@@ -125,11 +157,11 @@ export default class ItemList extends Vue {
     // for文でidがはiっているか確認
     this.currentItemList = copiedArray;
   }
-   /**
+  /**
    * 商品を高い順に並べるメソッド.
    * @returns 商品を並べ替えた後の配列
    */
-  orderExpensiveItemList(): void{
+  orderExpensiveItemList(): void {
     this.currentItemList = this.$store.getters.getItemList;
     let copiedArray = this.currentItemList.slice();
     copiedArray.sort(function (a: Item, b: Item) {
@@ -148,8 +180,8 @@ export default class ItemList extends Vue {
    * 検索結果を表示するメソッド.
    */
   serchResultList(): void {
-    if(this.serchText === ""){
-      this.errorMesage = "検索キーワードを入力してください。"
+    if (this.serchText === "") {
+      this.errorMesage = "検索キーワードを入力してください。";
       return;
     }
     this.errorMesage = "";
@@ -201,7 +233,7 @@ export default class ItemList extends Vue {
 
 <style scoped>
 @import url("/css/item_list.css");
-.error-message{
+.error-message {
   color: red;
 }
 </style>
