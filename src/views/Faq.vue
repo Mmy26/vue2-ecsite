@@ -51,5 +51,7 @@ export default class Faq extends Vue {
 </script>
 
 <style scoped>
-
+.page-title{
+  text-align: center;
+}
 </style>
