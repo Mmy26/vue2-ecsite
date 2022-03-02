@@ -65,7 +65,11 @@
                     type="checkbox"
                     v-bind:value="topping.id"
                     v-model="selectTopping"
+<<<<<<< HEAD
                     v-on:change="calcSubTotalPrice"
+=======
+                    v-bind:value="topping.id"
+>>>>>>> develop
                   />
                   <span>{{ topping.name }}</span>
                 </label>
@@ -154,7 +158,7 @@ export default class ItemDetail extends Vue {
   // 選択された商品のサイズ
   private selectSize = "M";
   // 選択されたトッピング
-  private selectTopping = 0;
+  private selectTopping = [];
   // 選択された商品のオーダー数量
   private selectItemQuantity = 1;
   // 画像パス
