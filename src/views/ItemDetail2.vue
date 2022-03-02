@@ -65,11 +65,7 @@
                     type="checkbox"
                     v-bind:value="topping.id"
                     v-model="selectTopping"
-<<<<<<< HEAD
                     v-on:change="calcSubTotalPrice"
-=======
-                    v-bind:value="topping.id"
->>>>>>> develop
                   />
                   <span>{{ topping.name }}</span>
                 </label>
@@ -224,20 +220,31 @@ export default class ItemDetail extends Vue {
    * 選択された商品の小計を求める
    * @returns -数量、サイズ、トッピングの合計金額
    */
+
   private subTotalPrice = 0;
   calcSubTotalPrice(): number {
     if (this.selectSize === "M") {
       let sizePrice = 0;
-      let toppingPrice = 0;
       sizePrice = this.selectItem.priceM;
-      toppingPrice = 200 * this.selectTopping;
-      this.subTotalPrice = (sizePrice + toppingPrice) * this.selectItemQuantity;
-    } else {
+      if (this.selectTopping.length === 0) {
+        this.subTotalPrice = sizePrice * this.selectItemQuantity;
+      } else if (this.selectTopping.length >= 1) {
+        let toppingAmount = 0;
+        toppingAmount = this.selectTopping.length * 200;
+        this.subTotalPrice =
+          (sizePrice + toppingAmount) * this.selectItemQuantity;
+      }
+    } else if (this.selectSize === "L") {
       let sizePrice = 0;
-      let toppingPrice = 0;
       sizePrice = this.selectItem.priceL;
-      toppingPrice = 300 * this.selectTopping;
-      this.subTotalPrice = (sizePrice + toppingPrice) * this.selectItemQuantity;
+      if (this.selectTopping.length === 0) {
+        this.subTotalPrice = sizePrice * this.selectItemQuantity;
+      } else if (this.selectTopping.length >= 1) {
+        let toppingAmount = 0;
+        toppingAmount = this.selectTopping.length * 300;
+        this.subTotalPrice =
+          (sizePrice + toppingAmount) * this.selectItemQuantity;
+      }
     }
     return this.subTotalPrice;
   }
