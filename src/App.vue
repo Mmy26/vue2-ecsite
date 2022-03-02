@@ -13,6 +13,9 @@ import { Component, Vue } from "vue-property-decorator";
 import M from "materialize-css/dist/js/materialize.min";
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.css"; // add
+import "bootstrap-vue/dist/bootstrap-vue.css"; // add
 
 @Component({
   components: {
