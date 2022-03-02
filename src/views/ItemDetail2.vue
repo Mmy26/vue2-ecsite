@@ -1,29 +1,5 @@
 <template>
   <div>
-    <header>
-      <div class="container">
-        <div class="header">
-          <div class="header-left">
-            <a href="top.html">
-              <img class="logo" src="img/header_logo.png" />
-            </a>
-          </div>
-
-          <div class="header-right">
-            <a href="item_list.html">商品一覧</a>
-            <a href="register_admin.html">会員登録</a>
-            <a href="cart_list.html">
-              <i class="fas fa-shopping-cart"> </i>カート
-            </a>
-            <a href="login.html" class="login">
-              <i class="fas fa-sign-in-alt"></i>ログイン
-            </a>
-
-            <a href="order_history.html">注文履歴</a>
-          </div>
-        </div>
-      </div>
-    </header>
     <div class="top-wrapper">
       <div class="container">
         <h1 class="page-title">
@@ -81,6 +57,20 @@
                 <span>&nbsp;Ｍ&nbsp;</span>&nbsp;&nbsp;200円(税抜)
                 <span>&nbsp;Ｌ</span>&nbsp;&nbsp;300円(税抜)
               </div>
+
+              <div
+                v-for="topping of selectItem.toppingList"
+                v-bind:key="topping.id"
+              >
+                <label>
+                  <input
+                    type="checkbox"
+                    v-on:change="calcSubTotalPrice"
+                    v-model="selectTopping"
+                  />
+                  <span>{{ topping.name }}</span></label
+                >
+              </div>
             </div>
           </label>
 
@@ -114,11 +104,7 @@
             <span>この商品金額： {{ subTotalPrice }}円(税抜)</span>
           </div>
           <div class="row item-cart-btn">
-            <button
-              class="btn"
-              type="button"
-              onclick="location.href='cart_list.html'"
-            >
+            <button class="btn" type="button" v-on:click="addToCart">
               <span>カートに入れる</span>
             </button>
           </div>
@@ -153,7 +139,18 @@ export default class ItemDetail extends Vue {
   );
 
   // 選択された商品
-  selectItem!: Item;
+  // selectItem!: Item;
+  private selectItem = new Item(
+    0,
+    "",
+    "",
+    "",
+    0,
+    0,
+    "",
+    false,
+    new Array<Topping>()
+  );
   // 選択された商品のサイズ
   private selectSize = "";
   // 選択されたトッピング
@@ -187,16 +184,20 @@ export default class ItemDetail extends Vue {
       currentItem.id,
       currentItem.type,
       currentItem.name,
-      currentItem.discription,
+      currentItem.description,
       currentItem.priceM,
       currentItem.priceL,
       currentItem.imagePath,
       currentItem.deleted,
       currentItem.toppingList
     );
+    console.dir("①response:" + JSON.stringify(this.selectItem));
+    console.log(this.selectItem);
+
     const responseTopping = await axios.get(
       `http://153.127.48.168:8080/ecsite-api/item/toppings/coffee`
     );
+
     console.dir("①response:" + JSON.stringify(this.selectItem));
 
     const displayToppingList = new Array<Topping>();
@@ -214,6 +215,8 @@ export default class ItemDetail extends Vue {
       this.selectItem.toppingList = displayToppingList;
       this.selectItemImage = `${this.selectItem.imagePath}`;
     }
+
+    this.selectItemImage = `${this.selectItem.imagePath}`;
   }
 
   /**
@@ -236,6 +239,14 @@ export default class ItemDetail extends Vue {
       this.subTotalPrice = (sizePrice + toppingPrice) * this.selectItemQuantity;
     }
     return this.subTotalPrice;
+  }
+
+  /**
+   * カートに入れる.
+   */
+  addToCart(): void {
+    //注文確認画面に遷移する
+    this.$router.push("/cartList");
   }
 }
 </script>
