@@ -200,7 +200,7 @@ export default class ItemList extends Vue {
     }
     let suggestKeywordArray = new Array<string>();
     let initText = this.serchText;
-    let initArray = this.currentItemList;
+    let initArray = this.$store.getters.getItemList;
     for (let item of initArray) {
       if (item.name.includes(initText)) {
         suggestKeywordArray.push(item.name);
@@ -267,6 +267,8 @@ export default class ItemList extends Vue {
     if (this.currentItemList.length === 0) {
       this.errorMesage = "1件もありませんでしたので全件表示します";
       this.currentItemList = this.$store.getters.getItemList;
+      this.createLinkNumberForPaging();
+      this.initialDisplay();
     }
     this.serchText = "";
   }
@@ -310,10 +312,10 @@ export default class ItemList extends Vue {
     // 現在のページ数をクリックされたページ数に変更
     this.currentPageNum = pageNum;
     if (this.serchText === "") {
-      // 検索入力欄に何も書かれていなかった場合、全従業員一覧情報をVuexストアから取得
+      // 検索入力欄に何も書かれていなかった場合、全商品一覧情報をVuexストアから取得
       this.currentItemList = this.$store.getters.getItemList;
     }
-    // 対象ページに出力する従業員一覧を作成する
+    // 対象ページに出力する商品一覧を作成する
     this.createItemListForOnePage(pageNum, this.currentItemList);
   }
 

@@ -52,6 +52,7 @@ export default class Faq extends Vue {
 
 <style scoped>
 .page-title{
+  padding-top: 80px;
   text-align: center;
 }
 </style>
