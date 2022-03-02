@@ -74,7 +74,7 @@ export default new Vuex.Store({
         ),
       ]
     ),
-  
+
     itemList: new Array<Item>(),
     toppings: new Array<Topping>(),
   },
@@ -190,4 +190,3 @@ export default new Vuex.Store({
     },
   },
 });
-

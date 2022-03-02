@@ -21,12 +21,11 @@
               <label>
                 <input
                   id="size-m"
-                  name="size"
+                  name="sizeM"
                   type="radio"
                   value="M"
                   v-model="selectSize"
                   v-on:change="calcSubTotalPrice"
-                  checked="checked"
                 />
                 <span>
                   &nbsp;<span class="price">Ｍ</span
@@ -36,12 +35,12 @@
               <label>
                 <input
                   id="size-l"
-                  name="size"
+                  name="sizeL"
                   value="L"
                   v-model="selectSize"
                   v-on:change="calcSubTotalPrice"
                   type="radio"
-                />
+                />&nbsp;&nbsp;
                 <span>
                   &nbsp;<span class="price">Ｌ</span
                   >{{ selectItem.priceL }}円(税抜)</span
@@ -57,20 +56,20 @@
                 <span>&nbsp;Ｍ&nbsp;</span>&nbsp;&nbsp;200円(税抜)
                 <span>&nbsp;Ｌ</span>&nbsp;&nbsp;300円(税抜)
               </div>
-              <div
+              <span
                 v-for="topping of selectItem.toppingList"
                 v-bind:key="topping.id"
               >
-                <label>
+                <label class="item-topping">
                   <input
                     type="checkbox"
-                    v-on:change="calcSubTotalPrice"
-                    v-model="selectTopping"
                     v-bind:value="topping.id"
+                    v-model="selectTopping"
+                    v-on:change="calcSubTotalPrice"
                   />
-                  <span>{{ topping.name }}</span></label
-                >
-              </div>
+                  <span>{{ topping.name }}</span>
+                </label>
+              </span>
             </div>
           </label>
 
@@ -82,6 +81,7 @@
                   class="browser-default"
                   v-on:change="calcSubTotalPrice"
                   v-model="selectItemQuantity"
+                  style="text-align: -webkit-center"
                 >
                   <option value="" disabled>選択して下さい</option>
                   <option value="1" selected>1</option>
@@ -112,8 +112,9 @@
           </div>
         </div>
       </div>
+
+      <!-- end container -->
     </div>
-    <!-- end container -->
   </div>
   <!-- end top-wrapper -->
   <!-- Compiled and minified JavaScript -->
@@ -154,7 +155,7 @@ export default class ItemDetail extends Vue {
     new Array<Topping>()
   );
   // 選択された商品のサイズ
-  private selectSize = "";
+  private selectSize = "M";
   // 選択されたトッピング
   private selectTopping = 0;
   // 選択された商品のオーダー数量
@@ -222,20 +223,31 @@ export default class ItemDetail extends Vue {
    * 選択された商品の小計を求める
    * @returns -数量、サイズ、トッピングの合計金額
    */
+
   private subTotalPrice = 0;
   calcSubTotalPrice(): number {
     if (this.selectSize === "M") {
       let sizePrice = 0;
-      let toppingPrice = 0;
       sizePrice = this.selectItem.priceM;
-      toppingPrice = 200 * this.selectTopping;
-      this.subTotalPrice = (sizePrice + toppingPrice) * this.selectItemQuantity;
-    } else {
+      if (this.selectTopping.length === 0) {
+        this.subTotalPrice = sizePrice * this.selectItemQuantity;
+      } else if (this.selectTopping.length >= 1) {
+        let toppingAmount = 0;
+        toppingAmount = this.selectTopping.length * 200;
+        this.subTotalPrice =
+          (sizePrice + toppingAmount) * this.selectItemQuantity;
+      }
+    } else if (this.selectSize === "L") {
       let sizePrice = 0;
-      let toppingPrice = 0;
       sizePrice = this.selectItem.priceL;
-      toppingPrice = 300 * this.selectTopping;
-      this.subTotalPrice = (sizePrice + toppingPrice) * this.selectItemQuantity;
+      if (this.selectTopping.length === 0) {
+        this.subTotalPrice = sizePrice * this.selectItemQuantity;
+      } else if (this.selectTopping.length >= 1) {
+        let toppingAmount = 0;
+        toppingAmount = this.selectTopping.length * 300;
+        this.subTotalPrice =
+          (sizePrice + toppingAmount) * this.selectItemQuantity;
+      }
     }
     return this.subTotalPrice;
   }
@@ -250,4 +262,8 @@ export default class ItemDetail extends Vue {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.item-toppings {
+  display: inline-block;
+}
+</style>
