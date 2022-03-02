@@ -53,8 +53,8 @@
           </div>
 
           <div class="row cart-total-price">
-            <div>消費税：{{ order.getTax }} 円</div>
-            <div>ご注文金額合計：{{ order.getCalcTotalPrice }} 円 (税込)</div>
+            <div>消費税：{{ this.getTax }} 円</div>
+            <div>ご注文金額合計：{{ this.getCalcTotalPrice }} 円 (税込)</div>
           </div>
 
           <h2 class="page-title">お届け先情報</h2>
@@ -450,11 +450,13 @@ export default class OrderConfirm extends Vue {
     );
   }
 
-  getCalcTotalPrice(): number {
+  // gettersで合計金額を取得
+  get getCalcTotalPrice(): number {
     return this.$store.getters.calcTotalPrice;
   }
 
-  getTax(): number {
+  // gettersで消費税を取得
+  get getTax(): number {
     return this.$store.getters.tax;
   }
 }
