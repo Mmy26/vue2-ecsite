@@ -84,13 +84,14 @@
               <div
                 v-for="topping of selectItem.toppingList"
                 v-bind:key="topping.id"
-              ></div>
-              <input
-                type="checkbox"
-                v-on:change="calcSubTotalPrice"
-                v-model="selectTopping"
-              />
-              <span>{{ topping.name }}</span>
+              >
+                <input
+                  type="checkbox"
+                  v-on:change="calcSubTotalPrice"
+                  v-model="selectTopping"
+                />
+                <span>{{ topping.name }}</span>
+              </div>
             </div>
           </label>
 
@@ -163,7 +164,18 @@ export default class ItemDetail extends Vue {
   );
 
   // 選択された商品
-  selectItem!: Item;
+  // selectItem!: Item;
+  private selectItem = new Item(
+    0,
+    "",
+    "",
+    "",
+    0,
+    0,
+    "",
+    false,
+    new Array<Topping>()
+  );
   // 選択された商品のサイズ
   private selectSize = "";
   // 選択されたトッピング
@@ -187,7 +199,6 @@ export default class ItemDetail extends Vue {
     // getItemList()メソッドに先ほど取得したIDを渡し、１件の商品情報を取得し、戻り値をselectItemに代入する
     // this.selectItem = this.$store.getters.getItemId(itemId);
     // 今取得した商品情報から画像パスを取り出し、selectItemImage属性に代入する
-    this.selectItemImage = `${this.selectItem.imagePath}`;
 
     const response = await axios.get(
       `http://153.127.48.168:8080/ecsite-api/item/${itemId}`
@@ -198,21 +209,23 @@ export default class ItemDetail extends Vue {
       currentItem.id,
       currentItem.type,
       currentItem.name,
-      currentItem.discription,
+      currentItem.description,
       currentItem.priceM,
       currentItem.priceL,
       currentItem.imagePath,
       currentItem.deleted,
       currentItem.toppingList
     );
+    console.dir("①response:" + JSON.stringify(this.selectItem));
+    console.log(this.selectItem);
+
     const responseTopping = await axios.get(
       `http://153.127.48.168:8080/ecsite-api/item/toppings/coffee`
     );
-    console.dir("①response:" + JSON.stringify(responseTopping));
 
     const displayToppingList = new Array<Topping>();
 
-    for (const topping of response.data.toppingList) {
+    for (const topping of responseTopping.data.toppings) {
       displayToppingList.push(
         new Topping(
           topping.id,
@@ -224,6 +237,8 @@ export default class ItemDetail extends Vue {
       );
       this.selectItem.toppingList = displayToppingList;
     }
+
+    this.selectItemImage = `${this.selectItem.imagePath}`;
   }
 
   /**
