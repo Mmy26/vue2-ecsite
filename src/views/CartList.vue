@@ -200,8 +200,12 @@ export default class XXXComponent extends Vue {
    * 注文に進む.
    */
   onOrderClick(): void {
-    //注文確認画面に遷移する
-    this.$router.push("/orderConfirm");
+    if (this.$store.getters.getLoginStatus === false) {
+      this.$router.push("/login");
+    } else {
+      //注文確認画面に遷移する
+      this.$router.push("/orderConfirm");
+    }
   }
 
   /**

@@ -12,6 +12,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    // ログインしているかどうか
+    isLogin: false,
     order: new Order(
       0,
       0,
@@ -94,6 +96,20 @@ export default new Vuex.Store({
   },
   mutations: {
     /**
+     * ログインする.
+     * @param state - ステート
+     */
+    logined(state) {
+      state.isLogin = true;
+    },
+    /**
+     * ログアウトする.
+     * @param state - ステート
+     */
+    logouted(state) {
+      state.isLogin = false;
+    },
+    /**
      * 商品リストを作成し、stateにセットするメソッド.
      * @param state - ステイト
      * @param payload - 商品一覧情報のペイロード
@@ -148,6 +164,15 @@ export default new Vuex.Store({
 
   modules: {},
   getters: {
+    /**
+     * ログイン状態を返す.
+     *
+     * @param state ステート
+     * @returns ture:ログイン済/false:ログアウト済
+     */
+    getLoginStatus(state) {
+      return state.isLogin;
+    },
     /**
      * 商品一覧を表すgetter.
      * @param state - ステイト
