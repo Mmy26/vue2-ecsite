@@ -20,11 +20,6 @@
                 class="search-name-input tooltipped"
                 data-position="right"
                 data-tooltip="お腹空いた？？"
-              />
-              <input
-                type="text"
-                name="name"
-                class="search-name-input"
                 v-model="serchText"
               />
               <button
@@ -37,12 +32,9 @@
               <div class="error-message red-text">{{ errorMesage }}</div>
             </form>
           </div>
+          <CompFixedButton />
         </div>
         <div class="items">
-          <div class="item">
-            <div class="item-icon">
-              <img src="" />
-            </div>
             <div
               class="item"
               v-for="item of orderInexpensiveItemList"
@@ -55,10 +47,9 @@
                 item.name
               }}</router-link
               ><br />
-              <span class="price">M</span>{{ item.priceM }}円(税抜)<br />
-              <span class="price">L</span>{{ item.priceL }}円(税抜)<br />
             </div>
-
+            <span class="price">M</span>{{ item.priceM }}円(税抜)<br />
+            <span class="price">L</span>{{ item.priceL }}円(税抜)<br />
             <div class="container">
               <form method="post" class="search-form">
                 <label>
