@@ -4,6 +4,7 @@
     <div class="item-wrapper">
       <div class="container">
         <div class="search-wrapper">
+
           <div class="container">
             <form method="post" class="search-form">
               <input
@@ -43,8 +44,43 @@
               <span class="price">M</span>{{ item.priceM }}円(税抜)<br />
               <span class="price">L</span>{{ item.priceL }}円(税抜)<br />
             </div>
+
+      <div class="container">
+        <form method="post" class="search-form">
+            <label>
+              <input type="checkbox" />
+              <span>Drink</span>
+            </label>&nbsp;&nbsp;&nbsp;
+            <label>
+              <input type="checkbox" />
+              <span>Food</span>
+            </label>
+          <input type="text" name="name" class="search-name-input tooltipped" data-position="right" data-tooltip="お腹空いた？？" v-model="serchText"/>
+          <button class="btn search-btn" type="button" v-on:click="serchResultList">
+            <span>検索</span>
+          </button>
+            <div class="error-message  red-text">{{ errorMesage }}</div>
+        </form>
+      </div>
+      <CompFixedButton/>
+    </div>
+        <div class="items">
+          <div
+            class="item"
+            v-for="item of orderInexpensiveItemList"
+            v-bind:key="item.id"
+          >
+            <div class="item-icon">
+              <img v-bind:src="item.imagePath" />
+            </div>
+            <router-link v-bind:to="'/itemDetail/' + item.id">{{
+              item.name
+            }}</router-link
+            ><br />
+            <span class="price">M</span>{{ item.priceM }}円(税抜)<br />
+            <span class="price">L</span>{{ item.priceL }}円(税抜)<br />
+>>>>>>> develop
           </div>
-        </div>
       </div>
     </div>
   </div>
@@ -53,7 +89,12 @@
 <script lang="ts">
 import { Item } from "@/type/item";
 import { Component, Vue } from "vue-property-decorator";
-@Component
+import CompFixedButton from "@/components/CompFixedButton.vue";
+@Component({
+  components: {
+    CompFixedButton
+  }
+})
 export default class ItemList extends Vue {
   //検索キーワード
   private serchText = "";
@@ -70,7 +111,7 @@ export default class ItemList extends Vue {
     await this.$store.dispatch("asyncGetItemList");
 
     this.currentItemList = this.$store.getters.getItemList;
-    console.log(this.currentItemList);
+
   }
 
   /**
