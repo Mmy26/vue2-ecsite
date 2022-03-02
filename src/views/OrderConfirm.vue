@@ -46,19 +46,15 @@
                       {{ orderItem.calcSubTotalPrice }}円
                     </div>
                   </td>
-                  <td>
-                    <button class="btn" type="button">
-                      <span>削除</span>
-                    </button>
-                  </td>
+                  <td></td>
                 </tr>
               </tbody>
             </table>
           </div>
 
           <div class="row cart-total-price">
-            <div>消費税：8,000円</div>
-            <div>ご注文金額合計：38,000円 (税込)</div>
+            <div>消費税：{{ order.getTax }} 円</div>
+            <div>ご注文金額合計：{{ order.getCalcTotalPrice }} 円 (税込)</div>
           </div>
 
           <h2 class="page-title">お届け先情報</h2>
@@ -452,6 +448,14 @@ export default class OrderConfirm extends Vue {
         ),
       ]
     );
+  }
+
+  getCalcTotalPrice(): number {
+    return this.$store.getters.calcTotalPrice;
+  }
+
+  getTax(): number {
+    return this.$store.getters.tax;
   }
 }
 </script>
