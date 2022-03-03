@@ -83,11 +83,11 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { Order } from "@/type/order";
-import { User } from "@/type/user";
-import { OrderItem } from "@/type/orderItem";
-import { Item } from "@/type/item";
-import { Topping } from "@/type/topping2";
+import { Order } from "@/types/order";
+import { User } from "@/types/user";
+import { OrderItem } from "@/types/orderItem";
+import { Item } from "@/types/item";
+import { Topping } from "@/types/topping2";
 @Component
 export default class XXXComponent extends Vue {
   // 合計金額

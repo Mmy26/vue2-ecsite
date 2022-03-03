@@ -37,12 +37,11 @@
 import { Component, Vue } from "vue-property-decorator";
 @Component
 export default class XXXComponent extends Vue {
-  toTopPage(): void {
-    this.$router.push("/itemList");
-  }
-  get isLogin(): boolean {
-    return this.$store.getters.getLoginStatus;
-  }
+  // get isLogin(): boolean {
+  //   console.log(this.$store.getters.getLoginStatus);
+  // toTopPage(): void {
+  //   this.$router.push("/itemList");
+  // }
 }
 </script>
 
