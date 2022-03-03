@@ -80,7 +80,9 @@
           >
             <input type="radio" id="" />
             <div class="item-icon">
-              <img v-bind:src="item.imagePath" />
+              <router-link v-bind:to="'/itemDetail/' + item.id">
+                <img v-bind:src="item.imagePath" />
+              </router-link>
             </div>
             <router-link v-bind:to="'/itemDetail/' + item.id">{{
               item.name
@@ -367,6 +369,14 @@ export default class ItemList extends Vue {
 
 <style scoped>
 @import url("/css/item_list.css");
+.item-icon img:hover {
+  opacity: 0.5;
+  transition: 0.3s;
+}
+.item-name:hover {
+  opacity: 0.7;
+  transition: 0.3s;
+}
 .error-message {
   color: red;
 }
