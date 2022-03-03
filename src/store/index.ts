@@ -209,7 +209,7 @@ export default new Vuex.Store({
      * @returns Orderオブジェクト
      */
     getOrder(state) {
-      return state.order.orderItemList;
+      return state.order;
     },
   },
 });
