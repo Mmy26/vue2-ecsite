@@ -153,7 +153,7 @@
 </template>
 
 <script lang="ts">
-import { Item } from "@/type/item";
+import { Item } from "@/types/item";
 import { Component, Vue } from "vue-property-decorator";
 import CompFixedButton from "@/components/CompFixedButton.vue";
 @Component({
