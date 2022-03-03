@@ -270,5 +270,13 @@ export default new Vuex.Store({
     getOrderHistoryInfoList(state) {
       return state.orderHistoryInfoList;
     },
+    /**
+     * ログインしているユーザーの情報を取得する.
+     * @param state - ステート
+     * @returns Userオブジェクト
+     */
+     getCurrentUser(state) {
+      return state.currentUser;
+    },
   },
 });

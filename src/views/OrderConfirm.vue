@@ -237,17 +237,18 @@ export default class OrderConfirm extends Vue {
     new Item(0, "", "", "", 0, 0, "", true, []),
     []
   );
-
+  //ログインしているユーザー情報
+  private currentUser = new User(0, "", "", "", "", "", "");
   //注文者の名前
-  private destinationName = "";
+  private destinationName = this.currentUser.name;
   //注文者のメールアドレス
-  private destinationEmail = "";
+  private destinationEmail = this.currentUser.email;
   //注文者の郵便番号
-  private destinationZipcode = "";
+  private destinationZipcode = this.currentUser.zipcode;
   //注文者の住所
-  private destinationAddress = "";
+  private destinationAddress = this.currentUser.address;
   //注文者の電話番号
-  private destinationTel = "";
+  private destinationTel = this.currentUser.telephone;
   //配達日時
   private deliveryDate = new Date();
   //配達時間
@@ -276,7 +277,7 @@ export default class OrderConfirm extends Vue {
    */
   created(): void {
     this.currentOrder = this.$store.getters.getOrder;
-    console.log(location.pathname);
+    this.currentUser = this.$store.getters.getCurrentUser;
   }
   /**
    * 注文ボタンが押下されたときのメソッド.
