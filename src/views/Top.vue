@@ -1,6 +1,6 @@
 <template>
   <div>
-     <div class="top-wrapper">
+    <div class="top-wrapper">
       <div class="container">
         <h1>DELIVERING THE FEELINGS OF ALOHA TO YOU</h1>
         <p>日本にいながらアロハな気分をあなたにお届け！</p>
@@ -23,13 +23,12 @@
     <div class="top-item-wrapper">
       <div class="container">
         <div class="heading">
-          <h2>ラクラクアロハ、４つの特徴！</h2>
+          <h2>らくらくcoffee、４つの特徴！</h2>
         </div>
         <div class="top-items">
           <div class="top-item">
             <div class="top-item-icon">
-              <img src="img/1.jpg" />
-              <p>ハワイアン料理</p>
+              <img src="../../public/img_coffee/point1.jpg" />
             </div>
             <p class="text-contents">
               アロハテーブルやウルフギャング、田中オブ東京などのハワイの有名店で修行を積んだ一流シェフによる本格的なハワイアン料理が家にいてもお手軽に楽しむことができます。
@@ -37,8 +36,7 @@
           </div>
           <div class="top-item">
             <div class="top-item-icon">
-              <img src="img/2.jpg" />
-              <p>スイーツも充実</p>
+              <img src="../../public/img_coffee/point2.jpg" />
             </div>
             <p class="text-contents">
               アイランドビンテージコーヒーやボガーツカフェのアサイボウルはもちろんのこと、最近流行りのバナンのソフトクリーム、エッグスンシングスのふわふわパンケーキなど有名店のスイーツも充実しています。
@@ -46,8 +44,7 @@
           </div>
           <div class="top-item">
             <div class="top-item-icon">
-              <img src="img/14.jpg" />
-              <p>アルコールも豊富</p>
+              <img src="../../public/img_coffee/point3.jpg" />
             </div>
             <p class="text-contents">
               ハワイといえばビーチでマイタイ！コナブリューイングのハワイアンコナビールなどハワイでしか飲めないアルコールも豊富にあります。
@@ -55,8 +52,7 @@
           </div>
           <div class="top-item">
             <div class="top-item-icon">
-              <img src="img/13.jpg" />
-              <p>ホテル創作料理</p>
+              <img src="../../public/img_coffee/point4.jpg" />
             </div>
             <p class="text-contents">
               シェラトンワイキキ、ロイヤルハワイアン、モアナサーフライダー、アウラニに入っているレストランの創作料理も「ラクラクアロハ」なら気軽に注文できます。
@@ -81,11 +77,9 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 @Component
-export default class XXXComponent extends Vue {
-
-}
+export default class XXXComponent extends Vue {}
 </script>
 
 <style scoped>
-
+@import url("/css/top.css");
 </style>

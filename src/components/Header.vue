@@ -4,7 +4,7 @@
       <div class="container">
         <div class="header">
           <div class="header-left">
-            <a href="/itemList">
+            <a href="/top">
               <img
                 class="logo"
                 src="img_coffee/header_logo.png"
