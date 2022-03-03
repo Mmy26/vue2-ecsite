@@ -403,6 +403,9 @@ export default class OrderConfirm extends Vue {
    * ショッピングカート一覧を表示させる.
    */
   created(): void {
+    if (this.$store.getters.getLoginStatus === false) {
+      this.$router.push("/login");
+    }
     this.currentOrder = new Order(
       0,
       0,

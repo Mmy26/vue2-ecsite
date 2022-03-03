@@ -11,11 +11,7 @@
           <p>メールが届かない場合は「注文履歴」からご確認ください。</p>
         </div>
         <div class="row order-finished-btn">
-          <button
-            class="btn"
-            type="button"
-            v-on:click="toTopPage"
-          >
+          <button class="btn" type="button" v-on:click="toTopPage">
             <span>トップ画面を表示する</span>
           </button>
         </div>
@@ -29,14 +25,20 @@
 import { Component, Vue } from "vue-property-decorator";
 @Component
 export default class OrderFinished extends Vue {
-  toTopPage(): void{
+  created(): void {
+    if (this.$store.getters.getLoginStatus === false) {
+      this.$router.push("/login");
+    }
+  }
+
+  toTopPage(): void {
     this.$router.push("/itemList");
   }
 }
 </script>
 
 <style scoped>
-.order-finished{
+.order-finished {
   text-align: center;
 }
 </style>
