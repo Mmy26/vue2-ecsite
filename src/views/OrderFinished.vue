@@ -15,6 +15,11 @@
             <span>トップ画面を表示する</span>
           </button>
         </div>
+        <div class="row order-history-btn">
+          <button class="btn" type="button" v-on:click="toOrderHistory">
+            <span>注文履歴</span>
+          </button>
+        </div>
       </div>
       <!-- end container -->
     </div>
@@ -33,6 +38,9 @@ export default class OrderFinished extends Vue {
 
   toTopPage(): void {
     this.$router.push("/itemList");
+  }
+  toOrderHistory(): void {
+    this.$router.push("/orderHistory");
   }
 }
 </script>

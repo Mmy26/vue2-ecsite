@@ -4,8 +4,12 @@
       <div class="container">
         <div class="header">
           <div class="header-left">
-            <a href="top.html">
-              <img class="logo" src="img_coffee/header_logo.png" />
+            <a href="/top">
+              <img
+                class="logo"
+                src="img_coffee/header_logo.png"
+                v-on:click="toTopPage"
+              />
             </a>
           </div>
 
@@ -33,11 +37,11 @@
 import { Component, Vue } from "vue-property-decorator";
 @Component
 export default class XXXComponent extends Vue {
-  get isLogin(): boolean {
-    console.log(this.$store.getters.getLoginStatus);
-
-    return this.$store.getters.getLoginStatus;
-  }
+  // get isLogin(): boolean {
+  //   console.log(this.$store.getters.getLoginStatus);
+  // toTopPage(): void {
+  //   this.$router.push("/itemList");
+  // }
 }
 </script>
 
