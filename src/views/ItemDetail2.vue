@@ -123,11 +123,11 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { Item } from "@/type/item";
+import { Item } from "@/types/item";
 import axios from "axios";
-import { Topping } from "@/type/topping2";
-import { OrderItem } from "@/type/orderItem";
-import { orderTopping } from "@/type/OrderTopping";
+import { Topping } from "@/types/topping2";
+import { OrderItem } from "@/types/orderItem";
+import { orderTopping } from "@/types/orderTopping";
 
 @Component
 export default class ItemDetail extends Vue {

@@ -1,12 +1,12 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { Item } from "@/type/item";
-import { Order } from "@/type/order";
-import { User } from "@/type/user";
-import { OrderItem } from "@/type/orderItem";
+import { Item } from "@/types/item";
+import { Order } from "@/types/order";
+import { User } from "@/types/user";
+import { OrderItem } from "@/types/orderItem";
 
 import axios from "axios";
-import { Topping } from "@/type/topping2";
+import { Topping } from "@/types/topping2";
 
 Vue.use(Vuex);
 
