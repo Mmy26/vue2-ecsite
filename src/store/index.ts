@@ -199,6 +199,16 @@ export default new Vuex.Store({
     removeItem(state, payload) {
       state.order.orderItemList.splice(payload.itemIndex, 1);
     },
+
+    /**
+     *商品を追加する.
+
+     * @param state - ステート
+     * @param payload - 追加する商品の情報
+     */
+    addItem(state, payload) {
+      state.order.orderItemList.push(payload);
+    },
   },
 
   modules: {},
