@@ -12,9 +12,29 @@
             </div>
             <div class="item-intro">
               {{ selectItem.discription }}
+              <div class="sns-btn">
+                <a
+                  target="_blank"
+                  href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F192.168.11.12%3A8080%2FitemDetail&amp;src=sdkpreparse"
+                  class="fb-xfbml-parse-ignore"
+                  ><button type="button">Facebook</button></a
+                >
+                <a
+                  target="_blank"
+                  href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+                  class="twitter-share-button"
+                  data-show-count="false"
+                >
+                  <button type="button">Twitter</button></a
+                >
+                <a
+                  target="_blank"
+                  href="https://social-plugins.line.me/lineit/share?url=http://192.168.11.12:8080/itemDetail"
+                  ><button type="button">LINE</button></a
+                >
+              </div>
             </div>
           </div>
-
           <div class="row item-size">
             <div class="item-hedding">サイズ</div>
             <div>
