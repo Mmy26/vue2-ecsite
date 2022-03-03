@@ -396,6 +396,7 @@ export default class OrderConfirm extends Vue {
     );
 
     if (response.data.status === "success") {
+      this.$store.commit("initializeOrder");
       this.$router.push("/orderFinished");
     } else {
       // 失敗ならエラーメッセージを表示する
@@ -427,7 +428,6 @@ export default class OrderConfirm extends Vue {
         zipcode: this.destinationZipcode.replace("-", ""),
       },
     });
-
     this.destinationAddress = response.data.items[0].address;
   }
 

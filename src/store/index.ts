@@ -80,7 +80,7 @@ export default new Vuex.Store({
     itemList: new Array<Item>(),
     toppings: new Array<Topping>(),
     orderHistoryInfoList: new Array<Order>(),
-    currentUser: new User(0, "", "", "", "", "", "")
+    currentUser: new User(0, "", "", "", "", "", ""),
   },
   actions: {
     /**
@@ -103,7 +103,7 @@ export default new Vuex.Store({
       //ダミーID 129, 134, 139, 148, 150
       // 下のid部分をthis.state.currentUser.idにする
       const response = await axios.get(
-        "http://153.127.48.168:8080/ecsite-api/order/orders/coffee/129" 
+        "http://153.127.48.168:8080/ecsite-api/order/orders/coffee/129"
       );
       const payload = response.data;
       context.commit("setOrderHistoryInfo", payload);
@@ -199,7 +199,7 @@ export default new Vuex.Store({
      * @param state - ステイト
      * @param payload APIから返ってきたユーザー情報
      */
-    setCurrentUser(state, payload){
+    setCurrentUser(state, payload) {
       state.currentUser = new User(
         payload.id,
         payload.name,
@@ -208,9 +208,34 @@ export default new Vuex.Store({
         payload.zipcode,
         payload.address,
         payload.telephone
-      )
+      );
       console.log(state.currentUser);
-    }
+    },
+    /**
+     * 注文テーブルを削除する.
+     *
+     * @param state - ステート
+     * @param payload - 削除する注文票
+     */
+
+    initializeOrder(state) {
+      state.order = new Order(
+        0,
+        state.currentUser.id,
+        0,
+        0,
+        new Date(),
+        "",
+        "",
+        "",
+        "",
+        "",
+        new Date(),
+        0,
+        state.currentUser,
+        []
+      );
+    },
   },
 
   modules: {},
@@ -276,7 +301,7 @@ export default new Vuex.Store({
      * @param state - ステート
      * @returns Userオブジェクト
      */
-     getCurrentUser(state) {
+    getCurrentUser(state) {
       return state.currentUser;
     },
   },
