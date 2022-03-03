@@ -166,7 +166,6 @@
                 <input name="paymentMethod" type="radio" value="2" />
                 <span>クレジットカード</span>
               </label>
-              <CompCreditCardPayment />
             </span>
           </div>
          <CompCreditCardPayment />
@@ -381,21 +380,21 @@ export default class OrderConfirm extends Vue {
         destinationTel: this.destinationTel,
         deliveryTime: format(this.deliveryDate, "yyyy/MM/dd HH:mm:ss"),
         paymentMethod: this.paymentMethod,
-        orderItemList: this.currentOrder.makeOrderFormList,
+        orderItemFormList: this.currentOrder.makeOrderFormList,
       }
     );
     console.dir("response:" + JSON.stringify(response));
     console.log(this.currentOrder);
-    console.log(this.currentOrder.user.id)
-    console.log(this.currentOrder.status)
-    console.log(this.currentOrder.totalPrice)
-    console.log(this.currentOrder.destinationName)
-    console.log(this.currentOrder.destinationZipcode)
-    console.log(this.currentOrder.destinationAddress)
-    console.log(this.currentOrder.destinationTel)
-    console.log(format(this.deliveryDate, "yyyy/MM/dd HH:mm:ss"))
-    console.log(this.paymentMethod)
-    console.log(this.currentOrder.makeOrderFormList);
+    console.log('  1   ' + this.currentOrder.user.id)
+    console.log('  2   ' + this.currentOrder.status)
+    console.log('  3   ' + this.currentOrder.totalPrice)
+    console.log('  4   ' + this.destinationName)
+    console.log('  5   ' + this.destinationZipcode)
+    console.log('  6   ' + this.destinationAddress)
+    console.log('  7   ' + this.destinationTel)
+    console.log('  8   ' + format(this.deliveryDate, "yyyy/MM/dd HH:mm:ss"))
+    console.log('  9   ' + this.paymentMethod)
+    console.log('  10   ',this.currentOrder.makeOrderFormList);
 
     if (response.data.status === "success") {
       // if (this.paymentMethod === 2) {

@@ -74,7 +74,6 @@ export class Order {
         new OrderItemForm(orderItem.id, orderItem.quantity, orderItem.size)
       );
     }
-    console.log(newArray);
     return newArray;
   }
 
