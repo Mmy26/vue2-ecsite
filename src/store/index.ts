@@ -132,21 +132,21 @@ export default new Vuex.Store({
       }
     },
 
-    changeOrderStatus(state, payload) {
-      // const statusList = {
-      //   targetKey: payload.key,
-      //   targetValue: payload.value
-      // }
-      // state.order.statusList.targetKey = statusList.targetValue;
-      state.order.status = payload.status;
-    },
-    updateOrder(state, payload) {
-      state.order.destinationName = payload.destinationName;
-      state.order.destinationEmail = payload.destinationEmail;
-      state.order.destinationZipcode = payload.destinationZipcode;
-      state.order.destinationAddress = payload.destinationAddress;
-      state.order.destinationTel = payload.destinationTel;
-    },
+    // changeOrderStatus(state, payload) {
+    //   // const statusList = {
+    //   //   targetKey: payload.key,
+    //   //   targetValue: payload.value
+    //   // }
+    //   // state.order.statusList.targetKey = statusList.targetValue;
+    //   state.order.status = payload.status;
+    // },
+    // updateOrder(state, payload) {
+    //   state.order.destinationName = payload.destinationName;
+    //   state.order.destinationEmail = payload.destinationEmail;
+    //   state.order.destinationZipcode = payload.destinationZipcode;
+    //   state.order.destinationAddress = payload.destinationAddress;
+    //   state.order.destinationTel = payload.destinationTel;
+    // },
 
     /**
      * 商品を削除する.
