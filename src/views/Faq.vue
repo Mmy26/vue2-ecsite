@@ -1,7 +1,8 @@
 <template>
   <div class="faq-page">
     <h2 class="page-title">よくある質問</h2>
-    <ul class="collapsible">
+    <div class="container">
+      <ul class="collapsible">
     <li>
       <div class="collapsible-header"><i class="material-icons">help_outline</i>割引チケットは利用できますか？</div>
       <div class="collapsible-body"><span>はい。お支払い時にご提示をお願いします。</span></div>
@@ -39,6 +40,7 @@
       <div class="collapsible-body"><span>詳細につきましては、<a href="#">こちらのページ</a>をご覧ください</span></div>
     </li>
   </ul>
+    </div>
   </div>
 </template>
 
