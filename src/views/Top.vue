@@ -7,7 +7,8 @@
             <h1>DELIVERING THE FEELINGS OF COFFEE TO YOU</h1>
             <p>こだわりのコーヒーとスイーツをおうちで</p>
             <p>
-              らくらくcoffeeはあなたのささやかな幸せに寄り添う "最高の一杯" をお届けします。
+              らくらくcoffeeはあなたのささやかな幸せに寄り添う "最高の一杯"
+              をお届けします。
             </p>
             <div class="btn-wrapper">
               <a href="/registerUser" class="btn signup">会員登録</a>
