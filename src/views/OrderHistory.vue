@@ -67,6 +67,9 @@ export default class OrderHistory extends Vue {
   );
 
   created(): void {
+    if (this.$store.getters.getLoginStatus === false) {
+      this.$router.push("/login");
+    }
     this.$store.dispatch("asyncGetOrderHistoryInfo");
     this.currentOrderHistoryInfoList =
       this.$store.getters.getOrderHistoryInfoList;
