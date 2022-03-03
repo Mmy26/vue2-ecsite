@@ -8,6 +8,7 @@ import { Item } from "./item";
 import { Topping } from "./topping2";
 
 export class OrderItem {
+  static item: any;
   constructor(
     // id
     private _id: number,

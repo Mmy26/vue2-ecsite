@@ -79,7 +79,7 @@ export default new Vuex.Store({
 
     itemList: new Array<Item>(),
     toppings: new Array<Topping>(),
-    orderHistoryInfoList: new Array<Order>()
+    orderHistoryInfoList: new Array<Order>(),
   },
   actions: {
     /**
@@ -151,25 +151,25 @@ export default new Vuex.Store({
      * @param payload - 注文情報のペイロード
      */
     setOrderHistoryInfo(state, payload) {
-      for(const order of payload.orders){
+      for (const order of payload.orders) {
         state.orderHistoryInfoList.push(
           new Order(
-          order.id,
-          order.userId,
-          order.status,
-          order.totalPrice,
-          order.orderDate,
-          order.destinationName,
-          order.destinationEmail,
-          order.destinationZipcode,
-          order.destinationAddress,
-          order.destinationTel,
-          order.deliveryTime,
-          order.paymentMethod,
-          order.user,
-          order.orderItemList
+            order.id,
+            order.userId,
+            order.status,
+            order.totalPrice,
+            order.orderDate,
+            order.destinationName,
+            order.destinationEmail,
+            order.destinationZipcode,
+            order.destinationAddress,
+            order.destinationTel,
+            order.deliveryTime,
+            order.paymentMethod,
+            order.user,
+            order.orderItemList
           )
-        )
+        );
       }
     },
 
@@ -267,7 +267,7 @@ export default new Vuex.Store({
      * @param state - ステート
      * @returns Orderオブジェクト
      */
-     getOrderHistoryInfoList(state) {
+    getOrderHistoryInfoList(state) {
       return state.orderHistoryInfoList;
     },
   },
