@@ -157,7 +157,7 @@ export default class ItemDetail extends Vue {
   // 選択された商品のサイズ
   private selectSize = "M";
   // 選択されたトッピング
-  private selectTopping = 0;
+  private selectTopping = [];
   // 選択された商品のオーダー数量
   private selectItemQuantity = 1;
   // 画像パス
