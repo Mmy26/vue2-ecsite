@@ -72,7 +72,9 @@
           <h2 class="topic">癒しのひと時をあなたに</h2>
           <h3 class="topic">Let's enjoy tea time!</h3>
         </div>
-        <span class="btn message">ようこそ、コーヒーの世界へ</span>
+        <a href="/itemList"
+          ><span class="btn message">ようこそ、コーヒーの世界へ</span></a
+        >
       </div>
     </div>
   </div>
