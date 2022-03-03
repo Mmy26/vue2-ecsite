@@ -11,7 +11,7 @@ const routes: Array<RouteConfig> = [
   // },
   {
     path: "/top",
-    component: () => import("../views/top.vue"),
+    component: () => import("../views/Top.vue"),
   },
   {
     path: "/cartList",
