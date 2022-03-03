@@ -1,12 +1,12 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { Item } from "@/type/item";
-import { Order } from "@/type/order";
-import { User } from "@/type/user";
-import { OrderItem } from "@/type/orderItem";
+import { Item } from "@/types/item";
+import { Order } from "@/types/order";
+import { User } from "@/types/user";
+import { OrderItem } from "@/types/orderItem";
 
 import axios from "axios";
-import { Topping } from "@/type/topping2";
+import { Topping } from "@/types/topping2";
 
 Vue.use(Vuex);
 
@@ -79,6 +79,7 @@ export default new Vuex.Store({
 
     itemList: new Array<Item>(),
     toppings: new Array<Topping>(),
+    orderHistoryInfoList: new Array<Order>(),
   },
   actions: {
     /**
@@ -91,6 +92,19 @@ export default new Vuex.Store({
       );
       const payload = response.data;
       context.commit("showItemList", payload);
+    },
+    /**
+     * 注文履歴の情報を非同期通信で取得するメソッド.
+     * @param context - コンテクスト
+     */
+    async asyncGetOrderHistoryInfo(context) {
+      //一旦ダミーのIDが入っています。
+      //ダミーID 129, 134, 139, 148, 150
+      const response = await axios.get(
+        "http://153.127.48.168:8080/ecsite-api/order/orders/coffee/129"
+      );
+      const payload = response.data;
+      context.commit("setOrderHistoryInfo", payload);
     },
   },
   mutations: {
@@ -131,6 +145,33 @@ export default new Vuex.Store({
         );
       }
     },
+    /**
+     * 注文履歴情報をstateにセットするメソッド.
+     * @param state - ステイト
+     * @param payload - 注文情報のペイロード
+     */
+    setOrderHistoryInfo(state, payload) {
+      for (const order of payload.orders) {
+        state.orderHistoryInfoList.push(
+          new Order(
+            order.id,
+            order.userId,
+            order.status,
+            order.totalPrice,
+            order.orderDate,
+            order.destinationName,
+            order.destinationEmail,
+            order.destinationZipcode,
+            order.destinationAddress,
+            order.destinationTel,
+            order.deliveryTime,
+            order.paymentMethod,
+            order.user,
+            order.orderItemList
+          )
+        );
+      }
+    },
 
     // changeOrderStatus(state, payload) {
     //   // const statusList = {
@@ -157,6 +198,16 @@ export default new Vuex.Store({
 
     removeItem(state, payload) {
       state.order.orderItemList.splice(payload.itemIndex, 1);
+    },
+
+    /**
+     *商品を追加する.
+
+     * @param state - ステート
+     * @param payload - 追加する商品の情報
+     */
+    addItem(state, payload) {
+      state.order.orderItemList.push(payload);
     },
   },
 
@@ -210,6 +261,14 @@ export default new Vuex.Store({
      */
     getOrder(state) {
       return state.order;
+    },
+    /**
+     * 注文商品リストを取得する.
+     * @param state - ステート
+     * @returns Orderオブジェクト
+     */
+    getOrderHistoryInfoList(state) {
+      return state.orderHistoryInfoList;
     },
   },
 });
