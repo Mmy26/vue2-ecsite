@@ -1,9 +1,9 @@
 import { User } from "./user";
 import { OrderItem } from "./orderItem";
-import { OrderItemForm } from "./oderItemForm"
+import { OrderItemForm } from "./oderItemForm";
 /**
-*注文を表すドメインクラス.
-*/
+ *注文を表すドメインクラス.
+ */
 export class Order {
   constructor(
     //orderID
@@ -36,22 +36,46 @@ export class Order {
     private _orderItemList: Array<OrderItem>
   ) {}
   /**
-   * 注文をする際に利用するフォームリストを作成するgetter.
+   * 注文商品の小計の合計金額を計算する.
+   * @returns 注文商品の小計の合計金額
+   */
+  public get itemListSubTotalPrice(): number {
+    //注文した商品の配列の小計の合計に0.1をかける
+    let itemListTotalPrice = 0;
+    for (const orderItem of this.orderItemList) {
+      itemListTotalPrice += orderItem.calcSubTotalPrice;
+    }
+    return itemListTotalPrice;
+  } 
+  /**
+   * 消費税を計算する.
+   * @returns 消費税
+   */
+  public get tax(): number {
+    const taxPrice = this.itemListSubTotalPrice * 0.1;
+    // 小数点を切り捨てる
+    return Math.floor(taxPrice);
+  }
+  /**
+   * 合計金額を計算する.
+   * @returns 合計金額
+   */
+  public get calcTotalPrice(): number {
+    const totalPrice = this.itemListSubTotalPrice + this.tax;
+    return totalPrice;
+  }
+  /** 注文をする際に利用するフォームリストを作成するgetter.
    * @returns オーダー表の配列
    */
-  public get makeOrderFormList(): Array<OrderItemForm>{
+  public get makeOrderFormList(): Array<OrderItemForm> {
     const newArray = new Array<OrderItemForm>();
-    for( const orderItem of this.orderItemList ){
+    for (const orderItem of this.orderItemList) {
       newArray.push(
-        new OrderItemForm(
-          orderItem.id,
-          orderItem.quantity,
-          orderItem.size
-        )
-      )
+        new OrderItemForm(orderItem.id, orderItem.quantity, orderItem.size)
+      );
     }
     console.log(newArray);
-    return newArray
+    return newArray;
   }
 
   public get id(): number {

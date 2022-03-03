@@ -1,6 +1,18 @@
 <mxfile host="65bd71144e">
     <diagram id="91QkuJvfcBkw0_UWqF4J" name="1-1.ユーザー登録">
+<<<<<<< HEAD
+        <mxGraphModel dx="1977" dy="580" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
+=======
+<<<<<<< HEAD
+        <mxGraphModel dx="1487" dy="510" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
+=======
+<<<<<<< HEAD
+        <mxGraphModel dx="1783" dy="510" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
+=======
         <mxGraphModel dx="1514" dy="577" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
+>>>>>>> develop
+>>>>>>> origin/develop
+>>>>>>> develop
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -213,7 +225,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="EyuVHIVoqNiwpzXAZM63" name="1-2.ログイン">
-        <mxGraphModel dx="682" dy="510" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
+        <mxGraphModel dx="808" dy="580" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
             <root>
                 <mxCell id="iVFCtjfJq4Yx4DA4iJ7C-0"/>
                 <mxCell id="iVFCtjfJq4Yx4DA4iJ7C-1" parent="iVFCtjfJq4Yx4DA4iJ7C-0"/>
@@ -275,7 +287,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="0aJxYFS4KX39cBGj6npc" name="1-3商品一覧の表示">
-        <mxGraphModel dx="682" dy="510" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
+        <mxGraphModel dx="808" dy="580" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
             <root>
                 <mxCell id="iS40yYiM1ePwNztEy5PK-0"/>
                 <mxCell id="iS40yYiM1ePwNztEy5PK-1" parent="iS40yYiM1ePwNztEy5PK-0"/>
@@ -316,7 +328,15 @@
         </mxGraphModel>
     </diagram>
     <diagram id="dRtXGDgnn2yRGKHWtulO" name="1-4.商品詳細">
-        <mxGraphModel dx="682" dy="510" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+<<<<<<< HEAD
+        <mxGraphModel dx="808" dy="580" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+=======
+<<<<<<< HEAD
+        <mxGraphModel dx="338" dy="510" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+=======
+        <mxGraphModel dx="614" dy="510" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+>>>>>>> origin/develop
+>>>>>>> develop
             <root>
                 <mxCell id="Ia4ylGvipv_UN721ocfG-0"/>
                 <mxCell id="Ia4ylGvipv_UN721ocfG-1" parent="Ia4ylGvipv_UN721ocfG-0"/>
@@ -362,7 +382,11 @@
         </mxGraphModel>
     </diagram>
     <diagram id="o-qBqUW1IN_Z3qIHcku9" name="1-5.ショッピングカート表示">
-        <mxGraphModel dx="682" dy="510" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
+<<<<<<< HEAD
+        <mxGraphModel dx="808" dy="580" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
+=======
+        <mxGraphModel dx="318" dy="510" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
+>>>>>>> develop
             <root>
                 <mxCell id="A0n8Hgd9mK-pJu0OB5NF-0"/>
                 <mxCell id="A0n8Hgd9mK-pJu0OB5NF-1" parent="A0n8Hgd9mK-pJu0OB5NF-0"/>
@@ -427,7 +451,15 @@
         </mxGraphModel>
     </diagram>
     <diagram id="9QmRDtU-FV0Ewgq0QcqA" name="(追加）ショッピングカートの商品を追加する(正村)">
+<<<<<<< HEAD
+        <mxGraphModel dx="808" dy="580" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+=======
+<<<<<<< HEAD
+        <mxGraphModel dx="318" dy="510" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+=======
         <mxGraphModel dx="345" dy="577" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+>>>>>>> origin/develop
+>>>>>>> develop
             <root>
                 <mxCell id="pykRJnTCW9VATMXlX7vU-0"/>
                 <mxCell id="pykRJnTCW9VATMXlX7vU-1" parent="pykRJnTCW9VATMXlX7vU-0"/>
@@ -477,7 +509,11 @@
         </mxGraphModel>
     </diagram>
     <diagram id="4gTVVb1cd4JxGzCO7xcf" name="(削除)ショッピングカートの商品を削除する(正村)">
-        <mxGraphModel dx="682" dy="510" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+<<<<<<< HEAD
+        <mxGraphModel dx="808" dy="580" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+=======
+        <mxGraphModel dx="318" dy="510" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+>>>>>>> develop
             <root>
                 <mxCell id="hkWxsOch9XOiNNUkbG-H-0"/>
                 <mxCell id="hkWxsOch9XOiNNUkbG-H-1" parent="hkWxsOch9XOiNNUkbG-H-0"/>
@@ -518,7 +554,15 @@
         </mxGraphModel>
     </diagram>
     <diagram id="MCqkPE23s1_hAKQEw5z3" name="1-6.注文確認画面">
+<<<<<<< HEAD
+        <mxGraphModel dx="1658" dy="580" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+=======
+<<<<<<< HEAD
+        <mxGraphModel dx="1168" dy="510" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+=======
         <mxGraphModel dx="1195" dy="577" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+>>>>>>> origin/develop
+>>>>>>> develop
             <root>
                 <mxCell id="Los26IaRr-ENn7jv4Evg-0"/>
                 <mxCell id="Los26IaRr-ENn7jv4Evg-1" parent="Los26IaRr-ENn7jv4Evg-0"/>
@@ -560,7 +604,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="PNBRfgdaC4X4xdRB5j3b" name="1-7 注文をする">
-        <mxGraphModel grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" page="1" fold="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
+        <mxGraphModel dx="1977" dy="580" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
             <root>
                 <mxCell id="n6yIteZiZgiKs1znGPL6-0"/>
                 <mxCell id="n6yIteZiZgiKs1znGPL6-1" parent="n6yIteZiZgiKs1znGPL6-0"/>
