@@ -7,11 +7,9 @@
     <section class="section" id="photos">
       <div class="row">
         <div class="col s12 l6 offset-l1">
-          <h1>注文履歴</h1>
-          <h4 class="indigo-text text-darken-4">
-            ご注文ありがとうございました。
-          </h4>
-          <p>注文された商品の詳細は下よりご確認ください。</p>
+          <h1 class="h1">* ❁ ｡ 注文履歴ﾟ ❀ ｡ *</h1>
+          <h4 class="h4">ご注文ありがとうございました。</h4>
+          <p class="sub">注文された商品の詳細は下よりご確認ください。</p>
         </div>
         <div class="col s12 l4">
           <img
@@ -78,4 +76,28 @@ export default class OrderHistory extends Vue {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.orderFinishHistory {
+  width: 850px;
+  margin-left: auto;
+  margin-right: auto;
+  white-space: nowrap;
+  word-wrap: break-word;
+}
+
+.h1 {
+  text-align: center;
+  color: #364e96; /*文字色*/
+  padding: 0.5em 0; /*上下の余白*/
+  border-top: solid 3px #364e96; /*上線*/
+  border-bottom: solid 3px #364e96; /*下線*/
+}
+.h4 {
+  text-align: center;
+  color: #364e96;
+}
+
+.sub {
+  text-align: center;
+}
+</style>
