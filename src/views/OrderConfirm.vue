@@ -166,13 +166,14 @@
                 <input name="paymentMethod" type="radio" value="2" />
                 <span>クレジットカード</span>
               </label>
+              <CompCreditCardPayment />
             </span>
           </div>
           <div class="row order-confirm-btn">
             <button
               class="btn"
               type="button"
-              onclick="location.href='order_finished.html'"
+              v-on:click="order"
             >
               <span>この内容で注文する</span>
             </button>
@@ -183,8 +184,6 @@
       <!-- end top-wrapper -->
       <!-- Compiled and minified JavaScript -->
     </body>
-
-    <CompCreditCardPayment />
   </div>
 </template>
 
@@ -273,89 +272,89 @@ export default class OrderConfirm extends Vue {
    */
   async order(): Promise<void> {
     //入力値チェック
-    if (this.destinationName === "") {
-      this.nameErrorMessage = "名前を入力して下さい";
-      this.hasError = true;
-    }
-    const includeOrNot = (str: string): boolean => {
-      return this.destinationEmail.includes(str);
-    };
-    if (this.destinationEmail === "") {
-      this.emailErrorMessage = "メールアドレスを入力してください。";
-      this.hasError = true;
-    }
-    if (includeOrNot("@")) {
-      this.emailErrorMessage = "メールアドレスの形式が不正です。";
-      this.hasError = true;
-    }
-    const addressCheck = (): boolean => {
-      let hasAddressError = false;
-      let targetArray = new Array<string>();
-      targetArray = this.destinationZipcode.split("-");
-      if (targetArray[0].length != 3) {
-        hasAddressError = true;
-      } else if (targetArray[1].length != 4) {
-        hasAddressError = true;
-      }
-      return hasAddressError;
-    };
-    if (addressCheck()) {
-      this.hasError = true;
-      this.zipcodeErrorMessage = "郵便番号はXXX-XXXXの形式で入力してください";
-    }
-    if (this.destinationZipcode === "") {
-      this.zipcodeErrorMessage = "住所を入力してください。";
-    }
-    if (this.destinationAddress === "") {
-      this.hasError = true;
-      this.addressErrorMessage = "住所を入力してください。";
-    }
-    const telCheck = (): boolean => {
-      let hasTelError = false;
-      let targetArray = new Array<string>();
-      if (includeOrNot("-")) {
-        hasTelError = true;
-      }
-      targetArray = this.destinationTel.split("-");
-      if (targetArray[0].length != 4) {
-        hasTelError = true;
-      } else if (targetArray[1].length != 4) {
-        hasTelError = true;
-      } else if (targetArray[2].length != 4) {
-        hasTelError = true;
-      }
-      return hasTelError;
-    };
-    if (telCheck()) {
-      this.telErrorMessage = "電話番号はXXXX-XXXX-XXXXの形式で入力してください";
-      this.hasError = true;
-    }
-    if (this.destinationTel === "電話番号を入力してください。") {
-      this.telErrorMessage = "電話番号を入力してください。";
-      this.hasError = true;
-    }
-    const hoursCheck = (): boolean => {
-      let currentDate = new Date();
-      return (
-        this.deliveryTime <=
-        new Date(
-          getYear(currentDate),
-          getMonth(currentDate),
-          getDate(currentDate),
-          getHours(currentDate) + 3
-        )
-      );
-    };
-    if (hoursCheck()) {
-      this.delivelyErrorMessage = "今から3時間後の日時をご入力ください";
-      this.hasError = true;
-    }
-    if (this.deliveryTime === new Date()) {
-      this.delivelyErrorMessage = "配達日時を入力してください。";
-    }
-    if (this.hasError) {
-      return;
-    }
+    // if (this.destinationName === "") {
+    //   this.nameErrorMessage = "名前を入力して下さい";
+    //   this.hasError = true;
+    // }
+    // const includeOrNot = (str: string): boolean => {
+    //   return this.destinationEmail.includes(str);
+    // };
+    // if (this.destinationEmail === "") {
+    //   this.emailErrorMessage = "メールアドレスを入力してください。";
+    //   this.hasError = true;
+    // }
+    // if (includeOrNot("@")) {
+    //   this.emailErrorMessage = "メールアドレスの形式が不正です。";
+    //   this.hasError = true;
+    // }
+    // const addressCheck = (): boolean => {
+    //   let hasAddressError = false;
+    //   let targetArray = new Array<string>();
+    //   targetArray = this.destinationZipcode.split("-");
+    //   if (targetArray[0].length != 3) {
+    //     hasAddressError = true;
+    //   } else if (targetArray[1].length != 4) {
+    //     hasAddressError = true;
+    //   }
+    //   return hasAddressError;
+    // };
+    // if (addressCheck()) {
+    //   this.hasError = true;
+    //   this.zipcodeErrorMessage = "郵便番号はXXX-XXXXの形式で入力してください";
+    // }
+    // if (this.destinationZipcode === "") {
+    //   this.zipcodeErrorMessage = "住所を入力してください。";
+    // }
+    // if (this.destinationAddress === "") {
+    //   this.hasError = true;
+    //   this.addressErrorMessage = "住所を入力してください。";
+    // }
+    // const telCheck = (): boolean => {
+    //   let hasTelError = false;
+    //   let targetArray = new Array<string>();
+    //   if (includeOrNot("-")) {
+    //     hasTelError = true;
+    //   }
+    //   targetArray = this.destinationTel.split("-");
+    //   if (targetArray[0].length != 4) {
+    //     hasTelError = true;
+    //   } else if (targetArray[1].length != 4) {
+    //     hasTelError = true;
+    //   } else if (targetArray[2].length != 4) {
+    //     hasTelError = true;
+    //   }
+    //   return hasTelError;
+    // };
+    // if (telCheck()) {
+    //   this.telErrorMessage = "電話番号はXXXX-XXXX-XXXXの形式で入力してください";
+    //   this.hasError = true;
+    // }
+    // if (this.destinationTel === "電話番号を入力してください。") {
+    //   this.telErrorMessage = "電話番号を入力してください。";
+    //   this.hasError = true;
+    // }
+    // const hoursCheck = (): boolean => {
+    //   let currentDate = new Date();
+    //   return (
+    //     this.deliveryTime <=
+    //     new Date(
+    //       getYear(currentDate),
+    //       getMonth(currentDate),
+    //       getDate(currentDate),
+    //       getHours(currentDate) + 3
+    //     )
+    //   );
+    // };
+    // if (hoursCheck()) {
+    //   this.delivelyErrorMessage = "今から3時間後の日時をご入力ください";
+    //   this.hasError = true;
+    // }
+    // if (this.deliveryTime === new Date()) {
+    //   this.delivelyErrorMessage = "配達日時を入力してください。";
+    // }
+    // if (this.hasError) {
+    //   return;
+    // }
 
     //注文をする機能のメインの処理
     const response = await axios.post(

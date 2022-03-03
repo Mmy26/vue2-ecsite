@@ -1,11 +1,12 @@
 <template>
   <div>
     <stripe-element-card
+      class="card-form"
       ref="elementRef"
       :pk="publishableKey"
       @token="tokenCreated"
     />
-    <button @click="submit">Generate token</button>
+    <button @click="submit">クレジットカードが利用できるか確認する。</button>
   </div>
 </template>
 
@@ -38,3 +39,8 @@ export default {
   }
 };
 </script>
+<style scoped>
+.card-form{
+  width: 600px;
+}
+</style>
