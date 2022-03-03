@@ -163,18 +163,19 @@
                 <input
                   name="paymentMethod"
                   type="radio"
-                  value="1"
+                  v-bind:value="1"
                   v-model.number="paymentMethod"
+                  v-on:change="changeFrag"
                 />
                 <span>代金引換</span>
               </label>
               <label class="order-confirm-payment-method-radio">
-                <input name="paymentMethod" type="radio" value="2" />
+                <input name="paymentMethod" type="radio" v-bind:value="2" v-model.number="paymentMethod" v-on:change="changeFrag" />
                 <span>クレジットカード</span>
               </label>
             </span>
           </div>
-          <div class="credit-card-field">
+          <div class="credit-card-field" v-show="canShow">
             <CompCreditCardPayment />
           </div>
           <div class="row order-confirm-btn">
@@ -277,6 +278,8 @@ export default class OrderConfirm extends Vue {
   private telErrorMessage = "";
   //配達日時入力フォームのエラーメッセージ
   private delivelyErrorMessage = "";
+  //クレジットカード入力フォームのFrag
+  private canShow = false;
 
   /**
    * ショッピングカート一覧を表示させる.
@@ -426,6 +429,13 @@ export default class OrderConfirm extends Vue {
     });
 
     this.destinationAddress = response.data.items[0].address;
+  }
+
+  /**
+   * canShowフラグを切り替える.
+   */
+  changeFrag(): void{
+      this.canShow = !this.canShow
   }
 }
 </script>
