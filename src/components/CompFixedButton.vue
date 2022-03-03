@@ -3,7 +3,7 @@
     <div class="fixed-action-btn">
       <router-link
         to="/faq"
-        class="waves-effect waves-light btn modal-trigger blue darken-3"
+        class="waves-effect waves-light btn-floating btn-large blue darken-3"
         ><i class="large material-icons">chat</i></router-link
       >
       <ul>
@@ -20,7 +20,4 @@ export default class CompFixedButton extends Vue {}
 </script>
 
 <style scoped>
-.modal-content {
-  text-align: center;
-}
 </style>

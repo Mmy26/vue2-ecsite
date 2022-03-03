@@ -47,7 +47,13 @@
             list="data-list"
           />
           <datalist id="data-list">
-            <option  v-for="item of this.$store.getters.getItemList" v-bind:key="item.id" v-bind:value="item.name">{{ item.name }}</option>
+            <option
+              v-for="item of this.$store.getters.getItemList"
+              v-bind:key="item.id"
+              v-bind:value="item.name"
+            >
+              {{ item.name }}
+            </option>
           </datalist>
           <button
             class="btn search-btn"
@@ -86,7 +92,7 @@
         </div>
       </div>
     </div>
-    <ul class="pagination ">
+    <ul class="pagination">
       <span v-if="currentPageNum === 1">
         <li class="disabled">
           <router-link to="/itemList">
@@ -374,7 +380,7 @@ export default class ItemList extends Vue {
 .error-message {
   color: red;
 }
-.pagination{
+.pagination {
   text-align: center;
 }
 </style>
