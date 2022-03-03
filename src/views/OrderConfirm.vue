@@ -190,16 +190,16 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import CompCreditCardPayment from "@/components/CompCreditCardPayment.vue";
-import { User } from "@/type/user";
-import { OrderItem } from "@/type/orderItem";
-import { Order } from "@/type/order";
+import { User } from "@/types/user";
+import { OrderItem } from "@/types/orderItem";
+import { Order } from "@/types/order";
 import axios from "axios";
 import { getHours } from "date-fns";
 import { getYear } from "date-fns";
 import { getMonth } from "date-fns";
 import { getDate } from "date-fns";
-import { Item } from "@/type/item";
-import { Topping } from "@/type/topping2";
+import { Item } from "@/types/item";
+import { Topping } from "@/types/topping2";
 import { getMinutes } from "date-fns/esm";
 
 @Component({
@@ -405,6 +405,9 @@ export default class OrderConfirm extends Vue {
    * ショッピングカート一覧を表示させる.
    */
   created(): void {
+    if (this.$store.getters.getLoginStatus === false) {
+      this.$router.push("/login");
+    }
     this.currentOrder = new Order(
       0,
       0,

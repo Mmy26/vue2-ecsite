@@ -1,25 +1,25 @@
 <template>
-  <div>
+  <div class="pageFmt">
     <div class="firstError">
       <br />
       <br />
       <br />
-      <h1>404エラー</h1>
-      <h2>お探しのページは見つかりませんでした</h2>
+      <h1 class="h1">404エラー</h1>
+      <h4>お探しのページは見つかりませんでした</h4>
     </div>
-    <h4>お探しのページは</h4>
-    <div class="secondError">
+    <h5>
+      お探しのページは
       <ul>
         <li>すでに削除されている・公開期間が終わっている</li>
         <li>アクセスしたアドレスが異なっている</li>
       </ul>
-    </div>
-    <h4>などの理由で見つかりませんでした。</h4>
-    <div class="bg" />
+      などの理由で見つかりませんでした。
+    </h5>
+
+    <img src="/img/error404.jpg" width="20%" height="20%" />
     <div>
       <p>後者の場合</p>
       <ul>
-        <li>本ページにある検索フォームにキーワードを入力して検索する</li>
         <li><a href="/itemList">商品一覧</a>から商品を探す</li>
         <li><a href="/registerUser">会員登録</a>から改めてリンクをたどる</li>
       </ul>
@@ -47,7 +47,24 @@ export default class XXXComponent extends Vue {}
 .firstError {
   color: red;
 }
-.secondError {
-  color: orange;
+
+.pageFmt {
+  text-align: center;
+}
+
+.h1 {
+  position: relative;
+  padding: 1rem 2rem calc(1rem + 10px);
+  background: #fff100;
+}
+
+.h1:before {
+  position: absolute;
+  top: -7px;
+  left: -7px;
+  width: 100%;
+  height: 100%;
+  content: "";
+  border: 4px solid #000;
 }
 </style>
