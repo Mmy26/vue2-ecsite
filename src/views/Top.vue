@@ -44,7 +44,7 @@
           </div>
           <div class="top-item">
             <div class="top-item-icon">
-              <img src="../../public/img_coffee/point3.jpg" />
+              <div class="point3"><img src="../../public/img_coffee/point3.jpg" /></div>
             </div>
             <p class="text-contents">
               ハワイといえばビーチでマイタイ！コナブリューイングのハワイアンコナビールなどハワイでしか飲めないアルコールも豊富にあります。
@@ -64,8 +64,8 @@
 
     <div class="message-wrapper">
       <div class="container">
-        <div class="heading">
-          <h2>さぁ、今すぐALOHAの旅に出よう！</h2>
+        <div class="heading-message">
+          <h2>さぁ、癒しのひと時をあなたに</h2>
           <h3>Let's go on an Aloha trip!</h3>
         </div>
         <span class="btn message">ALOHAの旅に出る！</span>
