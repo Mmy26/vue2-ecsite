@@ -43,9 +43,12 @@
             type="text"
             name="name"
             class="search-name-input"
-            v-on:change="makeSuggestArray()"
             v-model="serchText"
+            list="data-list"
           />
+          <datalist id="data-list">
+            <option  v-for="item of this.$store.getters.getItemList" v-bind:key="item.id" v-bind:value="item.name">{{ item.name }}</option>
+          </datalist>
           <button
             class="btn search-btn"
             type="button"
@@ -53,17 +56,6 @@
           >
             <span>検 索</span>
           </button>
-          <div>
-            <ul class="collection">
-              <li
-                class="collection-item"
-                v-for="(name, index) of makeSuggestArray"
-                v-bind:key="index"
-              >
-                {{ name }}
-              </li>
-            </ul>
-          </div>
           <div class="error-message">{{ errorMesage }}</div>
         </form>
       </div>
@@ -302,6 +294,8 @@ export default class ItemList extends Vue {
         this.currentItemList.push(item);
       }
     }
+    this.drinkList = "";
+    this.foodList = "";
   }
 
   /**
