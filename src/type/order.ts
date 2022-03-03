@@ -1,6 +1,6 @@
 import { User } from "./user";
 import { OrderItem } from "./orderItem";
-import { OrderItemForm } from "./oderItemForm";
+import { OrderItemForm } from "./orderItemForm";
 /**
  *注文を表すドメインクラス.
  */
