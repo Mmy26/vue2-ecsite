@@ -183,11 +183,14 @@
       <!-- end top-wrapper -->
       <!-- Compiled and minified JavaScript -->
     </body>
+
+    <CompCreditCardPayment />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import CompCreditCardPayment from "@/components/CompCreditCardPayment.vue";
 import { User } from "@/type/user";
 import { OrderItem } from "@/type/orderItem";
 import { Order } from "@/type/order";
@@ -199,7 +202,11 @@ import { getDate } from "date-fns";
 import { Item } from "@/type/item";
 import { Topping } from "@/type/topping2";
 
-@Component
+@Component({
+  components: {
+    CompCreditCardPayment,
+  },
+})
 export default class OrderConfirm extends Vue {
   //現在の注文
   private currentOrder = new Order(
