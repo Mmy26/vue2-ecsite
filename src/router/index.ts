@@ -35,6 +35,10 @@ const routes: Array<RouteConfig> = [
     component: () => import("../views/Login.vue"),
   },
   {
+    path: "/orderConfirm",
+    component: () => import("../views/OrderConfirm.vue"),
+  },
+  {
     path: "/faq",
     component: () => import("../views/Faq.vue"),
   },

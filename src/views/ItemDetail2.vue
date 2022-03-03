@@ -3,7 +3,7 @@
     <div class="top-wrapper">
       <div class="container">
         <h1 class="page-title">
-          {{ selectItem.name }}
+          {{ selectItem._name }}
         </h1>
         <div class="row">
           <div class="row item-detail">
@@ -56,6 +56,7 @@
                 <span>&nbsp;Ｍ&nbsp;</span>&nbsp;&nbsp;200円(税抜)
                 <span>&nbsp;Ｌ</span>&nbsp;&nbsp;300円(税抜)
               </div>
+
               <span
                 v-for="topping of selectItem.toppingList"
                 v-bind:key="topping.id"
@@ -201,6 +202,8 @@ export default class ItemDetail extends Vue {
       `http://153.127.48.168:8080/ecsite-api/item/toppings/coffee`
     );
 
+    console.dir("①response:" + JSON.stringify(this.selectItem));
+
     const displayToppingList = new Array<Topping>();
 
     for (const topping of responseTopping.data.toppings) {
@@ -214,6 +217,7 @@ export default class ItemDetail extends Vue {
         )
       );
       this.selectItem.toppingList = displayToppingList;
+      this.selectItemImage = `${this.selectItem.imagePath}`;
     }
 
     this.selectItemImage = `${this.selectItem.imagePath}`;

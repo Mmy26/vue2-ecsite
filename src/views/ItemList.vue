@@ -94,7 +94,7 @@
         </div>
       </div>
     </div>
-    <ul class="pagination ">
+    <ul class="pagination">
       <span v-if="currentPageNum === 1">
         <li class="disabled">
           <router-link to="/itemList">
@@ -380,7 +380,7 @@ export default class ItemList extends Vue {
 .error-message {
   color: red;
 }
-.pagination{
+.pagination {
   text-align: center;
 }
 </style>
