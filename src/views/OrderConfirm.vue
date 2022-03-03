@@ -86,7 +86,7 @@
               <div class="input-field">
                 <input id="zipcode" type="text" maxlength="8" v-model="destinationZipcode"/>
                 <label for="zipcode">郵便番号</label>
-                <button class="btn" type="button">
+                <button class="btn" type="button" v-on:click="getAddress">
                   <span>住所検索</span>
                 </button>
               </div>
@@ -174,7 +174,9 @@
               </label>
             </span>
           </div>
-         <CompCreditCardPayment />
+          <div class="credit-card-field">
+            <CompCreditCardPayment />
+          </div>
           <div class="row order-confirm-btn">
             <button
               class="btn"
@@ -207,8 +209,6 @@ import { getMonth } from "date-fns";
 import { getDate } from "date-fns";
 import { format } from "date-fns";
 import { Item } from "@/types/item";
-import { Topping } from "@/types/topping2";
-import { getMinutes, getSeconds } from "date-fns/esm";
 
 @Component({
   components: {
@@ -409,11 +409,35 @@ export default class OrderConfirm extends Vue {
   get getTax(): number {
     return this.$store.getters.tax;
   }
+
+  /**
+   * 住所情報をAPIから取得する.
+   *
+   * @returns Promiseオブジェクト
+   */
+  async getAddress(): Promise<void> {
+    require("axios");
+
+    const response = await axios.get("https://zipcoda.net/api", {
+      adapter: require("axios-jsonp"),
+      params: {
+        zipcode: this.destinationZipcode.replace("-", ""),
+      },
+    });
+
+    this.destinationAddress = response.data.items[0].address;
+  }
 }
 </script>
 
 <style scoped>
 .error-message{
   color: red;
+}
+.credit-card-field{
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  margin: 30px auto;
 }
 </style>

@@ -6,7 +6,7 @@
       :pk="publishableKey"
       @token="tokenCreated"
     />
-    <button class="btn" v-on:click="submit">クレジットカードが利用できるか確認する。</button>
+    <button class="btn" v-on:click="submit" style="margin:10px;">クレジットカードが利用できるか確認する。</button>
     <div>{{ statusMessage }}</div>
   </div>
 </template>

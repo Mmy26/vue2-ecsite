@@ -101,8 +101,9 @@ export default new Vuex.Store({
     async asyncGetOrderHistoryInfo(context) {
       //一旦ダミーのIDが入っています。
       //ダミーID 129, 134, 139, 148, 150
+      // 下のid部分をthis.state.currentUser.idにする
       const response = await axios.get(
-        "http://153.127.48.168:8080/ecsite-api/order/orders/coffee/129"
+        "http://153.127.48.168:8080/ecsite-api/order/orders/coffee/129" 
       );
       const payload = response.data;
       context.commit("setOrderHistoryInfo", payload);
