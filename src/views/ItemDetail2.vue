@@ -3,7 +3,7 @@
     <div class="top-wrapper">
       <div class="container">
         <h1 class="page-title">
-          {{ selectItem.name }}
+          {{ selectItem._name }}
         </h1>
         <div class="row">
           <div class="row item-detail">
@@ -21,12 +21,11 @@
               <label>
                 <input
                   id="size-m"
-                  name="size"
+                  name="sizeM"
                   type="radio"
                   value="M"
                   v-model="selectSize"
                   v-on:change="calcSubTotalPrice"
-                  checked="checked"
                 />
                 <span>
                   &nbsp;<span class="price">Ｍ</span
@@ -36,12 +35,12 @@
               <label>
                 <input
                   id="size-l"
-                  name="size"
+                  name="sizeL"
                   value="L"
                   v-model="selectSize"
                   v-on:change="calcSubTotalPrice"
                   type="radio"
-                />
+                />&nbsp;&nbsp;
                 <span>
                   &nbsp;<span class="price">Ｌ</span
                   >{{ selectItem.priceL }}円(税抜)</span
@@ -57,20 +56,21 @@
                 <span>&nbsp;Ｍ&nbsp;</span>&nbsp;&nbsp;200円(税抜)
                 <span>&nbsp;Ｌ</span>&nbsp;&nbsp;300円(税抜)
               </div>
-              <div
+
+              <span
                 v-for="topping of selectItem.toppingList"
                 v-bind:key="topping.id"
               >
-                <label>
+                <label class="item-topping">
                   <input
                     type="checkbox"
-                    v-on:change="calcSubTotalPrice"
-                    v-bind:value="selectTopping"
+                    v-bind:value="topping.id"
                     v-model="selectTopping"
+                    v-on:change="calcSubTotalPrice"
                   />
-                  <span>{{ topping.name }}</span></label
-                >
-              </div>
+                  <span>{{ topping.name }}</span>
+                </label>
+              </span>
             </div>
           </label>
 
@@ -82,6 +82,7 @@
                   class="browser-default"
                   v-on:change="calcSubTotalPrice"
                   v-model="selectItemQuantity"
+                  style="text-align: -webkit-center"
                 >
                   <option value="" disabled>選択して下さい</option>
                   <option value="1" selected>1</option>
@@ -101,7 +102,9 @@
             </div>
           </div>
           <div class="row item-total-price">
-            <span>この商品金額： {{ subTotalPrice }}円(税抜)</span>
+            <span
+              >この商品金額： {{ subTotalPrice.toLocaleString() }}円(税抜)</span
+            >
           </div>
           <div class="row item-cart-btn">
             <button class="btn" type="button" v-on:click="addToCart">
@@ -110,8 +113,9 @@
           </div>
         </div>
       </div>
+
+      <!-- end container -->
     </div>
-    <!-- end container -->
   </div>
   <!-- end top-wrapper -->
   <!-- Compiled and minified JavaScript -->
@@ -154,9 +158,9 @@ export default class ItemDetail extends Vue {
     new Array<Topping>()
   );
   // 選択された商品のサイズ
-  private selectSize = "";
+  private selectSize = "M";
   // 選択されたトッピング
-  private selectTopping = 0;
+  private selectTopping = [];
   // 選択された商品のオーダー数量
   private selectItemQuantity = 1;
   // 画像パス
@@ -200,6 +204,8 @@ export default class ItemDetail extends Vue {
       `http://153.127.48.168:8080/ecsite-api/item/toppings/coffee`
     );
 
+    console.dir("①response:" + JSON.stringify(this.selectItem));
+
     const displayToppingList = new Array<Topping>();
 
     for (const topping of responseTopping.data.toppings) {
@@ -213,6 +219,7 @@ export default class ItemDetail extends Vue {
         )
       );
       this.selectItem.toppingList = displayToppingList;
+      this.selectItemImage = `${this.selectItem.imagePath}`;
     }
 
     this.selectItemImage = `${this.selectItem.imagePath}`;
@@ -222,66 +229,81 @@ export default class ItemDetail extends Vue {
    * 選択された商品の小計を求める
    * @returns -数量、サイズ、トッピングの合計金額
    */
+
   private subTotalPrice = 0;
   calcSubTotalPrice(): number {
     if (this.selectSize === "M") {
       let sizePrice = 0;
-      let toppingPrice = 0;
       sizePrice = this.selectItem.priceM;
-      toppingPrice = 200 * this.selectTopping;
-      this.subTotalPrice = (sizePrice + toppingPrice) * this.selectItemQuantity;
-    } else {
+      if (this.selectTopping.length === 0) {
+        this.subTotalPrice = sizePrice * this.selectItemQuantity;
+      } else if (this.selectTopping.length >= 1) {
+        let toppingAmount = 0;
+        toppingAmount = this.selectTopping.length * 200;
+        this.subTotalPrice =
+          (sizePrice + toppingAmount) * this.selectItemQuantity;
+      }
+    } else if (this.selectSize === "L") {
       let sizePrice = 0;
-      let toppingPrice = 0;
       sizePrice = this.selectItem.priceL;
-      toppingPrice = 300 * this.selectTopping;
-      this.subTotalPrice = (sizePrice + toppingPrice) * this.selectItemQuantity;
+      if (this.selectTopping.length === 0) {
+        this.subTotalPrice = sizePrice * this.selectItemQuantity;
+      } else if (this.selectTopping.length >= 1) {
+        let toppingAmount = 0;
+        toppingAmount = this.selectTopping.length * 300;
+        this.subTotalPrice =
+          (sizePrice + toppingAmount) * this.selectItemQuantity;
+      }
     }
     return this.subTotalPrice;
   }
 
   /** 商品をカートに入れる.
    */
-  // addToCart(): void {
-  //   const orderItem = new OrderItem(
-  //     0,
-  //     this.selectItem.id,
-  //     1,
-  //     this.selectItemQuantity,
-  //     this.selectSize,
-  //     new Item(
-  //       this.selectItem.id,
-  //       this.selectItem.type,
-  //       this.selectItem.name,
-  //       this.selectItem.discription,
-  //       this.selectItem.priceM,
-  //       this.selectItem.priceL,
-  //       this.selectItem.imagePath,
-  //       this.selectItem.deleted,
-  //       this.selectItem.toppingList
-  //     ),
-  //     this.selectToppingList(this.selectTopping)
-  //   );
-  //   this.$store.commit("addItem", orderItem);
-  //   //注文確認画面に遷移する
-  //   this.$router.push("/cartList");
-  // }
+  addToCart(): void {
+    const orderItem = new OrderItem(
+      0,
+      this.selectItem.id,
+      1,
+      this.selectItemQuantity,
+      this.selectSize,
+      new Item(
+        this.selectItem.id,
+        this.selectItem.type,
+        this.selectItem.name,
+        this.selectItem.discription,
+        this.selectItem.priceM,
+        this.selectItem.priceL,
+        this.selectItem.imagePath,
+        this.selectItem.deleted,
+        this.selectItem.toppingList
+      ),
+      this.selectToppingList(this.selectTopping)
+    );
+    this.$store.commit("addItem", orderItem);
+    //注文確認画面に遷移する
+    this.$router.push("/cartList");
+  }
 
-  // selectToppingList(selectToppingIdList: Array<number>): Array<orderTopping> {
-  //   const selectOrderToppingList = new Array<orderTopping>();
+  selectToppingList(selectToppingIdList: Array<number>): Array<orderTopping> {
+    const selectOrderToppingList = new Array<orderTopping>();
 
-  //   for (let toppingId of selectToppingIdList) {
-  //     const topping = this.selectItem.toppingList.find((topping) => {
-  //       return topping.id === toppingId;
-  //     });
-  //     if (topping !== undefined) {
-  //       const aOrderTopping = new orderTopping(0, toppingId, 0, topping);
-  //       selectOrderToppingList.push(aOrderTopping);
-  //     }
-  //   }
-  //   return selectOrderToppingList;
-  // }
+    for (let toppingId of selectToppingIdList) {
+      const topping = this.selectItem.toppingList.find((topping) => {
+        return topping.id === toppingId;
+      });
+      if (topping !== undefined) {
+        const aOrderTopping = new orderTopping(0, toppingId, 0, topping);
+        selectOrderToppingList.push(aOrderTopping);
+      }
+    }
+    return selectOrderToppingList;
+  }
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.item-toppings {
+  display: inline-block;
+}
+</style>

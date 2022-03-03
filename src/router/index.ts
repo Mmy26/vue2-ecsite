@@ -1,6 +1,5 @@
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
-import Home from "../views/Home.vue";
 
 Vue.use(VueRouter);
 
@@ -36,12 +35,25 @@ const routes: Array<RouteConfig> = [
     component: () => import("../views/Login.vue"),
   },
   {
+    path: "/orderConfirm",
+    component: () => import("../views/OrderConfirm.vue"),
+  },
+  {
     path: "/faq",
     component: () => import("../views/Faq.vue"),
   },
   {
     path: "/orderFinished",
     component: () => import("../views/OrderFinished.vue"),
+  },
+  {
+    path: "/error",
+    component: () => import("../views/Error.vue"),
+  },
+  {
+    path: "*",
+    name: "NotFoundError",
+    component: () => import("../views/Error.vue"),
   },
 ];
 
