@@ -19,10 +19,12 @@
             <router-link to="/cartList"
               ><i class="fas fa-shopping-cart"></i>カート</router-link
             >
-            <router-link to="/login" class="login">
+            <router-link to="/login" v-if="!isLogin">
               <i class="fas fa-sign-in-alt"></i>ログイン
             </router-link>
-
+            <router-link to="/logout" v-if="isLogin">
+              <i class="fas fa-sign-in-alt"></i>ログアウト
+            </router-link>
             <router-link to="">注文履歴</router-link>
           </div>
         </div>
@@ -37,6 +39,9 @@ import { Component, Vue } from "vue-property-decorator";
 export default class XXXComponent extends Vue {
   toTopPage(): void {
     this.$router.push("/itemList");
+  }
+  get isLogin(): boolean {
+    return this.$store.getters.getLoginStatus;
   }
 }
 </script>
