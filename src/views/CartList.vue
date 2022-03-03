@@ -47,7 +47,7 @@
                   </td>
                   <td>
                     <div class="text-center">
-                      {{ orderItem.calcSubTotalPrice }}円
+                      {{ orderItem.calcSubTotalPrice.toLocaleString() }}円
                     </div>
                   </td>
                   <td>
@@ -61,9 +61,11 @@
           </div>
           <div class="row cart-total-price">
             <!-- this.currentOrder.taxだとエラーが出る -->
-            <div>消費税：{{ this.currentOrder.tax }}円</div>
+            <div>消費税：{{ this.currentOrder.tax.toLocaleString() }}円</div>
             <div>
-              ご注文金額合計：{{ this.currentOrder.calcTotalPrice }}円 (税込)
+              ご注文金額合計：{{
+                this.currentOrder.calcTotalPrice.toLocaleString()
+              }}円 (税込)
             </div>
           </div>
           <div class="row order-confirm-btn">
@@ -198,8 +200,12 @@ export default class XXXComponent extends Vue {
    * 注文に進む.
    */
   onOrderClick(): void {
-    //注文確認画面に遷移する
-    this.$router.push("/orderConfirm");
+    if (this.$store.getters.getLoginStatus === false) {
+      this.$router.push("/login");
+    } else {
+      //注文確認画面に遷移する
+      this.$router.push("/orderConfirm");
+    }
   }
 
   /**
