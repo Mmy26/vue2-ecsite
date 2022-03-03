@@ -25,7 +25,7 @@
             <router-link to="/logout" v-if="isLogin">
               <i class="fas fa-sign-in-alt"></i>ログアウト
             </router-link>
-            <router-link to="">注文履歴</router-link>
+            <router-link to="/orderHistory">注文履歴</router-link>
           </div>
         </div>
       </div>
