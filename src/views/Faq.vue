@@ -45,9 +45,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 @Component
-export default class Faq extends Vue {
-
-}
+export default class Faq extends Vue {}
 </script>
 
 <style scoped>

@@ -276,6 +276,7 @@ export default class OrderConfirm extends Vue {
    */
   created(): void {
     this.currentOrder = this.$store.getters.getOrder;
+    console.log(location.pathname);
   }
   /**
    * 注文ボタンが押下されたときのメソッド.
@@ -283,89 +284,89 @@ export default class OrderConfirm extends Vue {
    */
   async order(): Promise<void> {
     //入力値チェック
-    // if (this.destinationName === "") {
-    //   this.nameErrorMessage = "名前を入力して下さい";
-    //   this.hasError = true;
-    // }
-    // const includeOrNot = (str: string): boolean => {
-    //   return this.destinationEmail.includes(str);
-    // };
-    // if (this.destinationEmail === "") {
-    //   this.emailErrorMessage = "メールアドレスを入力してください。";
-    //   this.hasError = true;
-    // }
-    // if (includeOrNot("@")) {
-    //   this.emailErrorMessage = "メールアドレスの形式が不正です。";
-    //   this.hasError = true;
-    // }
-    // const addressCheck = (): boolean => {
-    //   let hasAddressError = false;
-    //   let targetArray = new Array<string>();
-    //   targetArray = this.destinationZipcode.split("-");
-    //   if (targetArray[0].length != 3) {
-    //     hasAddressError = true;
-    //   } else if (targetArray[1].length != 4) {
-    //     hasAddressError = true;
-    //   }
-    //   return hasAddressError;
-    // };
-    // if (addressCheck()) {
-    //   this.hasError = true;
-    //   this.zipcodeErrorMessage = "郵便番号はXXX-XXXXの形式で入力してください";
-    // }
-    // if (this.destinationZipcode === "") {
-    //   this.zipcodeErrorMessage = "住所を入力してください。";
-    // }
-    // if (this.destinationAddress === "") {
-    //   this.hasError = true;
-    //   this.addressErrorMessage = "住所を入力してください。";
-    // }
-    // const telCheck = (): boolean => {
-    //   let hasTelError = false;
-    //   let targetArray = new Array<string>();
-    //   if (includeOrNot("-")) {
-    //     hasTelError = true;
-    //   }
-    //   targetArray = this.destinationTel.split("-");
-    //   if (targetArray[0].length != 4) {
-    //     hasTelError = true;
-    //   } else if (targetArray[1].length != 4) {
-    //     hasTelError = true;
-    //   } else if (targetArray[2].length != 4) {
-    //     hasTelError = true;
-    //   }
-    //   return hasTelError;
-    // };
-    // if (telCheck()) {
-    //   this.telErrorMessage = "電話番号はXXXX-XXXX-XXXXの形式で入力してください";
-    //   this.hasError = true;
-    // }
-    // if (this.destinationTel === "電話番号を入力してください。") {
-    //   this.telErrorMessage = "電話番号を入力してください。";
-    //   this.hasError = true;
-    // }
-    // const hoursCheck = (): boolean => {
-    //   let currentDate = new Date();
-    //   return (
-    //     this.deliveryDate <=
-    //     new Date(
-    //       getYear(currentDate),
-    //       getMonth(currentDate),
-    //       getDate(currentDate),
-    //       getHours(currentDate) + 3
-    //     )
-    //   );
-    // };
-    // if (hoursCheck()) {
-    //   this.delivelyErrorMessage = "今から3時間後の日時をご入力ください";
-    //   this.hasError = true;
-    // }
-    // if (this.deliveryDate === new Date()) {
-    //   this.delivelyErrorMessage = "配達日時を入力してください。";
-    // }
-    // if (this.hasError) {
-    //   return;
-    // }
+    if (this.destinationName === "") {
+      this.nameErrorMessage = "名前を入力して下さい";
+      this.hasError = true;
+    }
+    const includeOrNot = (str: string): boolean => {
+      return this.destinationEmail.includes(str);
+    };
+    if (this.destinationEmail === "") {
+      this.emailErrorMessage = "メールアドレスを入力してください。";
+      this.hasError = true;
+    }
+    if (includeOrNot("@")) {
+      this.emailErrorMessage = "メールアドレスの形式が不正です。";
+      this.hasError = true;
+    }
+    const addressCheck = (): boolean => {
+      let hasAddressError = false;
+      let targetArray = new Array<string>();
+      targetArray = this.destinationZipcode.split("-");
+      if (targetArray[0].length != 3) {
+        hasAddressError = true;
+      } else if (targetArray[1].length != 4) {
+        hasAddressError = true;
+      }
+      return hasAddressError;
+    };
+    if (addressCheck()) {
+      this.hasError = true;
+      this.zipcodeErrorMessage = "郵便番号はXXX-XXXXの形式で入力してください";
+    }
+    if (this.destinationZipcode === "") {
+      this.zipcodeErrorMessage = "住所を入力してください。";
+    }
+    if (this.destinationAddress === "") {
+      this.hasError = true;
+      this.addressErrorMessage = "住所を入力してください。";
+    }
+    const telCheck = (): boolean => {
+      let hasTelError = false;
+      let targetArray = new Array<string>();
+      if (includeOrNot("-")) {
+        hasTelError = true;
+      }
+      targetArray = this.destinationTel.split("-");
+      if (targetArray[0].length != 4) {
+        hasTelError = true;
+      } else if (targetArray[1].length != 4) {
+        hasTelError = true;
+      } else if (targetArray[2].length != 4) {
+        hasTelError = true;
+      }
+      return hasTelError;
+    };
+    if (telCheck()) {
+      this.telErrorMessage = "電話番号はXXXX-XXXX-XXXXの形式で入力してください";
+      this.hasError = true;
+    }
+    if (this.destinationTel === "電話番号を入力してください。") {
+      this.telErrorMessage = "電話番号を入力してください。";
+      this.hasError = true;
+    }
+    const hoursCheck = (): boolean => {
+      let currentDate = new Date();
+      return (
+        this.deliveryDate <=
+        new Date(
+          getYear(currentDate),
+          getMonth(currentDate),
+          getDate(currentDate),
+          getHours(currentDate) + 3
+        )
+      );
+    };
+    if (hoursCheck()) {
+      this.delivelyErrorMessage = "今から3時間後の日時をご入力ください";
+      this.hasError = true;
+    }
+    if (this.deliveryDate === new Date()) {
+      this.delivelyErrorMessage = "配達日時を入力してください。";
+    }
+    if (this.hasError) {
+      return;
+    }
     //注文をする機能のメインの処理
     const response = await axios.post(
       "http://153.127.48.168:8080/ecsite-api/order",
@@ -383,36 +384,8 @@ export default class OrderConfirm extends Vue {
         orderItemFormList: this.currentOrder.makeOrderFormList,
       }
     );
-    console.dir("response:" + JSON.stringify(response));
-    console.log(this.currentOrder);
-    console.log('  1   ' + this.currentOrder.user.id)
-    console.log('  2   ' + this.currentOrder.status)
-    console.log('  3   ' + this.currentOrder.totalPrice)
-    console.log('  4   ' + this.destinationName)
-    console.log('  5   ' + this.destinationZipcode)
-    console.log('  6   ' + this.destinationAddress)
-    console.log('  7   ' + this.destinationTel)
-    console.log('  8   ' + format(this.deliveryDate, "yyyy/MM/dd HH:mm:ss"))
-    console.log('  9   ' + this.paymentMethod)
-    console.log('  10   ',this.currentOrder.makeOrderFormList);
 
     if (response.data.status === "success") {
-      // if (this.paymentMethod === 2) {
-      //   this.$store.commit("changeOrderStatus", {
-      //     status: 2,
-      //   });
-      // } else {
-      //   this.$store.commit("changeOrderStatus", {
-      //     status: 1,
-      //   });
-      // }
-      // this.$store.commit("updateOrder", {
-      //   destinationName: this.destinationName,
-      //   destinationEmail: this.destinationEmail,
-      //   destinationZipcode: this.destinationZipcode,
-      //   destinationAddress: this.destinationAddress,
-      //   destinationTel: this.destinationTel,
-      // });
       this.$router.push("/orderFinished");
     } else {
       // 失敗ならエラーメッセージを表示する
