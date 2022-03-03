@@ -3,11 +3,12 @@
  * @remarks
  * 注文商品情報を表します。
  */
-import { orderTopping } from "./OrderTopping";
+import { orderTopping } from "./orderTopping";
 import { Item } from "./item";
 import { Topping } from "./topping2";
 
 export class OrderItem {
+  static item: any;
   constructor(
     // id
     private _id: number,

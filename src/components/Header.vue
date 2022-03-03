@@ -4,8 +4,11 @@
       <div class="container">
         <div class="header">
           <div class="header-left">
-            <a href="top.html">
-              <img class="logo" src="img_coffee/header_logo.png" />
+            <a href="/top">
+              <img
+                class="logo"
+                src="img_coffee/header_logo.png"
+              />
             </a>
           </div>
 
@@ -15,11 +18,13 @@
             <router-link to="/cartList"
               ><i class="fas fa-shopping-cart"></i>カート</router-link
             >
-            <router-link to="/login" class="login">
+            <router-link to="/login" v-if="!isLogin">
               <i class="fas fa-sign-in-alt"></i>ログイン
             </router-link>
-
-            <router-link to="">注文履歴</router-link>
+            <router-link to="/logout" v-if="isLogin">
+              <i class="fas fa-sign-in-alt"></i>ログアウト
+            </router-link>
+            <router-link to="/orderHistory">注文履歴</router-link>
           </div>
         </div>
       </div>
@@ -30,7 +35,11 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 @Component
-export default class XXXComponent extends Vue {}
+export default class XXXComponent extends Vue {
+  get isLogin(): boolean {
+    return this.$store.getters.getLoginStatus;
+  }
+}
 </script>
 
 <style scoped>
