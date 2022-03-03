@@ -10,6 +10,10 @@ const routes: Array<RouteConfig> = [
   //   component: Home,
   // },
   {
+    path: "/top",
+    component: () => import("../views/Top.vue"),
+  },
+  {
     path: "/cartList",
     component: () => import("../views/CartList.vue"),
   },
