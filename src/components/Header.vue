@@ -33,7 +33,9 @@
 import { Component, Vue } from "vue-property-decorator";
 @Component
 export default class XXXComponent extends Vue {
-   get isLogin(): boolean {
+  get isLogin(): boolean {
+    console.log(this.$store.getters.getLoginStatus);
+
     return this.$store.getters.getLoginStatus;
   }
 }
