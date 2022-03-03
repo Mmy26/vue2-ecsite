@@ -60,14 +60,7 @@ const routes: Array<RouteConfig> = [
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes: [
-    {
-      path: "/user/:id(\\d+)",
-      component: () => import("../views/Error.vue"),
-      props: (route) => ({ userId: route.params.userId }),
-    },
-    { path: "/*", component: () => import("../views/Error.vue") },
-  ],
+  routes,
 });
 
 export default router;
