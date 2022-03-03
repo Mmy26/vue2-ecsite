@@ -202,12 +202,10 @@ export default class XXXComponent extends Vue {
   onOrderClick(): void {
     if (this.$store.getters.getLoginStatus === false) {
       this.$router.push("/login");
-    } else {
-      //注文確認画面に遷移する
-      this.$router.push("/orderConfirm");
     }
+    //注文確認画面に遷移する
+    this.$router.push("/orderConfirm");
   }
-
   /**
    * 商品を削除する.
    */
