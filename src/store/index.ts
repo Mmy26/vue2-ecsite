@@ -80,6 +80,7 @@ export default new Vuex.Store({
     itemList: new Array<Item>(),
     toppings: new Array<Topping>(),
     orderHistoryInfoList: new Array<Order>(),
+    currentUser: new User(0, "", "", "", "", "", "")
   },
   actions: {
     /**
@@ -192,6 +193,23 @@ export default new Vuex.Store({
     addItem(state, payload) {
       state.order.orderItemList.push(payload);
     },
+    /**
+     * ユーザー情報をセットする.
+     * @param state - ステイト
+     * @param payload APIから返ってきたユーザー情報
+     */
+    setCurrentUser(state, payload){
+      state.currentUser = new User(
+        payload.id,
+        payload.name,
+        payload.email,
+        payload.password,
+        payload.zipcode,
+        payload.address,
+        payload.telephone
+      )
+      console.log(state.currentUser);
+    }
   },
 
   modules: {},
