@@ -65,6 +65,7 @@
                   <input
                     type="checkbox"
                     v-on:change="calcSubTotalPrice"
+                    v-bind:value="selectTopping"
                     v-model="selectTopping"
                   />
                   <span>{{ topping.name }}</span></label
@@ -121,6 +122,8 @@ import { Component, Vue } from "vue-property-decorator";
 import { Item } from "@/type/item";
 import axios from "axios";
 import { Topping } from "@/type/topping2";
+import { OrderItem } from "@/type/orderItem";
+import { orderTopping } from "@/type/OrderTopping";
 
 @Component
 export default class ItemDetail extends Vue {
@@ -237,13 +240,47 @@ export default class ItemDetail extends Vue {
     return this.subTotalPrice;
   }
 
-  /**
-   * カートに入れる.
+  /** 商品をカートに入れる.
    */
-  addToCart(): void {
-    //注文確認画面に遷移する
-    this.$router.push("/cartList");
-  }
+  // addToCart(): void {
+  //   const orderItem = new OrderItem(
+  //     0,
+  //     this.selectItem.id,
+  //     1,
+  //     this.selectItemQuantity,
+  //     this.selectSize,
+  //     new Item(
+  //       this.selectItem.id,
+  //       this.selectItem.type,
+  //       this.selectItem.name,
+  //       this.selectItem.discription,
+  //       this.selectItem.priceM,
+  //       this.selectItem.priceL,
+  //       this.selectItem.imagePath,
+  //       this.selectItem.deleted,
+  //       this.selectItem.toppingList
+  //     ),
+  //     this.selectToppingList(this.selectTopping)
+  //   );
+  //   this.$store.commit("addItem", orderItem);
+  //   //注文確認画面に遷移する
+  //   this.$router.push("/cartList");
+  // }
+
+  // selectToppingList(selectToppingIdList: Array<number>): Array<orderTopping> {
+  //   const selectOrderToppingList = new Array<orderTopping>();
+
+  //   for (let toppingId of selectToppingIdList) {
+  //     const topping = this.selectItem.toppingList.find((topping) => {
+  //       return topping.id === toppingId;
+  //     });
+  //     if (topping !== undefined) {
+  //       const aOrderTopping = new orderTopping(0, toppingId, 0, topping);
+  //       selectOrderToppingList.push(aOrderTopping);
+  //     }
+  //   }
+  //   return selectOrderToppingList;
+  // }
 }
 </script>
 
