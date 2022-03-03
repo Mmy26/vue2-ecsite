@@ -267,6 +267,7 @@ export default class ItemDetail extends Vue {
 </script>
 
 <style scoped>
+@import url("/css/item_detail.css");
 .item-toppings {
   display: inline-block;
 }

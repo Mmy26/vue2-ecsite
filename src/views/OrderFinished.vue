@@ -11,12 +11,13 @@
           <p>メールが届かない場合は「注文履歴」からご確認ください。</p>
         </div>
         <div class="row order-finished-btn">
-          <button
-            class="btn"
-            type="button"
-            v-on:click="toTopPage"
-          >
+          <button class="btn" type="button" v-on:click="toTopPage">
             <span>トップ画面を表示する</span>
+          </button>
+        </div>
+        <div class="row order-history-btn">
+          <button class="btn" type="button" v-on:click="toOrderHistory">
+            <span>注文履歴</span>
           </button>
         </div>
       </div>
@@ -29,14 +30,17 @@
 import { Component, Vue } from "vue-property-decorator";
 @Component
 export default class OrderFinished extends Vue {
-  toTopPage(): void{
+  toTopPage(): void {
     this.$router.push("/itemList");
+  }
+  toOrderHistory(): void {
+    this.$router.push("/orderHistory");
   }
 }
 </script>
 
 <style scoped>
-.order-finished{
+.order-finished {
   text-align: center;
 }
 </style>
