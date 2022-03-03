@@ -95,8 +95,7 @@
 .top-item-icon p {
   position: absolute; /* item-iconからpを位置指定するための指定 */
   top: 35%;
-  width: 100%;
-  color: red;
+  width: 70%;
 }
 
 .top-item-icon img {

@@ -30,6 +30,12 @@
 import { Component, Vue } from "vue-property-decorator";
 @Component
 export default class OrderFinished extends Vue {
+  created(): void {
+    if (this.$store.getters.getLoginStatus === false) {
+      this.$router.push("/login");
+    }
+  }
+
   toTopPage(): void {
     this.$router.push("/itemList");
   }

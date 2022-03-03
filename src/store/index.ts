@@ -1,12 +1,12 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { Item } from "@/type/item";
-import { Order } from "@/type/order";
-import { User } from "@/type/user";
-import { OrderItem } from "@/type/orderItem";
+import { Item } from "@/types/item";
+import { Order } from "@/types/order";
+import { User } from "@/types/user";
+import { OrderItem } from "@/types/orderItem";
 
 import axios from "axios";
-import { Topping } from "@/type/topping2";
+import { Topping } from "@/types/topping2";
 
 Vue.use(Vuex);
 
@@ -198,6 +198,16 @@ export default new Vuex.Store({
 
     removeItem(state, payload) {
       state.order.orderItemList.splice(payload.itemIndex, 1);
+    },
+
+    /**
+     *商品を追加する.
+
+     * @param state - ステート
+     * @param payload - 追加する商品の情報
+     */
+    addItem(state, payload) {
+      state.order.orderItemList.push(payload);
     },
   },
 

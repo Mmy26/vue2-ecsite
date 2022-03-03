@@ -52,13 +52,12 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { User } from "@/type/user";
-import { OrderHistoryInfo } from "@/type/orderHistoryInfo";
+import { User } from "@/types/user";
+import { OrderHistoryInfo } from "@/types/orderHistoryInfo";
 
 @Component
 export default class OrderHistory extends Vue {
   private currentUser = new User(0, "", "", "", "", "", "");
-
   private currentOrderHistoryInfoList = new OrderHistoryInfo(
     -1,
     new Date(),
