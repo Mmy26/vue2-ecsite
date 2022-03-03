@@ -35,6 +35,10 @@ const routes: Array<RouteConfig> = [
     component: () => import("../views/Login.vue"),
   },
   {
+    path: "/orderConfirm",
+    component: () => import("../views/OrderConfirm.vue"),
+  },
+  {
     path: "/faq",
     component: () => import("../views/Faq.vue"),
   },
@@ -45,6 +49,15 @@ const routes: Array<RouteConfig> = [
   {
     path: "/orderHistory",
     component: () => import("../views/OrderHistory.vue"),
+  },
+  {
+    path: "/error",
+    component: () => import("../views/Error.vue"),
+  },
+  {
+    path: "*",
+    name: "NotFoundError",
+    component: () => import("../views/Error.vue"),
   },
 ];
 

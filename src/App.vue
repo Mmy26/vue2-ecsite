@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <Header />
-    <div class="top-wrapper">
+    <!-- <div class="top-wrapper"> -->
       <router-view />
-    </div>
+    <!-- </div> -->
     <Footer />
   </div>
 </template>
@@ -26,7 +26,7 @@ export default class App extends Vue {
     //cdnのインストールが必要。mountedだとタイミングが合わないので、時間をずらした。
     setTimeout(() => {
       M.AutoInit();
-    }, 20);
+    }, 100);
   }
 }
 </script>
