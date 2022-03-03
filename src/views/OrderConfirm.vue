@@ -73,12 +73,14 @@
                 <input id="name" type="text" v-model="destinationName"/>
                 <label for="name">お名前</label>
               </div>
+              <div class="error-message">{{ nameErrorMessage }}</div>
             </div>
             <div class="row">
               <div class="input-field">
                 <input id="email" type="email" v-model="destinationEmail"/>
                 <label for="email">メールアドレス</label>
               </div>
+              <div class="error-message">{{ emailErrorMessage }}</div>
             </div>
             <div class="row">
               <div class="input-field">
@@ -88,18 +90,21 @@
                   <span>住所検索</span>
                 </button>
               </div>
+              <div class="error-message">{{ zipcodeErrorMessage }}</div>
             </div>
             <div class="row">
               <div class="input-field">
                 <input id="address" type="text" v-model="destinationAddress"/>
                 <label for="address">住所</label>
               </div>
+              <div class="error-message">{{ addressErrorMessage }}</div>
             </div>
             <div class="row">
               <div class="input-field">
                 <input id="tel" type="tel" v-model="destinationTel"/>
                 <label for="tel">電話番号</label>
               </div>
+              <div class="error-message">{{ telErrorMessage }}</div>
             </div>
             <div class="row order-confirm-delivery-datetime">
               <div class="input-field">
@@ -148,6 +153,7 @@
                 <span>18時</span>
               </label>
             </div>
+            <div class="error-message">{{ delivelyErrorMessage }}</div>
           </div>
 
           <h2 class="page-title">お支払い方法</h2>
