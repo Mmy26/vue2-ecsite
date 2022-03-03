@@ -16,6 +16,7 @@
       などの理由で見つかりませんでした。
     </h5>
 
+    <img src="/img/error404.jpg" width="20%" height="20%" />
     <div>
       <p>後者の場合</p>
       <ul>
