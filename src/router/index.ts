@@ -47,6 +47,10 @@ const routes: Array<RouteConfig> = [
     component: () => import("../views/OrderFinished.vue"),
   },
   {
+    path: "/orderHistory",
+    component: () => import("../views/OrderHistory.vue"),
+  },
+  {
     path: "/error",
     component: () => import("../views/Error.vue"),
   },
