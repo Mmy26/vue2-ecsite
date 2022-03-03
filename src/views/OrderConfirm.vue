@@ -70,20 +70,20 @@
           <div class="order-confirm-delivery-info">
             <div class="row">
               <div class="input-field">
-                <input id="name" type="text" />
+                <input id="name" type="text" v-model="destinationName"/>
                 <label for="name">お名前</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field">
-                <input id="email" type="email" />
+                <input id="email" type="email" v-model="destinationEmail"/>
                 <label for="email">メールアドレス</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field">
-                <input id="zipcode" type="text" maxlength="7" />
-                <label for="zipcode">郵便番号(ハイフンなし)</label>
+                <input id="zipcode" type="text" maxlength="8" v-model="destinationZipcode"/>
+                <label for="zipcode">郵便番号</label>
                 <button class="btn" type="button">
                   <span>住所検索</span>
                 </button>
@@ -91,13 +91,13 @@
             </div>
             <div class="row">
               <div class="input-field">
-                <input id="address" type="text" />
+                <input id="address" type="text" v-model="destinationAddress"/>
                 <label for="address">住所</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field">
-                <input id="tel" type="tel" />
+                <input id="tel" type="tel" v-model="destinationTel"/>
                 <label for="tel">電話番号</label>
               </div>
             </div>
@@ -108,43 +108,43 @@
               </div>
               <label class="order-confirm-delivery-time">
                 <input
-                  name="deliveryTime"
+                  name="deliveryDate"
                   type="radio"
-                  value="10時"
-                  checked="checked"
+                  value="10"
+                  v-model.number="deliveryTime"
                 />
                 <span>10時</span>
               </label>
               <label class="order-confirm-delivery-time">
-                <input name="deliveryTime" type="radio" value="11時" />
+                <input name="deliveryTime" type="radio" value="11" v-model.number="deliveryTime" />
                 <span>11時</span>
               </label>
               <label class="order-confirm-delivery-time">
-                <input name="deliveryTime" type="radio" value="12時" />
+                <input name="deliveryTime" type="radio" value="12" v-model.number="deliveryTime" />
                 <span>12時</span>
               </label>
               <label class="order-confirm-delivery-time">
-                <input name="deliveryTime" type="radio" value="13時" />
+                <input name="deliveryTime" type="radio" value="13" v-model.number="deliveryTime" />
                 <span>13時</span>
               </label>
               <label class="order-confirm-delivery-time">
-                <input name="deliveryTime" type="radio" value="14時" />
+                <input name="deliveryTime" type="radio" value="14" v-model.number="deliveryTime" />
                 <span>14時</span>
               </label>
               <label class="order-confirm-delivery-time">
-                <input name="deliveryTime" type="radio" value="15時" />
+                <input name="deliveryTime" type="radio" value="15" v-model.number="deliveryTime" />
                 <span>15時</span>
               </label>
               <label class="order-confirm-delivery-time">
-                <input name="deliveryTime" type="radio" value="16時" />
+                <input name="deliveryTime" type="radio" value="16" v-model.number="deliveryTime" />
                 <span>16時</span>
               </label>
               <label class="order-confirm-delivery-time">
-                <input name="deliveryTime" type="radio" value="17時" />
+                <input name="deliveryTime" type="radio" value="17" v-model.number="deliveryTime" />
                 <span>17時</span>
               </label>
               <label class="order-confirm-delivery-time">
-                <input name="deliveryTime" type="radio" value="18時" />
+                <input name="deliveryTime" type="radio" value="18" v-model.number="deliveryTime" />
                 <span>18時</span>
               </label>
             </div>
@@ -158,7 +158,7 @@
                   name="paymentMethod"
                   type="radio"
                   value="1"
-                  checked="checked"
+                  v-model.number="paymentMethod"
                 />
                 <span>代金引換</span>
               </label>
@@ -168,11 +168,12 @@
               </label>
             </span>
           </div>
+         <CompCreditCardPayment />
           <div class="row order-confirm-btn">
             <button
               class="btn"
               type="button"
-              onclick="location.href='order_finished.html'"
+              v-on:click="order"
             >
               <span>この内容で注文する</span>
             </button>
@@ -183,8 +184,6 @@
       <!-- end top-wrapper -->
       <!-- Compiled and minified JavaScript -->
     </body>
-
-    <CompCreditCardPayment />
   </div>
 </template>
 
@@ -201,6 +200,7 @@ import { getMonth } from "date-fns";
 import { getDate } from "date-fns";
 import { Item } from "@/type/item";
 import { Topping } from "@/type/topping2";
+import { getMinutes } from "date-fns/esm";
 
 @Component({
   components: {
@@ -247,9 +247,11 @@ export default class OrderConfirm extends Vue {
   //注文者の電話番号
   private destinationTel = "";
   //配達日時
-  private deliveryTime = new Date();
+  private deliveryDate = new Date();
+  //配達時間
+  private deliveryTime = 10;
   //支払い方法
-  private paymentMethod = 0;
+  private paymentMethod = 1;
   //エラーFrag
   private hasError = false;
   //注文時のエラーメッセージ
@@ -337,7 +339,7 @@ export default class OrderConfirm extends Vue {
     const hoursCheck = (): boolean => {
       let currentDate = new Date();
       return (
-        this.deliveryTime <=
+        this.deliveryDate <=
         new Date(
           getYear(currentDate),
           getMonth(currentDate),
@@ -350,7 +352,7 @@ export default class OrderConfirm extends Vue {
       this.delivelyErrorMessage = "今から3時間後の日時をご入力ください";
       this.hasError = true;
     }
-    if (this.deliveryTime === new Date()) {
+    if (this.deliveryDate === new Date()) {
       this.delivelyErrorMessage = "配達日時を入力してください。";
     }
     if (this.hasError) {
@@ -369,7 +371,7 @@ export default class OrderConfirm extends Vue {
         destinationZipcode: this.destinationZipcode,
         destinationAddress: this.destinationAddress,
         destinationTel: this.destinationTel,
-        deliveryTime: this.deliveryTime,
+        deliveryTime: `${this.deliveryDate} ${this.deliveryTime}:${getMinutes( new Date() )}:`,
         paymentMethod: this.paymentMethod,
         orderItemList: this.currentOrder.makeOrderFormList,
       }
