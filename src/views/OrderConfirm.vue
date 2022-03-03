@@ -322,7 +322,7 @@ export default class OrderConfirm extends Vue {
       this.zipcodeErrorMessage = "郵便番号はXXX-XXXXの形式で入力してください";
     }
     if (this.destinationZipcode === "") {
-      this.zipcodeErrorMessage = "住所を入力してください。";
+      this.zipcodeErrorMessage = "郵便番号を入力してください。";
     }
     if (this.destinationAddress === "") {
       this.hasError = true;
@@ -348,7 +348,7 @@ export default class OrderConfirm extends Vue {
       this.telErrorMessage = "電話番号はXXXX-XXXX-XXXXの形式で入力してください";
       this.hasError = true;
     }
-    if (this.destinationTel === "電話番号を入力してください。") {
+    if (this.destinationTel === "") {
       this.telErrorMessage = "電話番号を入力してください。";
       this.hasError = true;
     }
