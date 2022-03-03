@@ -1,6 +1,5 @@
 import { User } from "./user";
 import { OrderItem } from "./orderItem";
-import { OrderItemForm } from "./orderItemForm";
 /**
  *注文を表すドメインクラス.
  */
@@ -67,6 +66,7 @@ export class Order {
   /** 注文をする際に利用するフォームリストを作成するgetter.
    * @returns オーダー表の配列
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public get makeOrderFormList(): any{
     const newArray = [];
     for (const orderItem of this.orderItemList) {

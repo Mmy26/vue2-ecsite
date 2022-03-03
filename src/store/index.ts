@@ -215,9 +215,8 @@ export default new Vuex.Store({
      * 注文テーブルを削除する.
      *
      * @param state - ステート
-     * @param payload - 削除する注文票
+     * @param payload - 更新する情報
      */
-
     initializeOrder(state) {
       state.order = new Order(
         0,
@@ -236,6 +235,19 @@ export default new Vuex.Store({
         []
       );
     },
+     /**
+     * ユーザー情報を更新する.
+     * @param state - ステイト
+     * @param payload 更新するユーザー情報
+     */
+      updateCurrentUser(state, payload) {
+        state.currentUser.name = payload.name;
+        state.currentUser.email = payload.email;
+        state.currentUser.zipcode = payload.zipcode;
+        state.currentUser.address = payload.address;
+        state.currentUser.telephone = payload.telephone;
+        console.log(state.currentUser);
+      },
   },
 
   modules: {},

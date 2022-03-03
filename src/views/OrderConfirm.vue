@@ -396,6 +396,13 @@ export default class OrderConfirm extends Vue {
     );
 
     if (response.data.status === "success") {
+      this.$store.commit("updateCurrentUser",{
+        name: this.destinationName,
+        email: this.destinationEmail,
+        zipcode: this.destinationZipcode,
+        address: this.destinationAddress,
+        telephone: this.destinationTel
+      });
       this.$store.commit("initializeOrder");
       this.$router.push("/orderFinished");
     } else {
