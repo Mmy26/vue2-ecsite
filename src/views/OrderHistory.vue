@@ -29,17 +29,27 @@
               </tr>
             </thead>
 
-            <tbody>
+            <tbody
+              v-for="order of currentOrderHistoryInfoList"
+              v-bind:key="order.id"
+            >
               <tr>
                 <th>
-                  {{ currentOrderHistoryInfoList.orderDate }}
-                </th>
-                <th>{{ currentOrderHistoryInfoList.deliveryTime }}</th>
-                <th>
-                  {{ currentOrderHistoryInfoList.destinationAddress }}
+                  {{ order.orderDate }}
                 </th>
                 <th>
-                  {{ currentOrderHistoryInfoList.orderItemList }}
+                  {{ order.deliveryTime }}
+                </th>
+                <th>
+                  {{ order.destinationAddress }}
+                </th>
+                <th>
+                  <p
+                    v-for="orderItem of order.orderItemList"
+                    v-bind:key="orderItem.id"
+                  >
+                    {{ orderItem.item.name }} / {{ orderItem.quantity }}個
+                  </p>
                 </th>
               </tr>
             </tbody>
@@ -54,6 +64,8 @@
 import { Component, Vue } from "vue-property-decorator";
 import { User } from "@/types/user";
 import { OrderHistoryInfo } from "@/types/orderHistoryInfo";
+import { Order } from "@/types/order";
+import { format } from "date-fns";
 
 @Component
 export default class OrderHistory extends Vue {
@@ -62,7 +74,9 @@ export default class OrderHistory extends Vue {
     -1,
     new Date(),
     "",
+    // 配達時間をformatする
     new Date(),
+    // 注文商品が全表されてる
     []
   );
 
@@ -73,18 +87,15 @@ export default class OrderHistory extends Vue {
     this.$store.dispatch("asyncGetOrderHistoryInfo");
     this.currentOrderHistoryInfoList =
       this.$store.getters.getOrderHistoryInfoList;
-    console.log(this.currentOrderHistoryInfoList);
   }
 }
 </script>
 
 <style scoped>
-.orderFinishHistory {
+.tableFormat {
   width: 850px;
   margin-left: auto;
   margin-right: auto;
-  white-space: nowrap;
-  word-wrap: break-word;
 }
 
 .h1 {

@@ -283,8 +283,18 @@ export default class ItemDetail extends Vue {
   /** 商品をカートに入れる.
    */
   addToCart(): void {
+    const order = this.$store.getters.getOrder;
+    const orderItemList = order.orderItemList;
+
+    const latestOrderItem = orderItemList[orderItemList.length - 1];
+    console.log("latestOrderItem");
+    let newOrderItemId = 0;
+    if (latestOrderItem !== undefined) {
+      newOrderItemId = latestOrderItem.id + 1;
+    }
+    console.dir(JSON.stringify(latestOrderItem));
     const orderItem = new OrderItem(
-      0,
+      newOrderItemId,
       this.selectItem.id,
       1,
       this.selectItemQuantity,
@@ -309,13 +319,14 @@ export default class ItemDetail extends Vue {
 
   selectToppingList(selectToppingIdList: Array<number>): Array<orderTopping> {
     const selectOrderToppingList = new Array<orderTopping>();
+    let i = 0;
 
     for (let toppingId of selectToppingIdList) {
       const topping = this.selectItem.toppingList.find((topping) => {
         return topping.id === toppingId;
       });
       if (topping !== undefined) {
-        const aOrderTopping = new orderTopping(0, toppingId, 0, topping);
+        const aOrderTopping = new orderTopping(++i, toppingId, 0, topping);
         selectOrderToppingList.push(aOrderTopping);
       }
     }
@@ -360,7 +371,7 @@ export default class ItemDetail extends Vue {
   transition: 0.5s;
 }
 
-.sns-btn{
+.sns-btn {
   margin-top: 20px;
 }
 </style>

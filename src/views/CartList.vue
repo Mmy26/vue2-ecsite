@@ -6,7 +6,7 @@
     <div class="top-wrapper">
       <div class="container">
         <h1 class="page-title">ショッピングカート</h1>
-        <div>{{ errorMessage }}</div>
+        <div class="error-message">{{ errorMessage }}</div>
         <!-- table -->
         <div class="cartlist" v-show="canShow">
           <div class="row">
@@ -76,6 +76,9 @@
             <button class="btn" type="button" v-on:click="onOrderClick">
               <span>注文に進む</span>
             </button>
+            <button class="btn continue-shopping" type="button" v-on:click="continueShopping">
+              <span>買い物を続ける</span>
+            </button>
           </div>
         </div>
       </div>
@@ -144,11 +147,17 @@ export default class XXXComponent extends Vue {
    * 注文に進む.
    */
   onOrderClick(): void {
-    if (this.$store.getters.getLoginStatus === false) {
-      this.$router.push("/login");
+    if (this.$store.getters.getLoginStatus === true) {
+      this.$router.push("/orderConfirm");
     }
-    //注文確認画面に遷移する
-    this.$router.push("/orderConfirm");
+    this.$router.push("/login");
+  }
+
+  /**
+   * 買い物を続ける
+   */
+  continueShopping(): void {
+    this.$router.push("/itemList");
   }
   /**
    * 商品を削除する.
@@ -162,4 +171,17 @@ export default class XXXComponent extends Vue {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.error-message {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.btn{
+  margin-right:20px;
+}
+
+.continue-shopping{
+  background-color: rgba(192, 192, 192, 0.849);
+}
+</style>
