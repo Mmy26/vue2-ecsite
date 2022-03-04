@@ -247,15 +247,15 @@ export default class OrderConfirm extends Vue {
   //ログインしているユーザー情報
   private currentUser = new User(0, "", "", "", "", "", "");
   //注文者の名前
-  private destinationName = this.currentUser.name;
+  private destinationName = this.$store.getters.getCurrentUserName;
   //注文者のメールアドレス
-  private destinationEmail = this.currentUser.email;
+  private destinationEmail = this.$store.getters.getCurrentUserEmail;
   //注文者の郵便番号
-  private destinationZipcode = this.currentUser.zipcode;
+  private destinationZipcode = this.$store.getters.getCurrentUserZipcode;
   //注文者の住所
-  private destinationAddress = this.currentUser.address;
+  private destinationAddress = this.$store.getters.getCurrentUserAddress;
   //注文者の電話番号
-  private destinationTel = this.currentUser.telephone;
+  private destinationTel = this.$store.getters.getCurrentUserTel;
   //配達日時
   private deliveryDate = ""
   //配達時間
