@@ -19,7 +19,7 @@
           />
         </div>
         <div class="col s12">
-          <table border="1" class="tableFormat">
+          <table class="orderFinishHistory">
             <thead>
               <tr>
                 <th>ご注文日</th>
@@ -29,28 +29,27 @@
               </tr>
             </thead>
 
-            <tbody>
-              <div class="displayOrder">
-                <span
-                  v-for="order of currentOrderHistoryInfoList"
-                  v-bind:key="order.userId"
-                >
-                  <tr>
-                    <td>
-                      {{ order.orderDate }}
-                    </td>
-                    <td>{{ order.formatDeliveryTime }}</td>
-                    <td>
-                      {{ order.destinationAddress }}
-                    </td>
-                    <td>
-                      {{ order.orderItemList.item.name }}
-                      {{ order.orderItemList.item.topping.name }}
-                      {{ order.orderItemList.totalprice }}
-                    </td>
-                  </tr>
-                </span>
-              </div>
+            <tbody
+              v-for="order of currentOrderHistoryInfoList"
+              v-bind:key="order.id"
+            >
+              <tr>
+                <th>
+                  {{ order.orderDate }}
+                </th>
+                <th>{{ order.formatDeliveryTime }}</th>
+                <th>
+                  {{ order.destinationAddress }}
+                </th>
+                <th>
+                  <p
+                    v-for="orderItem of order.orderItemList.orderItem"
+                    v-bind:key="orderItem.id"
+                  >
+                    {{ orderItem.item }}
+                  </p>
+                </th>
+              </tr>
             </tbody>
           </table>
         </div>
