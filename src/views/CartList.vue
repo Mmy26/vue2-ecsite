@@ -76,7 +76,11 @@
             <button class="btn" type="button" v-on:click="onOrderClick">
               <span>注文に進む</span>
             </button>
-            <button class="btn continue-shopping" type="button" v-on:click="continueShopping">
+            <button
+              class="btn continue-shopping"
+              type="button"
+              v-on:click="continueShopping"
+            >
               <span>買い物を続ける</span>
             </button>
           </div>
@@ -94,7 +98,7 @@ import { Order } from "@/types/order";
 import { User } from "@/types/user";
 import { OrderItem } from "@/types/orderItem";
 import { Item } from "@/types/item";
-import { Topping } from "@/types/topping2";
+
 @Component
 export default class XXXComponent extends Vue {
   // 合計金額
@@ -177,11 +181,11 @@ export default class XXXComponent extends Vue {
   margin-top: 20px;
 }
 
-.btn{
-  margin-right:20px;
+.btn {
+  margin-right: 20px;
 }
 
-.continue-shopping{
+.continue-shopping {
   background-color: rgba(192, 192, 192, 0.849);
 }
 </style>
