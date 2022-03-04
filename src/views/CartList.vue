@@ -161,6 +161,7 @@ export default class XXXComponent extends Vue {
 <style scoped>
 .error-message{
   text-align: center;
+  margin-top:20px;
 }
 
 </style>

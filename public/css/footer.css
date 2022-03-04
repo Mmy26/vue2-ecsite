@@ -5,7 +5,7 @@
    ======================================== */
 
 footer .container {
-  background-color: #99666696;
+  max-width: 1920px;
 }
 footer img {
   width: 125px;
