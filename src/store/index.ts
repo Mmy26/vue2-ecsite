@@ -27,53 +27,7 @@ export default new Vuex.Store({
       new Date(),
       0,
       new User(0, "", "", "", "", "", ""),
-
-      [
-        new OrderItem(
-          21,
-          1,
-          1,
-          1,
-          "M",
-          new Item(
-            21,
-            "coffee",
-            "Gorgeous4サンド",
-            "",
-            480,
-            700,
-            "/img_coffee/1.jpg",
-            false,
-            [
-              new Topping(-1, "coffee", "ピクルス", 200, 300),
-              new Topping(-1, "coffee", "チーズ", 200, 300),
-            ]
-          ),
-          []
-        ),
-        new OrderItem(
-          21,
-          1,
-          1,
-          2,
-          "L",
-          new Item(
-            21,
-            "coffee",
-            "コーヒー",
-            "",
-            480,
-            700,
-            "/img_coffee/1.jpg",
-            false,
-            [
-              new Topping(-1, "coffee", "ピクルス", 200, 300),
-              new Topping(-1, "coffee", "チーズ", 200, 300),
-            ]
-          ),
-          []
-        ),
-      ]
+      []
     ),
 
     itemList: new Array<Item>(),
@@ -172,21 +126,21 @@ export default new Vuex.Store({
       }
     },
 
-    changeOrderStatus(state, payload) {
-      // const statusList = {
-      //   targetKey: payload.key,
-      //   targetValue: payload.value
-      // }
-      // state.order.statusList.targetKey = statusList.targetValue;
-      state.order.status = payload.status;
-    },
-    updateOrder(state, payload) {
-      state.order.destinationName = payload.destinationName;
-      state.order.destinationEmail = payload.destinationEmail;
-      state.order.destinationZipcode = payload.destinationZipcode;
-      state.order.destinationAddress = payload.destinationAddress;
-      state.order.destinationTel = payload.destinationTel;
-    },
+    // changeOrderStatus(state, payload) {
+    //   // const statusList = {
+    //   //   targetKey: payload.key,
+    //   //   targetValue: payload.value
+    //   // }
+    //   // state.order.statusList.targetKey = statusList.targetValue;
+    //   state.order.status = payload.status;
+    // },
+    // updateOrder(state, payload) {
+    //   state.order.destinationName = payload.destinationName;
+    //   state.order.destinationEmail = payload.destinationEmail;
+    //   state.order.destinationZipcode = payload.destinationZipcode;
+    //   state.order.destinationAddress = payload.destinationAddress;
+    //   state.order.destinationTel = payload.destinationTel;
+    // },
 
     /**
      * 商品を削除する.
@@ -259,7 +213,7 @@ export default new Vuex.Store({
      * @returns Orderオブジェクト
      */
     getOrder(state) {
-      return state.order.orderItemList;
+      return state.order;
     },
     /**
      * 注文商品リストを取得する.

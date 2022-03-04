@@ -78,9 +78,12 @@ export default class Login extends Vue {
       }
     );
     console.dir("response:" + JSON.stringify(response));
-    // ログインが成功したら商品一覧ページに遷移する
     if (response.data.status === "success") {
-      this.$router.push("/itemList");
+      if (this.$store.state.order.orderItemList.length > 0) {
+        this.$router.push("/orderConfirm");
+      } else {
+        this.$router.push("/itemList");
+      }
       // ログイン状態をtrueにする
       this.$store.commit("logined");
     }
