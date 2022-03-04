@@ -21,7 +21,7 @@
               </thead>
               <tbody>
                 <tr
-                  v-for="orderItem of this.currentOrder.orderItemList"
+                  v-for="(orderItem, index) of this.currentOrder.orderItemList"
                   v-bind:key="orderItem.id"
                 >
                   <td class="cart-item-name">
@@ -55,7 +55,11 @@
                     </div>
                   </td>
                   <td>
-                    <button class="btn" type="button">
+                    <button
+                      class="btn"
+                      type="button"
+                      v-on:click="removeFromCart(index)"
+                    >
                       <span>削除</span>
                     </button>
                   </td>
@@ -76,7 +80,11 @@
             <button class="btn" type="button" v-on:click="onOrderClick">
               <span>注文に進む</span>
             </button>
-            <button class="btn continue-shopping" type="button" v-on:click="continueShopping">
+            <button
+              class="btn continue-shopping"
+              type="button"
+              v-on:click="continueShopping"
+            >
               <span>買い物を続ける</span>
             </button>
           </div>
@@ -177,11 +185,11 @@ export default class XXXComponent extends Vue {
   margin-top: 20px;
 }
 
-.btn{
-  margin-right:20px;
+.btn {
+  margin-right: 20px;
 }
 
-.continue-shopping{
+.continue-shopping {
   background-color: rgba(192, 192, 192, 0.849);
 }
 </style>
