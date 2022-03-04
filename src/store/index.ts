@@ -270,5 +270,45 @@ export default new Vuex.Store({
     getCurrentUser(state) {
       return state.currentUser;
     },
+    /**
+     * ログインしているユーザーの名前情報を取得する.
+     * @param state - ステート
+     * @returns ユーザーの名前
+     */
+     getCurrentUserName(state) {
+      return state.currentUser.name;
+    },
+     /**
+     * ログインしているユーザーのメールアドレス情報を取得する.
+     * @param state - ステート
+     * @returns ユーザーのメールアドレス
+     */
+      getCurrentUserEmail(state) {
+        return state.currentUser.email;
+      },
+       /**
+     * ログインしているユーザーの郵便番号情報を取得する.
+     * @param state - ステート
+     * @returns ユーザーの郵便番号
+     */
+     getCurrentUserZipcode(state) {
+      return state.currentUser.zipcode;
+    },
+     /**
+     * ログインしているユーザーの住所情報を取得する.
+     * @param state - ステート
+     * @returns ユーザーの住所
+     */
+      getCurrentUserAddress(state) {
+        return state.currentUser.address;
+      },
+      /**
+     * ログインしているユーザーの電話番号情報を取得する.
+     * @param state - ステート
+     * @returns ユーザーの電話番号
+     */
+       getCurrentUserTel(state) {
+        return state.currentUser.telephone;
+      },
   },
 });
