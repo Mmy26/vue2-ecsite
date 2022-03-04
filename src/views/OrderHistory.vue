@@ -64,7 +64,7 @@
 import { Component, Vue } from "vue-property-decorator";
 import { User } from "@/types/user";
 import { OrderHistoryInfo } from "@/types/orderHistoryInfo";
-import { Order } from "@/type/order";
+import { Order } from "@/types/order";
 import { format } from "date-fns";
 
 @Component
@@ -87,7 +87,6 @@ export default class OrderHistory extends Vue {
     this.$store.dispatch("asyncGetOrderHistoryInfo");
     this.currentOrderHistoryInfoList =
       this.$store.getters.getOrderHistoryInfoList;
-    console.log(this.currentOrderHistoryInfoList);
   }
 }
 </script>
