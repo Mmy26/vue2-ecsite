@@ -28,6 +28,7 @@ export default {
   methods: {
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     submit () {
+      this.statusMessage = "確認中....."
       // this will trigger the process
       this.$refs.elementRef.submit();
     },
