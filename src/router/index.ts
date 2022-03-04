@@ -57,12 +57,7 @@ const routes: Array<RouteConfig> = [
   {
     path: "/error",
     component: () => import("../views/Error.vue"),
-  },
-  {
-    path: "*",
-    name: "NotFoundError",
-    component: () => import("../views/Error.vue"),
-  },
+  }
 ];
 
 const router = new VueRouter({

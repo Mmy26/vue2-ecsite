@@ -178,7 +178,6 @@ export default class XXXComponent extends Vue {
         telephone: this.telephone,
       }
     );
-    console.dir("response" + JSON.stringify(response));
 
     this.errorMessage = "";
     this.errorLastName = "";

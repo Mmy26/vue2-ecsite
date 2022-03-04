@@ -38,10 +38,14 @@
                   <td>
                     <ul>
                       <li
-                        v-for="topping of orderItem.item.toppingList"
-                        v-bind:key="topping.id"
+                        v-for="orderTopping of orderItem.orderToppingList"
+                        v-bind:key="orderTopping.id"
                       >
-                        {{ topping.name }}{{ topping.toppingPrice }}円
+                        {{ orderTopping.topping.name }}
+                        <span v-if="orderItem.size === 'M'"
+                          >{{ orderTopping.topping.priceM }}円</span
+                        >
+                        <span v-else>{{ orderTopping.topping.priceL }}円</span>
                       </li>
                     </ul>
                   </td>
@@ -129,6 +133,7 @@ export default class XXXComponent extends Vue {
    */
   created(): void {
     this.currentOrder = this.$store.getters.getOrder;
+
     // カートに商品が1個もなければエラーメッセージを出す
     if (this.currentOrder.orderItemList.length === 0) {
       this.errorMessage = "カートに商品がありません";

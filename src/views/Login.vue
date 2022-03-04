@@ -79,6 +79,15 @@ export default class Login extends Vue {
     );
     console.dir("response:" + JSON.stringify(response));
     if (response.data.status === "success") {
+      this.$store.commit("setCurrentUser",{
+        id: response.data.responseMap.user.id,
+        name: response.data.responseMap.user.name,
+        email: response.data.responseMap.user.email,
+        password: response.data.responseMap.user.password,
+        zipcode: response.data.responseMap.user.zipcode,
+        address: response.data.responseMap.user.address,
+        telephone: response.data.responseMap.user.telephone
+      });
       // ログイン状態をtrueにする
       this.$store.commit("logined");
       this.$router.push("/itemList");
