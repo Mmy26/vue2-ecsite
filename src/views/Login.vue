@@ -90,11 +90,11 @@ export default class Login extends Vue {
       });
       // ログイン状態をtrueにする
       this.$store.commit("logined");
-      if (this.$store.state.order.orderItemList.length >= 1) {
+      if (this.$store.state.inCart === true) {
         this.$router.push("/orderConfirm");
-        return;
+      } else {
+        this.$router.push("/itemList");
       }
-      this.$router.push("/itemList");
     }
     // ログインに失敗したらエラーメッセージを出す
     if (response.data.status === "error") {
