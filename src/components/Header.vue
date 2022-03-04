@@ -13,13 +13,14 @@
             <router-link to="/itemList">商品一覧</router-link>
             <router-link to="/registerUser">会員登録</router-link>
             <router-link to="/cartList"
-              ><i class="fas fa-shopping-cart"></i>カート</router-link
+              ><i class="material-icons prefix icon fix">shopping_cart</i
+              >カート</router-link
             >
             <router-link to="/login" v-if="!isLogin">
-              <i class="fas fa-sign-in-alt"></i>ログイン
+              <i class="material-icons icon">exit_to_app</i>ログイン
             </router-link>
             <router-link to="/logout" v-if="isLogin">
-              <i class="fas fa-sign-in-alt"></i>ログアウト
+              <i class="material-icons icon">keyboard_return</i>ログアウト
             </router-link>
             <router-link to="/orderHistory">注文履歴</router-link>
           </div>
@@ -92,5 +93,14 @@ header {
 
 .fas {
   margin-right: 5px;
+}
+
+.icon {
+  margin-top: 1px;
+  margin-right: 4px;
+}
+
+.fix {
+  margin-top: 5px;
 }
 </style>
