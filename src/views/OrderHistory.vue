@@ -37,7 +37,9 @@
                 <th>
                   {{ order.orderDate }}
                 </th>
-                <th>{{ order.formatDeliveryTime }}</th>
+                <th>
+                  {{ order.deliveryTime }}
+                </th>
                 <th>
                   {{ order.destinationAddress }}
                 </th>
@@ -46,7 +48,7 @@
                     v-for="orderItem of order.orderItemList"
                     v-bind:key="orderItem.id"
                   >
-                    {{ orderItem.item.name }}
+                    {{ orderItem.item.name }} / {{ orderItem.quantity }}個
                   </p>
                 </th>
               </tr>
@@ -63,6 +65,7 @@ import { Component, Vue } from "vue-property-decorator";
 import { User } from "@/types/user";
 import { OrderHistoryInfo } from "@/types/orderHistoryInfo";
 import { Order } from "@/type/order";
+import { format } from "date-fns";
 
 @Component
 export default class OrderHistory extends Vue {
