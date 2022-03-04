@@ -103,8 +103,10 @@
               <button class="btn" type="button" v-on:click="registerUser">
                 <span>登録<i class="material-icons right">done</i></span>
               </button>
+              <button type="button" v-on:click="reset" class="clear-btn">
+                クリア
+              </button>
             </div>
-            <div><button type="button" v-on:click="reset">クリア</button></div>
           </div>
         </div>
       </div>
@@ -176,7 +178,6 @@ export default class XXXComponent extends Vue {
         telephone: this.telephone,
       }
     );
-    console.dir("response" + JSON.stringify(response));
 
     this.errorMessage = "";
     this.errorLastName = "";
@@ -252,6 +253,8 @@ export default class XXXComponent extends Vue {
     }
 
     if (response.data.status === "success") {
+      console.log("success");
+
       this.$router.push("login");
     } else if (
       response.data.message.includes(
@@ -307,4 +310,16 @@ export default class XXXComponent extends Vue {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.clear-btn {
+  width: 90px;
+  height: 37px;
+  margin-left: 30px;
+  cursor: pointer;
+  background-color: silver;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  box-shadow: 0px 1px 2px silver;
+}
+</style>

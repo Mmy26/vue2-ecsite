@@ -1,12 +1,12 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { Item } from "@/type/item";
-import { Order } from "@/type/order";
-import { User } from "@/type/user";
-import { OrderItem } from "@/type/orderItem";
+import { Item } from "@/types/item";
+import { Order } from "@/types/order";
+import { User } from "@/types/user";
+import { OrderItem } from "@/types/orderItem";
 
 import axios from "axios";
-import { Topping } from "@/type/topping2";
+import { Topping } from "@/types/topping2";
 
 Vue.use(Vuex);
 
@@ -28,57 +28,13 @@ export default new Vuex.Store({
       new Date(),
       0,
       new User(0, "", "", "", "", "", ""),
-
-      [
-        new OrderItem(
-          21,
-          1,
-          1,
-          1,
-          "M",
-          new Item(
-            21,
-            "coffee",
-            "Gorgeous4サンド",
-            "",
-            480,
-            700,
-            "/img_coffee/1.jpg",
-            false,
-            [
-              new Topping(-1, "coffee", "ピクルス", 200, 300),
-              new Topping(-1, "coffee", "チーズ", 200, 300),
-            ]
-          ),
-          []
-        ),
-        new OrderItem(
-          21,
-          1,
-          1,
-          2,
-          "L",
-          new Item(
-            21,
-            "coffee",
-            "コーヒー",
-            "",
-            480,
-            700,
-            "/img_coffee/1.jpg",
-            false,
-            [
-              new Topping(-1, "coffee", "ピクルス", 200, 300),
-              new Topping(-1, "coffee", "チーズ", 200, 300),
-            ]
-          ),
-          []
-        ),
-      ]
+      []
     ),
 
     itemList: new Array<Item>(),
     toppings: new Array<Topping>(),
+    orderHistoryInfoList: new Array<Order>(),
+    currentUser: new User(0, "", "", "", "", "", ""),
   },
   actions: {
     /**
@@ -91,6 +47,20 @@ export default new Vuex.Store({
       );
       const payload = response.data;
       context.commit("showItemList", payload);
+    },
+    /**
+     * 注文履歴の情報を非同期通信で取得するメソッド.
+     * @param context - コンテクスト
+     */
+    async asyncGetOrderHistoryInfo(context) {
+      //一旦ダミーのIDが入っています。
+      //ダミーID 129, 134, 139, 148, 150
+      // 下のid部分をthis.state.currentUser.idにする
+      const response = await axios.get(
+        "http://153.127.48.168:8080/ecsite-api/order/orders/coffee/129"
+      );
+      const payload = response.data;
+      context.commit("setOrderHistoryInfo", payload);
     },
   },
   mutations: {
@@ -131,23 +101,33 @@ export default new Vuex.Store({
         );
       }
     },
-
-    changeOrderStatus(state, payload) {
-      // const statusList = {
-      //   targetKey: payload.key,
-      //   targetValue: payload.value
-      // }
-      // state.order.statusList.targetKey = statusList.targetValue;
-      state.order.status = payload.status;
+    /**
+     * 注文履歴情報をstateにセットするメソッド.
+     * @param state - ステイト
+     * @param payload - 注文情報のペイロード
+     */
+    setOrderHistoryInfo(state, payload) {
+      for (const order of payload.orders) {
+        state.orderHistoryInfoList.push(
+          new Order(
+            order.id,
+            order.userId,
+            order.status,
+            order.totalPrice,
+            order.orderDate,
+            order.destinationName,
+            order.destinationEmail,
+            order.destinationZipcode,
+            order.destinationAddress,
+            order.destinationTel,
+            order.deliveryTime,
+            order.paymentMethod,
+            order.user,
+            order.orderItemList
+          )
+        );
+      }
     },
-    updateOrder(state, payload) {
-      state.order.destinationName = payload.destinationName;
-      state.order.destinationEmail = payload.destinationEmail;
-      state.order.destinationZipcode = payload.destinationZipcode;
-      state.order.destinationAddress = payload.destinationAddress;
-      state.order.destinationTel = payload.destinationTel;
-    },
-
     /**
      * 商品を削除する.
      *
@@ -158,6 +138,70 @@ export default new Vuex.Store({
     removeItem(state, payload) {
       state.order.orderItemList.splice(payload.itemIndex, 1);
     },
+
+    /**
+     *商品を追加する.
+
+     * @param state - ステート
+     * @param payload - 追加する商品の情報
+     */
+    addItem(state, payload) {
+      state.order.orderItemList.push(payload);
+    },
+    /**
+     * ユーザー情報をセットする.
+     * @param state - ステイト
+     * @param payload APIから返ってきたユーザー情報
+     */
+    setCurrentUser(state, payload) {
+      state.currentUser = new User(
+        payload.id,
+        payload.name,
+        payload.email,
+        payload.password,
+        payload.zipcode,
+        payload.address,
+        payload.telephone
+      );
+      console.log(state.currentUser);
+    },
+    /**
+     * 注文テーブルを削除する.
+     *
+     * @param state - ステート
+     * @param payload - 更新する情報
+     */
+    initializeOrder(state) {
+      state.order = new Order(
+        0,
+        state.currentUser.id,
+        0,
+        0,
+        new Date(),
+        "",
+        "",
+        "",
+        "",
+        "",
+        new Date(),
+        0,
+        state.currentUser,
+        []
+      );
+    },
+     /**
+     * ユーザー情報を更新する.
+     * @param state - ステイト
+     * @param payload 更新するユーザー情報
+     */
+      updateCurrentUser(state, payload) {
+        state.currentUser.name = payload.name;
+        state.currentUser.email = payload.email;
+        state.currentUser.zipcode = payload.zipcode;
+        state.currentUser.address = payload.address;
+        state.currentUser.telephone = payload.telephone;
+        console.log(state.currentUser);
+      },
   },
 
   modules: {},
@@ -186,7 +230,6 @@ export default new Vuex.Store({
         return items[0];
       };
     },
-
     /**
      * IDからトッピングを検索し返す.
      *
@@ -209,7 +252,23 @@ export default new Vuex.Store({
      * @returns Orderオブジェクト
      */
     getOrder(state) {
-      return state.order.orderItemList;
+      return state.order;
+    },
+    /**
+     * 注文商品リストを取得する.
+     * @param state - ステート
+     * @returns Orderオブジェクト
+     */
+    getOrderHistoryInfoList(state) {
+      return state.orderHistoryInfoList;
+    },
+    /**
+     * ログインしているユーザーの情報を取得する.
+     * @param state - ステート
+     * @returns Userオブジェクト
+     */
+    getCurrentUser(state) {
+      return state.currentUser;
     },
   },
 });

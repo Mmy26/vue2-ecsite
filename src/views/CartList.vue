@@ -83,11 +83,11 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { Order } from "@/type/order";
-import { User } from "@/type/user";
-import { OrderItem } from "@/type/orderItem";
-import { Item } from "@/type/item";
-import { Topping } from "@/type/topping2";
+import { Order } from "@/types/order";
+import { User } from "@/types/user";
+import { OrderItem } from "@/types/orderItem";
+import { Item } from "@/types/item";
+import { Topping } from "@/types/topping2";
 @Component
 export default class XXXComponent extends Vue {
   // 合計金額
@@ -128,73 +128,12 @@ export default class XXXComponent extends Vue {
    * ショッピングカート一覧を表示させる.
    */
   created(): void {
-    this.currentOrder = new Order(
-      0,
-      0,
-      0,
-      0,
-      new Date(),
-      "",
-      "",
-      "",
-      "",
-      "",
-      new Date(),
-      0,
-      new User(0, "", "", "", "", "", ""),
-      [
-        new OrderItem(
-          21,
-          1,
-          1,
-          1,
-          "M",
-          new Item(
-            21,
-            "coffee",
-            "Gorgeous4サンド",
-            "",
-            480,
-            700,
-            "/img_coffee/1.jpg",
-            false,
-            [
-              new Topping(-1, "coffee", "ピクルス", 200, 300),
-              new Topping(-1, "coffee", "チーズ", 200, 300),
-            ]
-          ),
-          []
-        ),
-        new OrderItem(
-          21,
-          1,
-          1,
-          2,
-          "L",
-          new Item(
-            21,
-            "coffee",
-            "コーヒー",
-            "",
-            480,
-            700,
-            "/img_coffee/1.jpg",
-            false,
-            [
-              new Topping(-1, "coffee", "ピクルス", 200, 300),
-              new Topping(-1, "coffee", "チーズ", 200, 300),
-            ]
-          ),
-          []
-        ),
-      ]
-    );
+    this.currentOrder = this.$store.getters.getOrder;
     // カートに商品が1個もなければエラーメッセージを出す
     if (this.currentOrder.orderItemList.length === 0) {
       this.errorMessage = "カートに商品がありません";
       this.canShow = false;
     }
-    // this.currentOrder = this.$store.getters.getOrder;
   }
   /**
    * 注文に進む.
@@ -202,12 +141,10 @@ export default class XXXComponent extends Vue {
   onOrderClick(): void {
     if (this.$store.getters.getLoginStatus === false) {
       this.$router.push("/login");
-    } else {
-      //注文確認画面に遷移する
-      this.$router.push("/orderConfirm");
     }
+    //注文確認画面に遷移する
+    this.$router.push("/orderConfirm");
   }
-
   /**
    * 商品を削除する.
    */

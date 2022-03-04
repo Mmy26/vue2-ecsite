@@ -3,7 +3,7 @@
     <div class="top-wrapper">
       <div class="container">
         <h1 class="page-title">
-          {{ selectItem.name }}
+          {{ selectItem._name }}
         </h1>
         <div class="row">
           <div class="row item-detail">
@@ -12,9 +12,31 @@
             </div>
             <div class="item-intro">
               {{ selectItem.discription }}
+              <div class="sns-btn">
+                <a
+                  target="_blank"
+                  href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F192.168.11.12%3A8080%2FitemDetail&amp;src=sdkpreparse"
+                  ><button type="button" class="sns facebook-btn">
+                    Facebook
+                  </button></a
+                >
+                <a
+                  target="_blank"
+                  href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+                  data-show-count="false"
+                >
+                  <button type="button" class="sns twitter-btn">
+                    Twitter
+                  </button></a
+                >
+                <a
+                  target="_blank"
+                  href="https://social-plugins.line.me/lineit/share?url=http://192.168.11.12:8080/itemDetail"
+                  ><button type="button" class="sns line-btn">LINE</button></a
+                >
+              </div>
             </div>
           </div>
-
           <div class="row item-size">
             <div class="item-hedding">サイズ</div>
             <div>
@@ -56,6 +78,7 @@
                 <span>&nbsp;Ｍ&nbsp;</span>&nbsp;&nbsp;200円(税抜)
                 <span>&nbsp;Ｌ</span>&nbsp;&nbsp;300円(税抜)
               </div>
+
               <span
                 v-for="topping of selectItem.toppingList"
                 v-bind:key="topping.id"
@@ -122,9 +145,11 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import { Item } from "@/type/item";
+import { Item } from "@/types/item";
 import axios from "axios";
-import { Topping } from "@/type/topping2";
+import { Topping } from "@/types/topping2";
+import { OrderItem } from "@/types/orderItem";
+import { orderTopping } from "@/types/orderTopping";
 
 @Component
 export default class ItemDetail extends Vue {
@@ -201,6 +226,8 @@ export default class ItemDetail extends Vue {
       `http://153.127.48.168:8080/ecsite-api/item/toppings/coffee`
     );
 
+    console.dir("①response:" + JSON.stringify(this.selectItem));
+
     const displayToppingList = new Array<Topping>();
 
     for (const topping of responseTopping.data.toppings) {
@@ -214,6 +241,7 @@ export default class ItemDetail extends Vue {
         )
       );
       this.selectItem.toppingList = displayToppingList;
+      this.selectItemImage = `${this.selectItem.imagePath}`;
     }
 
     this.selectItemImage = `${this.selectItem.imagePath}`;
@@ -252,18 +280,87 @@ export default class ItemDetail extends Vue {
     return this.subTotalPrice;
   }
 
-  /**
-   * カートに入れる.
+  /** 商品をカートに入れる.
    */
   addToCart(): void {
+    const orderItem = new OrderItem(
+      0,
+      this.selectItem.id,
+      1,
+      this.selectItemQuantity,
+      this.selectSize,
+      new Item(
+        this.selectItem.id,
+        this.selectItem.type,
+        this.selectItem.name,
+        this.selectItem.discription,
+        this.selectItem.priceM,
+        this.selectItem.priceL,
+        this.selectItem.imagePath,
+        this.selectItem.deleted,
+        this.selectItem.toppingList
+      ),
+      this.selectToppingList(this.selectTopping)
+    );
+    this.$store.commit("addItem", orderItem);
     //注文確認画面に遷移する
     this.$router.push("/cartList");
+  }
+
+  selectToppingList(selectToppingIdList: Array<number>): Array<orderTopping> {
+    const selectOrderToppingList = new Array<orderTopping>();
+
+    for (let toppingId of selectToppingIdList) {
+      const topping = this.selectItem.toppingList.find((topping) => {
+        return topping.id === toppingId;
+      });
+      if (topping !== undefined) {
+        const aOrderTopping = new orderTopping(0, toppingId, 0, topping);
+        selectOrderToppingList.push(aOrderTopping);
+      }
+    }
+    return selectOrderToppingList;
   }
 }
 </script>
 
 <style scoped>
+@import url("/css/item_detail.css");
 .item-toppings {
   display: inline-block;
+}
+
+.facebook-btn {
+  background-color: #3b5998;
+}
+
+.twitter-btn {
+  background-color: #55acee;
+}
+
+.line-btn {
+  background-color: #14b887;
+}
+
+.sns {
+  width: 80px;
+  height: 25px;
+  font-size: 13px;
+  padding: 5px 12px;
+  color: white;
+  margin-right: 10px;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+}
+
+.sns:hover {
+  opacity: 0.7;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.sns-btn{
+  margin-top: 20px;
 }
 </style>

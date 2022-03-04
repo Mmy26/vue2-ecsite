@@ -10,6 +10,10 @@ const routes: Array<RouteConfig> = [
   //   component: Home,
   // },
   {
+    path: "/top",
+    component: () => import("../views/Top.vue"),
+  },
+  {
     path: "/cartList",
     component: () => import("../views/CartList.vue"),
   },
@@ -35,6 +39,10 @@ const routes: Array<RouteConfig> = [
     component: () => import("../views/Login.vue"),
   },
   {
+    path: "/orderConfirm",
+    component: () => import("../views/OrderConfirm.vue"),
+  },
+  {
     path: "/faq",
     component: () => import("../views/Faq.vue"),
   },
@@ -43,14 +51,13 @@ const routes: Array<RouteConfig> = [
     component: () => import("../views/OrderFinished.vue"),
   },
   {
-    path: "/error",
-    component: () => import("../views/Error.vue"),
+    path: "/orderHistory",
+    component: () => import("../views/OrderHistory.vue"),
   },
   {
-    path: "*",
-    name: "NotFoundError",
+    path: "/error",
     component: () => import("../views/Error.vue"),
-  },
+  }
 ];
 
 const router = new VueRouter({
