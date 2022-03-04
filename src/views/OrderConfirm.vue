@@ -309,22 +309,21 @@ export default class OrderConfirm extends Vue {
       this.emailErrorMessage = "メールアドレスの形式が不正です。";
       this.hasError = true;
     }
-    // const addressCheck = (): boolean => {
-    //   let hasAddressError = false;
-    //   let targetArray = new Array<string>();
-    //   targetArray = this.destinationZipcode.split("-");
-    //   console.log(targetArray);
-    //   if (targetArray[0].length != 3) {
-    //     hasAddressError = true;
-    //   } else if (targetArray[1].length != 4) {
-    //     hasAddressError = true;
-    //   }
-    //   return hasAddressError;
-    // };
-    // if (addressCheck()) {
-    //   this.hasError = true;
-    //   this.zipcodeErrorMessage = "郵便番号はXXX-XXXXの形式で入力してください";
-    // }
+    const addressCheck = (): boolean => {
+      let hasAddressError = false;
+      let targetArray = new Array<string>();
+      targetArray = this.destinationZipcode.split("-");
+      if (targetArray[0].length != 3) {
+        hasAddressError = true;
+      } else if (targetArray[1].length != 4) {
+        hasAddressError = true;
+      }
+      return hasAddressError;
+    };
+    if (addressCheck()) {
+      this.hasError = true;
+      this.zipcodeErrorMessage = "郵便番号はXXX-XXXXの形式で入力してください";
+    }
     if (this.destinationZipcode === "") {
       this.zipcodeErrorMessage = "郵便番号を入力してください。";
     }
@@ -332,53 +331,52 @@ export default class OrderConfirm extends Vue {
       this.hasError = true;
       this.addressErrorMessage = "住所を入力してください。";
     }
-    // const telCheck = (): boolean => {
-    //   let hasTelError = false;
-    //   let targetArray = new Array<string>();
-    //   if (includeOrNot("-")) {
-    //     hasTelError = true;
-    //   }
-    //   targetArray = this.destinationTel.split("-");
-    //   if (targetArray[0].length != 4) {
-    //     hasTelError = true;
-    //   } else if (targetArray[1].length != 4) {
-    //     hasTelError = true;
-    //   } else if (targetArray[2].length != 4) {
-    //     hasTelError = true;
-    //   }
-    //   return hasTelError;
-    // };
-    // if (telCheck()) {
-    //   this.telErrorMessage = "電話番号はXXXX-XXXX-XXXXの形式で入力してください";
-    //   this.hasError = true;
-    // }
+    const telCheck = (): boolean => {
+      let hasTelError = false;
+      let targetArray = new Array<string>();
+      if (includeOrNot("-")) {
+        hasTelError = true;
+      }
+      targetArray = this.destinationTel.split("-");
+      if (targetArray[0].length != 3) {
+        hasTelError = true;
+      } else if (targetArray[1].length != 4) {
+        hasTelError = true;
+      } else if (targetArray[2].length != 4) {
+        hasTelError = true;
+      }
+      return hasTelError;
+    };
+    if (telCheck()) {
+      this.telErrorMessage = "電話番号はXXXX-XXXX-XXXXの形式で入力してください";
+      this.hasError = true;
+    }
     if (this.destinationTel === "") {
       this.telErrorMessage = "電話番号を入力してください。";
       this.hasError = true;
     }
-    // const hoursCheck = (): boolean => {
-    //   let currentDate = new Date();
-    //   console.log(this.deliveryDate);
-    //   console.log(new Date(
-    //       getYear(currentDate),
-    //       getMonth(currentDate),
-    //       getDate(currentDate),
-    //       getHours(currentDate) + 3
-    //     ));
-    //   return (
-    //     this.deliveryDate <=
-    //     new Date(
-    //       getYear(currentDate),
-    //       getMonth(currentDate),
-    //       getDate(currentDate),
-    //       getHours(currentDate) + 3
-    //     )
-    //   );
-    // };
-    // if (hoursCheck()) {
-    //   this.delivelyErrorMessage = "今から3時間後の日時をご入力ください";
-    //   this.hasError = true;
-    // }
+    const hoursCheck = (): boolean => {
+      let currentDate = new Date();
+      
+        let splitedArray = this.deliveryDate.split("-");
+        let yearNum = Number(splitedArray[0])
+        let manthNum = Number(splitedArray[1])
+        let dayNum = Number(splitedArray[2])
+        let targetDate = new Date(yearNum, manthNum -1, dayNum);
+      return (
+        targetDate <=
+        new Date(
+          getYear(currentDate),
+          getMonth(currentDate),
+          getDate(currentDate),
+          getHours(currentDate) + 3
+        )
+      );
+    };
+    if (hoursCheck()) {
+      this.delivelyErrorMessage = "今から3時間後の日時をご入力ください";
+      this.hasError = true;
+    }
     if (this.deliveryDate === "" ) {
       this.delivelyErrorMessage = "配達日時を入力してください。";
     }
@@ -402,7 +400,6 @@ export default class OrderConfirm extends Vue {
         orderItemFormList: this.currentOrder.makeOrderFormList,
       }
     );
-    console.log(this.deliveryDate.replace("-", "/") + this.deliveryTime +format(new Date(), ":mm:ss"))
     if (response.data.status === "success") {
       this.$store.commit("updateCurrentUser",{
         name: this.destinationName,
