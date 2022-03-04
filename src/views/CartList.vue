@@ -144,12 +144,10 @@ export default class XXXComponent extends Vue {
    * 注文に進む.
    */
   onOrderClick(): void {
-    if (this.$store.getters.getLoginStatus === true){
-       if (this.$store.state.order.orderItemList.length > 0) {
-        this.$router.push("/orderConfirm");
-      }
+    if (this.$store.getters.getLoginStatus === true) {
+      this.$router.push("/orderConfirm");
     }
-      this.$router.push("/login");
+    this.$router.push("/login");
   }
   /**
    * 商品を削除する.
@@ -164,9 +162,8 @@ export default class XXXComponent extends Vue {
 </script>
 
 <style scoped>
-.error-message{
+.error-message {
   text-align: center;
-  margin-top:20px;
+  margin-top: 20px;
 }
-
 </style>
