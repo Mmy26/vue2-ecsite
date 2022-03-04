@@ -32,15 +32,18 @@ export class OrderItem {
   public get calcSubTotalPrice(): number {
     let subTotalPrice = 0;
     //トッピングオブジェクトを生成
-    const topping = new Topping(0, "", "", 0, 0);
+    // const topping = new Topping(0, "", "", 200, 300);
+    const TOPPING_PRICE_M = 200;
+    const TOPPING_PRICE_L = 300;
+
     if (this.size === "M") {
       //トッピングの合計金額
-      const toppingSubTotalM = this.orderToppingList.length * topping.priceM;
+      const toppingSubTotalM = this.orderToppingList.length * TOPPING_PRICE_M;
       //Mサイズの場合の小計
       subTotalPrice = (this.item.priceM + toppingSubTotalM) * this.quantity;
     } else if (this.size === "L") {
       //トッピングの合計金額
-      const toppingSubTotalL = this.orderToppingList.length * topping.priceL;
+      const toppingSubTotalL = this.orderToppingList.length * TOPPING_PRICE_L;
       //Lサイズの場合の小計
       subTotalPrice = (this.item.priceL + toppingSubTotalL) * this.quantity;
     }
