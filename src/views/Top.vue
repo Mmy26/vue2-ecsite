@@ -33,7 +33,7 @@
         </div>
       </div>
     </div>
-
+    <a href="#" id="page-top"><i class="material-icons icon">expand_less</i></a>
     <div class="top-item-wrapper">
       <div class="container">
         <div class="heading">
@@ -42,7 +42,10 @@
         <div class="top-items">
           <div class="top-item">
             <div class="top-item-icon">
-              <img class="materialboxed" src="../../public/img_coffee/point1.jpg" />
+              <img
+                class="materialboxed"
+                src="../../public/img_coffee/point1.jpg"
+              />
             </div>
             <p class="text-contents">
               この場所で生まれる小さな出会いやささやかな会話の一つひとつが、永くつづく時の流れの中に溶け込んでいく。そんな豊かな体験を提供するために、一杯に、一皿に、想いを乗せていきます。
@@ -50,7 +53,10 @@
           </div>
           <div class="top-item">
             <div class="top-item-icon">
-              <img class="materialboxed" src="../../public/img_coffee/point2.jpg" />
+              <img
+                class="materialboxed"
+                src="../../public/img_coffee/point2.jpg"
+              />
             </div>
             <p class="text-contents">
               エチオピアモカの華やかなアロマとワイニーな口あたりが特徴のコーヒー豆を使用しています。深いボディを感じながら、くつろぎながらゆっくりと、その味わいをお楽しみください。
@@ -59,7 +65,10 @@
           <div class="top-item">
             <div class="top-item-icon">
               <div class="point3">
-                <img class="materialboxed" src="../../public/img_coffee/point3.jpg" />
+                <img
+                  class="materialboxed"
+                  src="../../public/img_coffee/point3.jpg"
+                />
               </div>
             </div>
             <p class="text-contents">
@@ -68,7 +77,10 @@
           </div>
           <div class="top-item">
             <div class="top-item-icon">
-              <img class="materialboxed" src="../../public/img_coffee/point4.jpg" />
+              <img
+                class="materialboxed"
+                src="../../public/img_coffee/point4.jpg"
+              />
             </div>
             <p class="text-contents">
               ネットでの注文だけでなくイートインスペースもあります。お店の雰囲気やコーヒーの香りを楽しみながらゆっくりと過ごすのはいかがですか。
