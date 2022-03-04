@@ -315,8 +315,8 @@ export default class XXXComponent extends Vue {
 .form {
   width: 750px;
   height: 970px;
-  background-color: azure;
   margin: 0 auto;
+  box-shadow: 0 0 8px silver;
 }
 .clear-btn {
   width: 90px;

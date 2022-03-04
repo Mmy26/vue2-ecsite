@@ -6,7 +6,7 @@
     <div class="top-wrapper">
       <div class="container">
         <h1 class="page-title">ショッピングカート</h1>
-        <div>{{ errorMessage }}</div>
+        <div class="error-message">{{ errorMessage }}</div>
         <!-- table -->
         <div class="cartlist" v-show="canShow">
           <div class="row">
@@ -158,4 +158,9 @@ export default class XXXComponent extends Vue {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.error-message{
+  text-align: center;
+}
+
+</style>
