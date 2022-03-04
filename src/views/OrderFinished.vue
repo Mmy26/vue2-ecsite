@@ -37,7 +37,7 @@ export default class OrderFinished extends Vue {
   }
 
   toTopPage(): void {
-    this.$router.push("/itemList");
+    this.$router.push("/");
   }
   toOrderHistory(): void {
     this.$router.push("/orderHistory");

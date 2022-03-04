@@ -10,7 +10,7 @@ const routes: Array<RouteConfig> = [
   //   component: Home,
   // },
   {
-    path: "/top",
+    path: "/",
     component: () => import("../views/Top.vue"),
   },
   {
