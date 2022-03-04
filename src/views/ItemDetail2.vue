@@ -12,9 +12,31 @@
             </div>
             <div class="item-intro">
               {{ selectItem.discription }}
+              <div class="sns-btn">
+                <a
+                  target="_blank"
+                  href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F192.168.11.12%3A8080%2FitemDetail&amp;src=sdkpreparse"
+                  ><button type="button" class="sns facebook-btn">
+                    Facebook
+                  </button></a
+                >
+                <a
+                  target="_blank"
+                  href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+                  data-show-count="false"
+                >
+                  <button type="button" class="sns twitter-btn">
+                    Twitter
+                  </button></a
+                >
+                <a
+                  target="_blank"
+                  href="https://social-plugins.line.me/lineit/share?url=http://192.168.11.12:8080/itemDetail"
+                  ><button type="button" class="sns line-btn">LINE</button></a
+                >
+              </div>
             </div>
           </div>
-
           <div class="row item-size">
             <div class="item-hedding">サイズ</div>
             <div>
@@ -306,5 +328,39 @@ export default class ItemDetail extends Vue {
 @import url("/css/item_detail.css");
 .item-toppings {
   display: inline-block;
+}
+
+.facebook-btn {
+  background-color: #3b5998;
+}
+
+.twitter-btn {
+  background-color: #55acee;
+}
+
+.line-btn {
+  background-color: #14b887;
+}
+
+.sns {
+  width: 80px;
+  height: 25px;
+  font-size: 13px;
+  padding: 5px 12px;
+  color: white;
+  margin-right: 10px;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+}
+
+.sns:hover {
+  opacity: 0.7;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.sns-btn{
+  margin-top: 20px;
 }
 </style>
