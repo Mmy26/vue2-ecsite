@@ -73,37 +73,42 @@
                 <input id="name" type="text" v-model="destinationName"/>
                 <label for="name">お名前</label>
               </div>
+              <div class="error-message">{{ nameErrorMessage }}</div>
             </div>
             <div class="row">
               <div class="input-field">
                 <input id="email" type="email" v-model="destinationEmail"/>
                 <label for="email">メールアドレス</label>
               </div>
+              <div class="error-message">{{ emailErrorMessage }}</div>
             </div>
             <div class="row">
               <div class="input-field">
                 <input id="zipcode" type="text" maxlength="8" v-model="destinationZipcode"/>
                 <label for="zipcode">郵便番号</label>
-                <button class="btn" type="button">
+                <button class="btn" type="button" v-on:click="getAddress">
                   <span>住所検索</span>
                 </button>
               </div>
+              <div class="error-message">{{ zipcodeErrorMessage }}</div>
             </div>
             <div class="row">
               <div class="input-field">
                 <input id="address" type="text" v-model="destinationAddress"/>
                 <label for="address">住所</label>
               </div>
+              <div class="error-message">{{ addressErrorMessage }}</div>
             </div>
             <div class="row">
               <div class="input-field">
                 <input id="tel" type="tel" v-model="destinationTel"/>
                 <label for="tel">電話番号</label>
               </div>
+              <div class="error-message">{{ telErrorMessage }}</div>
             </div>
             <div class="row order-confirm-delivery-datetime">
               <div class="input-field">
-                <input id="deliveryDate" type="date" />
+                <input id="deliveryDate" type="date" v-model="deliveryDate"/>
                 <label for="address">配達日時</label>
               </div>
               <label class="order-confirm-delivery-time">
@@ -148,6 +153,7 @@
                 <span>18時</span>
               </label>
             </div>
+            <div class="error-message">{{ delivelyErrorMessage }}</div>
           </div>
 
           <h2 class="page-title">お支払い方法</h2>
@@ -157,18 +163,21 @@
                 <input
                   name="paymentMethod"
                   type="radio"
-                  value="1"
+                  v-bind:value="1"
                   v-model.number="paymentMethod"
+                  v-on:change="changeFrag"
                 />
                 <span>代金引換</span>
               </label>
               <label class="order-confirm-payment-method-radio">
-                <input name="paymentMethod" type="radio" value="2" />
+                <input name="paymentMethod" type="radio" v-bind:value="2" v-model.number="paymentMethod" v-on:change="changeFrag" />
                 <span>クレジットカード</span>
               </label>
             </span>
           </div>
-         <CompCreditCardPayment />
+          <div class="credit-card-field" v-show="canShow">
+            <CompCreditCardPayment />
+          </div>
           <div class="row order-confirm-btn">
             <button
               class="btn"
@@ -201,8 +210,6 @@ import { getMonth } from "date-fns";
 import { getDate } from "date-fns";
 import { format } from "date-fns";
 import { Item } from "@/types/item";
-import { Topping } from "@/types/topping2";
-import { getMinutes, getSeconds } from "date-fns/esm";
 
 @Component({
   components: {
@@ -237,19 +244,20 @@ export default class OrderConfirm extends Vue {
     new Item(0, "", "", "", 0, 0, "", true, []),
     []
   );
-
+  //ログインしているユーザー情報
+  private currentUser = new User(0, "", "", "", "", "", "");
   //注文者の名前
-  private destinationName = "";
+  private destinationName = this.currentUser.name;
   //注文者のメールアドレス
-  private destinationEmail = "";
+  private destinationEmail = this.currentUser.email;
   //注文者の郵便番号
-  private destinationZipcode = "";
+  private destinationZipcode = this.currentUser.zipcode;
   //注文者の住所
-  private destinationAddress = "";
+  private destinationAddress = this.currentUser.address;
   //注文者の電話番号
-  private destinationTel = "";
+  private destinationTel = this.currentUser.telephone;
   //配達日時
-  private deliveryDate = new Date();
+  private deliveryDate = ""
   //配達時間
   private deliveryTime = 10;
   //支払い方法
@@ -270,12 +278,15 @@ export default class OrderConfirm extends Vue {
   private telErrorMessage = "";
   //配達日時入力フォームのエラーメッセージ
   private delivelyErrorMessage = "";
+  //クレジットカード入力フォームのFrag
+  private canShow = false;
 
   /**
    * ショッピングカート一覧を表示させる.
    */
   created(): void {
     this.currentOrder = this.$store.getters.getOrder;
+    this.currentUser = this.$store.getters.getCurrentUser;
   }
   /**
    * 注文ボタンが押下されたときのメソッド.
@@ -283,25 +294,26 @@ export default class OrderConfirm extends Vue {
    */
   async order(): Promise<void> {
     //入力値チェック
-    // if (this.destinationName === "") {
-    //   this.nameErrorMessage = "名前を入力して下さい";
-    //   this.hasError = true;
-    // }
-    // const includeOrNot = (str: string): boolean => {
-    //   return this.destinationEmail.includes(str);
-    // };
-    // if (this.destinationEmail === "") {
-    //   this.emailErrorMessage = "メールアドレスを入力してください。";
-    //   this.hasError = true;
-    // }
-    // if (includeOrNot("@")) {
-    //   this.emailErrorMessage = "メールアドレスの形式が不正です。";
-    //   this.hasError = true;
-    // }
+    if (this.destinationName === "") {
+      this.nameErrorMessage = "名前を入力して下さい";
+      this.hasError = true;
+    }
+    const includeOrNot = (str: string): boolean => {
+      return this.destinationEmail.includes(str);
+    };
+    if (this.destinationEmail === "") {
+      this.emailErrorMessage = "メールアドレスを入力してください。";
+      this.hasError = true;
+    }
+    if (!includeOrNot("@")) {
+      this.emailErrorMessage = "メールアドレスの形式が不正です。";
+      this.hasError = true;
+    }
     // const addressCheck = (): boolean => {
     //   let hasAddressError = false;
     //   let targetArray = new Array<string>();
     //   targetArray = this.destinationZipcode.split("-");
+    //   console.log(targetArray);
     //   if (targetArray[0].length != 3) {
     //     hasAddressError = true;
     //   } else if (targetArray[1].length != 4) {
@@ -313,13 +325,13 @@ export default class OrderConfirm extends Vue {
     //   this.hasError = true;
     //   this.zipcodeErrorMessage = "郵便番号はXXX-XXXXの形式で入力してください";
     // }
-    // if (this.destinationZipcode === "") {
-    //   this.zipcodeErrorMessage = "住所を入力してください。";
-    // }
-    // if (this.destinationAddress === "") {
-    //   this.hasError = true;
-    //   this.addressErrorMessage = "住所を入力してください。";
-    // }
+    if (this.destinationZipcode === "") {
+      this.zipcodeErrorMessage = "郵便番号を入力してください。";
+    }
+    if (this.destinationAddress === "") {
+      this.hasError = true;
+      this.addressErrorMessage = "住所を入力してください。";
+    }
     // const telCheck = (): boolean => {
     //   let hasTelError = false;
     //   let targetArray = new Array<string>();
@@ -340,12 +352,19 @@ export default class OrderConfirm extends Vue {
     //   this.telErrorMessage = "電話番号はXXXX-XXXX-XXXXの形式で入力してください";
     //   this.hasError = true;
     // }
-    // if (this.destinationTel === "電話番号を入力してください。") {
-    //   this.telErrorMessage = "電話番号を入力してください。";
-    //   this.hasError = true;
-    // }
+    if (this.destinationTel === "") {
+      this.telErrorMessage = "電話番号を入力してください。";
+      this.hasError = true;
+    }
     // const hoursCheck = (): boolean => {
     //   let currentDate = new Date();
+    //   console.log(this.deliveryDate);
+    //   console.log(new Date(
+    //       getYear(currentDate),
+    //       getMonth(currentDate),
+    //       getDate(currentDate),
+    //       getHours(currentDate) + 3
+    //     ));
     //   return (
     //     this.deliveryDate <=
     //     new Date(
@@ -360,12 +379,12 @@ export default class OrderConfirm extends Vue {
     //   this.delivelyErrorMessage = "今から3時間後の日時をご入力ください";
     //   this.hasError = true;
     // }
-    // if (this.deliveryDate === new Date()) {
-    //   this.delivelyErrorMessage = "配達日時を入力してください。";
-    // }
-    // if (this.hasError) {
-    //   return;
-    // }
+    if (this.deliveryDate === "" ) {
+      this.delivelyErrorMessage = "配達日時を入力してください。";
+    }
+    if (this.hasError) {
+      return;
+    }
     //注文をする機能のメインの処理
     const response = await axios.post(
       "http://153.127.48.168:8080/ecsite-api/order",
@@ -375,44 +394,24 @@ export default class OrderConfirm extends Vue {
         totalPrice: this.currentOrder.totalPrice,
         destinationName: this.destinationName,
         destinationEmail: this.destinationEmail,
-        destinationZipcode: this.destinationZipcode,
+        destinationZipcode: this.destinationZipcode.replace("-", ""),
         destinationAddress: this.destinationAddress,
         destinationTel: this.destinationTel,
-        deliveryTime: format(this.deliveryDate, "yyyy/MM/dd HH:mm:ss"),
+        deliveryTime:  this.deliveryDate.replaceAll("-", "/") + " " + this.deliveryTime +format(new Date(), ":mm:ss"),
         paymentMethod: this.paymentMethod,
         orderItemFormList: this.currentOrder.makeOrderFormList,
       }
     );
-    console.dir("response:" + JSON.stringify(response));
-    console.log(this.currentOrder);
-    console.log('  1   ' + this.currentOrder.user.id)
-    console.log('  2   ' + this.currentOrder.status)
-    console.log('  3   ' + this.currentOrder.totalPrice)
-    console.log('  4   ' + this.destinationName)
-    console.log('  5   ' + this.destinationZipcode)
-    console.log('  6   ' + this.destinationAddress)
-    console.log('  7   ' + this.destinationTel)
-    console.log('  8   ' + format(this.deliveryDate, "yyyy/MM/dd HH:mm:ss"))
-    console.log('  9   ' + this.paymentMethod)
-    console.log('  10   ',this.currentOrder.makeOrderFormList);
-
+    console.log(this.deliveryDate.replace("-", "/") + this.deliveryTime +format(new Date(), ":mm:ss"))
     if (response.data.status === "success") {
-      // if (this.paymentMethod === 2) {
-      //   this.$store.commit("changeOrderStatus", {
-      //     status: 2,
-      //   });
-      // } else {
-      //   this.$store.commit("changeOrderStatus", {
-      //     status: 1,
-      //   });
-      // }
-      // this.$store.commit("updateOrder", {
-      //   destinationName: this.destinationName,
-      //   destinationEmail: this.destinationEmail,
-      //   destinationZipcode: this.destinationZipcode,
-      //   destinationAddress: this.destinationAddress,
-      //   destinationTel: this.destinationTel,
-      // });
+      this.$store.commit("updateCurrentUser",{
+        name: this.destinationName,
+        email: this.destinationEmail,
+        zipcode: this.destinationZipcode,
+        address: this.destinationAddress,
+        telephone: this.destinationTel
+      });
+      this.$store.commit("initializeOrder");
       this.$router.push("/orderFinished");
     } else {
       // 失敗ならエラーメッセージを表示する
@@ -429,11 +428,41 @@ export default class OrderConfirm extends Vue {
   get getTax(): number {
     return this.$store.getters.tax;
   }
+
+  /**
+   * 住所情報をAPIから取得する.
+   *
+   * @returns Promiseオブジェクト
+   */
+  async getAddress(): Promise<void> {
+    require("axios");
+
+    const response = await axios.get("https://zipcoda.net/api", {
+      adapter: require("axios-jsonp"),
+      params: {
+        zipcode: this.destinationZipcode.replace("-", ""),
+      },
+    });
+    this.destinationAddress = response.data.items[0].address;
+  }
+
+  /**
+   * canShowフラグを切り替える.
+   */
+  changeFrag(): void{
+      this.canShow = !this.canShow
+  }
 }
 </script>
 
 <style scoped>
 .error-message{
   color: red;
+}
+.credit-card-field{
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  margin: 30px auto;
 }
 </style>
