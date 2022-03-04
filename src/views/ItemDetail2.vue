@@ -287,8 +287,14 @@ export default class ItemDetail extends Vue {
     const orderItemList = order.orderItemList;
 
     const latestOrderItem = orderItemList[orderItemList.length - 1];
+    console.log("latestOrderItem");
+    let newOrderItemId = 0;
+    if (latestOrderItem !== undefined) {
+      newOrderItemId = latestOrderItem.id + 1;
+    }
+    console.dir(JSON.stringify(latestOrderItem));
     const orderItem = new OrderItem(
-      latestOrderItem.id + 1,
+      newOrderItemId,
       this.selectItem.id,
       1,
       this.selectItemQuantity,
