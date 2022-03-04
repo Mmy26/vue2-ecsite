@@ -13,8 +13,18 @@
             <div class="btn-wrapper">
               <a href="/registerUser" class="btn signup">会員登録</a>
               <p>or</p>
-              <a href="#" class="btn facebook">Facebookで登録</a>
-              <a href="#" class="btn twitter">Twitterで登録</a>
+              <a
+                target="_blank"
+                href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F192.168.11.12%3A8080%2FitemDetail&amp;src=sdkpreparse"
+                class="btn facebook"
+                >Facebookで登録</a
+              >
+              <a
+                target="_blank"
+                href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+                class="btn twitter"
+                >Twitterで登録</a
+              >
             </div>
           </div>
           <div class="top-img">
