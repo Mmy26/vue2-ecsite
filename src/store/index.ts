@@ -57,7 +57,7 @@ export default new Vuex.Store({
       //ダミーID 129, 134, 139, 148, 150
       // 下のid部分をthis.state.currentUser.idにする
       const response = await axios.get(
-        "http://153.127.48.168:8080/ecsite-api/order/orders/coffee/129"
+        `http://153.127.48.168:8080/ecsite-api/order/orders/coffee/${this.state.currentUser.id}`
       );
       const payload = response.data;
       context.commit("setOrderHistoryInfo", payload);
@@ -189,19 +189,19 @@ export default new Vuex.Store({
         []
       );
     },
-     /**
+    /**
      * ユーザー情報を更新する.
      * @param state - ステイト
      * @param payload 更新するユーザー情報
      */
-      updateCurrentUser(state, payload) {
-        state.currentUser.name = payload.name;
-        state.currentUser.email = payload.email;
-        state.currentUser.zipcode = payload.zipcode;
-        state.currentUser.address = payload.address;
-        state.currentUser.telephone = payload.telephone;
-        console.log(state.currentUser);
-      },
+    updateCurrentUser(state, payload) {
+      state.currentUser.name = payload.name;
+      state.currentUser.email = payload.email;
+      state.currentUser.zipcode = payload.zipcode;
+      state.currentUser.address = payload.address;
+      state.currentUser.telephone = payload.telephone;
+      console.log(state.currentUser);
+    },
   },
 
   modules: {},

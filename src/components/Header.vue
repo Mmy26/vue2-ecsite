@@ -4,8 +4,8 @@
       <div class="container">
         <div class="header">
           <div class="header-left">
-            <a href="/">
-              <img class="logo" src="img_coffee/header_logo.png" />
+            <a href="/top">
+              <img class="logo" src="/img_coffee/header_logo.png" />
             </a>
           </div>
 
@@ -100,7 +100,7 @@ header {
   margin-right: 4px;
 }
 
-.fix{
-  margin-top:5px;
+.fix {
+  margin-top: 5px;
 }
 </style>

@@ -360,7 +360,7 @@ export default class ItemDetail extends Vue {
   transition: 0.5s;
 }
 
-.sns-btn{
+.sns-btn {
   margin-top: 20px;
 }
 </style>
