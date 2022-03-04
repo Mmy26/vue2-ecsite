@@ -28,20 +28,20 @@
                   </td>
                   <td>
                     <span class="price">&nbsp;{{ orderItem.size }}</span
-                    ><span
-                      >&nbsp;&nbsp;{{
-                        orderItem.orderItemPrice.toLocaleString()
-                      }}円</span
+                    ><span>&nbsp;&nbsp;{{ orderItem.orderItemPrice }}円</span
                     ><span> &nbsp;&nbsp;{{ orderItem.quantity }}個</span>
                   </td>
                   <td>
                     <ul>
                       <li
-                        v-for="topping of orderItem.orderItemList.toppingList"
-                        v-bind:key="topping.id"
+                        v-for="orderTopping of orderItem.orderToppingList"
+                        v-bind:key="orderTopping.id"
                       >
-                        {{ topping.name
-                        }}{{ topping.toppingPrice.toLocaleString() }}円
+                        {{ orderTopping.topping.name }}
+                        <span v-if="orderItem.size === 'M'"
+                          >{{ orderTopping.topping.priceM }}円</span
+                        >
+                        <span v-else>{{ orderTopping.topping.priceL }}円</span>
                       </li>
                     </ul>
                   </td>
@@ -50,7 +50,11 @@
                       {{ orderItem.calcSubTotalPrice.toLocaleString() }}円
                     </div>
                   </td>
-                  <td></td>
+                  <td>
+                    <button class="btn" type="button">
+                      <span>削除</span>
+                    </button>
+                  </td>
                 </tr>
               </tbody>
             </table>
