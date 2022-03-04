@@ -394,7 +394,7 @@ export default class OrderConfirm extends Vue {
       return hasTelError;
     };
     if (telCheck()) {
-      this.telErrorMessage = "電話番号はXXXX-XXXX-XXXXの形式で入力してください";
+      this.telErrorMessage = "電話番号はXXX-XXXX-XXXXの形式で入力してください";
       this.hasError = true;
     }
     if (this.destinationTel === "") {
