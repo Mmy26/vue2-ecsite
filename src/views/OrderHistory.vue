@@ -43,10 +43,10 @@
                 </th>
                 <th>
                   <p
-                    v-for="orderItem of order.orderItemList.orderItem"
+                    v-for="orderItem of order.orderItemList"
                     v-bind:key="orderItem.id"
                   >
-                    {{ orderItem.item }}
+                    {{ orderItem.item.name }}
                   </p>
                 </th>
               </tr>
