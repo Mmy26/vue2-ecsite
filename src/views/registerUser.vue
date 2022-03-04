@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form>
+    <form class="form">
       <div class="top-wrapper">
         <div class="container">
           <div class="row register-page">
@@ -312,6 +312,12 @@ export default class XXXComponent extends Vue {
 </script>
 
 <style scoped>
+.form {
+  width: 750px;
+  height: 970px;
+  background-color: azure;
+  margin: 0 auto;
+}
 .clear-btn {
   width: 90px;
   height: 37px;
@@ -322,5 +328,9 @@ export default class XXXComponent extends Vue {
   border-radius: 3px;
   color: white;
   box-shadow: 0px 1px 2px silver;
+}
+.clear-btn:hover {
+  opacity: 0.7;
+  transition: 0.5;
 }
 </style>
