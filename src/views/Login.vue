@@ -78,7 +78,6 @@ export default class Login extends Vue {
       }
     );
     console.dir("response:" + JSON.stringify(response));
-    // ログインが成功したら商品一覧ページに遷移する
     if (response.data.status === "success") {
       this.$store.commit("setCurrentUser",{
         id: response.data.responseMap.user.id,
@@ -89,9 +88,9 @@ export default class Login extends Vue {
         address: response.data.responseMap.user.address,
         telephone: response.data.responseMap.user.telephone
       });
-      this.$router.push("/itemList");
       // ログイン状態をtrueにする
       this.$store.commit("logined");
+      this.$router.push("/itemList");
     }
     // ログインに失敗したらエラーメッセージを出す
     if (response.data.status === "error") {

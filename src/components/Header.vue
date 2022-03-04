@@ -8,7 +8,6 @@
               <img
                 class="logo"
                 src="img_coffee/header_logo.png"
-                v-on:click="toTopPage"
               />
             </a>
           </div>
@@ -37,11 +36,9 @@
 import { Component, Vue } from "vue-property-decorator";
 @Component
 export default class XXXComponent extends Vue {
-  // get isLogin(): boolean {
-  //   console.log(this.$store.getters.getLoginStatus);
-  // toTopPage(): void {
-  //   this.$router.push("/itemList");
-  // }
+  get isLogin(): boolean {
+    return this.$store.getters.getLoginStatus;
+  }
 }
 </script>
 
@@ -72,9 +69,28 @@ header {
 .header-right a {
   line-height: 65px;
   padding: 0 25px;
-  color: gray;
+  color: #555555;
   display: block;
   transition: all 0.5s;
+   position: relative;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.header-right a::after {
+  position: absolute;
+  bottom: 13px;
+  left: 0;
+  content: "";
+  width: 100%;
+  height: 1px;
+  background: #555555;
+  transform: scale(0, 1);
+  transform-origin: left top;
+  transition: transform 0.3s;
+}
+.header-right a:hover::after {
+  transform: scale(1, 1);
 }
 
 .fas {

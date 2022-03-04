@@ -2,20 +2,24 @@
   <div>
     <div class="top-wrapper">
       <div class="container">
-        <h1>DELIVERING THE FEELINGS OF ALOHA TO YOU</h1>
-        <p>日本にいながらアロハな気分をあなたにお届け！</p>
-        <p>
-          ラクラクアロハは自宅にハワイアン料理がデリバリーで届くハワイアンECサイトです。
-        </p>
-        <div class="btn-wrapper">
-          <a href="register_admin.html" class="btn signup">会員登録</a>
-          <p>or</p>
-          <a href="#" class="btn facebook"
-            ><i class="fab fa-facebook"></i>Facebookで登録</a
-          >
-          <a href="#" class="btn twitter"
-            ><i class="fab fa-twitter"></i>Twitterで登録</a
-          >
+        <div class="top-container">
+          <div class="catchCopy">
+            <h1>DELIVERING THE FEELINGS OF COFFEE TO YOU</h1>
+            <p>こだわりのコーヒーとスイーツをおうちで</p>
+            <p>
+              らくらくcoffeeはあなたのささやかな幸せに寄り添う "最高の一杯"
+              をお届けします。
+            </p>
+            <div class="btn-wrapper">
+              <a href="/registerUser" class="btn signup">会員登録</a>
+              <p>or</p>
+              <a href="#" class="btn facebook">Facebookで登録</a>
+              <a href="#" class="btn twitter">Twitterで登録</a>
+            </div>
+          </div>
+          <div class="top-img">
+            <img src="../../public/img_coffee/top-page.jpg" />
+          </div>
         </div>
       </div>
     </div>
@@ -31,7 +35,7 @@
               <img src="../../public/img_coffee/point1.jpg" />
             </div>
             <p class="text-contents">
-              アロハテーブルやウルフギャング、田中オブ東京などのハワイの有名店で修行を積んだ一流シェフによる本格的なハワイアン料理が家にいてもお手軽に楽しむことができます。
+              この場所で生まれる小さな出会いやささやかな会話の一つひとつが、永くつづく時の流れの中に溶け込んでいく。そんな豊かな体験を提供するために、一杯に、一皿に、想いを乗せていきます。
             </p>
           </div>
           <div class="top-item">
@@ -39,15 +43,17 @@
               <img src="../../public/img_coffee/point2.jpg" />
             </div>
             <p class="text-contents">
-              アイランドビンテージコーヒーやボガーツカフェのアサイボウルはもちろんのこと、最近流行りのバナンのソフトクリーム、エッグスンシングスのふわふわパンケーキなど有名店のスイーツも充実しています。
+              エチオピアモカの華やかなアロマとワイニーな口あたりが特徴のコーヒー豆を使用しています。深いボディを感じながら、くつろぎながらゆっくりと、その味わいをお楽しみください。
             </p>
           </div>
           <div class="top-item">
             <div class="top-item-icon">
-              <img src="../../public/img_coffee/point3.jpg" />
+              <div class="point3">
+                <img src="../../public/img_coffee/point3.jpg" />
+              </div>
             </div>
             <p class="text-contents">
-              ハワイといえばビーチでマイタイ！コナブリューイングのハワイアンコナビールなどハワイでしか飲めないアルコールも豊富にあります。
+              コーヒーだけでなく、スイーツも豊富に取り揃えています。お店の人気メニューのドーナツだけでなく、期間限定で登場するふわふわパンケーキや、季節のフルーツを使ったタルトケーキを味わえます。
             </p>
           </div>
           <div class="top-item">
@@ -55,20 +61,21 @@
               <img src="../../public/img_coffee/point4.jpg" />
             </div>
             <p class="text-contents">
-              シェラトンワイキキ、ロイヤルハワイアン、モアナサーフライダー、アウラニに入っているレストランの創作料理も「ラクラクアロハ」なら気軽に注文できます。
+              ネットでの注文だけでなくイートインスペースもあります。お店の雰囲気やコーヒーの香りを楽しみながらゆっくりと過ごすのはいかがですか。
             </p>
           </div>
         </div>
       </div>
     </div>
-
     <div class="message-wrapper">
       <div class="container">
         <div class="heading">
-          <h2>さぁ、今すぐALOHAの旅に出よう！</h2>
-          <h3>Let's go on an Aloha trip!</h3>
+          <h2 class="topic">癒しのひと時をあなたに</h2>
+          <h3 class="topic">Let's enjoy tea time!</h3>
         </div>
-        <span class="btn message">ALOHAの旅に出る！</span>
+        <a href="/itemList"
+          ><span class="btn message">ようこそ、コーヒーの世界へ</span></a
+        >
       </div>
     </div>
   </div>

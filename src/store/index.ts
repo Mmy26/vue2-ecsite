@@ -28,53 +28,7 @@ export default new Vuex.Store({
       new Date(),
       0,
       new User(0, "", "", "", "", "", ""),
-
-      [
-        new OrderItem(
-          21,
-          1,
-          1,
-          1,
-          "M",
-          new Item(
-            21,
-            "coffee",
-            "Gorgeous4サンド",
-            "",
-            480,
-            700,
-            "/img_coffee/1.jpg",
-            false,
-            [
-              new Topping(-1, "coffee", "ピクルス", 200, 300),
-              new Topping(-1, "coffee", "チーズ", 200, 300),
-            ]
-          ),
-          []
-        ),
-        new OrderItem(
-          21,
-          1,
-          1,
-          2,
-          "L",
-          new Item(
-            21,
-            "coffee",
-            "コーヒー",
-            "",
-            480,
-            700,
-            "/img_coffee/1.jpg",
-            false,
-            [
-              new Topping(-1, "coffee", "ピクルス", 200, 300),
-              new Topping(-1, "coffee", "チーズ", 200, 300),
-            ]
-          ),
-          []
-        ),
-      ]
+      []
     ),
 
     itemList: new Array<Item>(),
