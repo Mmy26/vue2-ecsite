@@ -1,6 +1,7 @@
 import { User } from "./user";
 import { OrderItem } from "./orderItem";
 import { OrderItemForm } from "./orderItemForm";
+import { format } from "date-fns";
 /**
  *注文を表すドメインクラス.
  */
@@ -46,7 +47,7 @@ export class Order {
       itemListTotalPrice += orderItem.calcSubTotalPrice;
     }
     return itemListTotalPrice;
-  } 
+  }
   /**
    * 消費税を計算する.
    * @returns 消費税
@@ -67,16 +68,24 @@ export class Order {
   /** 注文をする際に利用するフォームリストを作成するgetter.
    * @returns オーダー表の配列
    */
-  public get makeOrderFormList(): any{
+  public get makeOrderFormList(): any {
     const newArray = [];
     for (const orderItem of this.orderItemList) {
       newArray.push({
         itemId: orderItem.itemId,
         quantity: orderItem.quantity,
-        size: orderItem.size
+        size: orderItem.size,
       });
     }
     return newArray;
+  }
+
+  get formatDeliveryTime(): string {
+    const formatDeliveryTime = format(
+      this.deliveryTime,
+      "yyyy年MM月dd日hh時mm分"
+    );
+    return formatDeliveryTime;
   }
 
   public get id(): number {

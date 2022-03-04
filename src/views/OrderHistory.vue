@@ -30,18 +30,25 @@
             </thead>
 
             <tbody>
-              <tr>
-                <th>
-                  {{ currentOrderHistoryInfoList.orderDate }}
-                </th>
-                <th>{{ currentOrderHistoryInfoList.deliveryTime }}</th>
-                <th>
-                  {{ currentOrderHistoryInfoList.destinationAddress }}
-                </th>
-                <th>
-                  {{ currentOrderHistoryInfoList.orderItemList }}
-                </th>
-              </tr>
+              <div class="displayOrder">
+                <span
+                  v-for="order of currentOrderHistoryInfoList"
+                  v-bind:key="order.userId"
+                >
+                  <tr>
+                    <td>
+                      {{ order.orderDate }}
+                    </td>
+                    <td>{{ order.formatOrderDate }}</td>
+                    <td>
+                      {{ order.destinationAddress }}
+                    </td>
+                    <td>
+                      {{ order.orderItemList }}
+                    </td>
+                  </tr>
+                </span>
+              </div>
             </tbody>
           </table>
         </div>
@@ -54,6 +61,7 @@
 import { Component, Vue } from "vue-property-decorator";
 import { User } from "@/types/user";
 import { OrderHistoryInfo } from "@/types/orderHistoryInfo";
+import { Order } from "@/type/order";
 
 @Component
 export default class OrderHistory extends Vue {
@@ -62,7 +70,9 @@ export default class OrderHistory extends Vue {
     -1,
     new Date(),
     "",
+    // 配達時間をformatする
     new Date(),
+    // 注文商品が全表されてる
     []
   );
 
@@ -83,8 +93,7 @@ export default class OrderHistory extends Vue {
   width: 850px;
   margin-left: auto;
   margin-right: auto;
-  white-space: nowrap;
-  word-wrap: break-word;
+  border: solid;
 }
 
 .h1 {
