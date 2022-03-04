@@ -76,6 +76,9 @@
             <button class="btn" type="button" v-on:click="onOrderClick">
               <span>注文に進む</span>
             </button>
+            <button class="btn continue-shopping" type="button" v-on:click="continueShopping">
+              <span>買い物を続ける</span>
+            </button>
           </div>
         </div>
       </div>
@@ -149,6 +152,13 @@ export default class XXXComponent extends Vue {
     }
     this.$router.push("/login");
   }
+
+  /**
+   * 買い物を続ける
+   */
+  continueShopping(): void {
+    this.$router.push("/itemList");
+  }
   /**
    * 商品を削除する.
    */
@@ -165,5 +175,13 @@ export default class XXXComponent extends Vue {
 .error-message {
   text-align: center;
   margin-top: 20px;
+}
+
+.btn{
+  margin-right:20px;
+}
+
+.continue-shopping{
+  background-color: rgba(192, 192, 192, 0.849);
 }
 </style>
