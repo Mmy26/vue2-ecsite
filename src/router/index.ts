@@ -55,9 +55,9 @@ const routes: Array<RouteConfig> = [
     component: () => import("../views/OrderHistory.vue"),
   },
   {
-    path: "/error",
+    path: "*",
     component: () => import("../views/Error.vue"),
-  }
+  },
 ];
 
 const router = new VueRouter({

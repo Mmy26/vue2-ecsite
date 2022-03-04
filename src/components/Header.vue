@@ -5,10 +5,7 @@
         <div class="header">
           <div class="header-left">
             <a href="/top">
-              <img
-                class="logo"
-                src="img_coffee/header_logo.png"
-              />
+              <img class="logo" src="/img_coffee/header_logo.png" />
             </a>
           </div>
 
@@ -72,7 +69,7 @@ header {
   color: #555555;
   display: block;
   transition: all 0.5s;
-   position: relative;
+  position: relative;
   display: inline-block;
   text-decoration: none;
 }

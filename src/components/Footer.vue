@@ -3,7 +3,7 @@
     <footer>
       <div class="container">
         <img
-          src="img_coffee/header_logo.png"
+          src="/img_coffee/header_logo.png"
           class="footer-logo responsive-img"
         />
         <p>優雅な時間ををあなたにお届け</p>
