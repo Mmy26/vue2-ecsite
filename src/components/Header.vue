@@ -4,7 +4,7 @@
       <div class="container">
         <div class="header">
           <div class="header-left">
-            <a href="/top">
+            <a href="/">
               <img class="logo" src="img_coffee/header_logo.png" />
             </a>
           </div>
@@ -13,7 +13,7 @@
             <router-link to="/itemList">商品一覧</router-link>
             <router-link to="/registerUser">会員登録</router-link>
             <router-link to="/cartList"
-              ><i class="material-icons icon">shopping_cart</i
+              ><i class="material-icons prefix icon fix">shopping_cart</i
               >カート</router-link
             >
             <router-link to="/login" v-if="!isLogin">
@@ -98,5 +98,9 @@ header {
 .icon {
   margin-top: 1px;
   margin-right: 4px;
+}
+
+.fix{
+  margin-top:5px;
 }
 </style>
