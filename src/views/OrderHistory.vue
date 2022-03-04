@@ -19,7 +19,7 @@
           />
         </div>
         <div class="col s12">
-          <table class="orderFinishHistory">
+          <table border="1" class="tableFormat">
             <thead>
               <tr>
                 <th>ご注文日</th>
@@ -39,12 +39,14 @@
                     <td>
                       {{ order.orderDate }}
                     </td>
-                    <td>{{ order.formatOrderDate }}</td>
+                    <td>{{ order.formatDeliveryTime }}</td>
                     <td>
                       {{ order.destinationAddress }}
                     </td>
                     <td>
-                      {{ order.orderItemList }}
+                      {{ order.orderItemList.item.name }}
+                      {{ order.orderItemList.item.topping.name }}
+                      {{ order.orderItemList.totalprice }}
                     </td>
                   </tr>
                 </span>
@@ -89,11 +91,10 @@ export default class OrderHistory extends Vue {
 </script>
 
 <style scoped>
-.orderFinishHistory {
+.tableFormat {
   width: 850px;
   margin-left: auto;
   margin-right: auto;
-  border: solid;
 }
 
 .h1 {

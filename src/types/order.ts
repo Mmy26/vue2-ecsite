@@ -81,10 +81,7 @@ export class Order {
   }
 
   get formatDeliveryTime(): string {
-    const formatDeliveryTime = format(
-      this.deliveryTime,
-      "yyyy年MM月dd日hh時mm分"
-    );
+    const formatDeliveryTime = format(this.deliveryTime, "yyyy年MM月dd日");
     return formatDeliveryTime;
   }
 
