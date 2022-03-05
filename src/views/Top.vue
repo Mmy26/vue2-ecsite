@@ -90,7 +90,7 @@ export default class XXXComponent extends Vue {
   
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   mounted() {
-    //cdnのインストールが必要。mountedだとタイミングが合わないので、時間をずらした。
+    //npmのインストールが必要。mountedだとタイミングが合わないので、時間をずらした。
     setTimeout(() => {
       M.AutoInit();
     }, 100);
