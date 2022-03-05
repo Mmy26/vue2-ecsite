@@ -82,6 +82,10 @@ export class Order {
     return newArray;
   }
 
+  public get formatPrettyDate(): string{
+    return format(this.deliveryTime, "yyyy年MM月dd日");
+  }
+
   get formatDeliveryTime(): string {
     const formatDeliveryTime = format(this.deliveryTime, "YYYY/MM/DD/HH/mm");
     return formatDeliveryTime;

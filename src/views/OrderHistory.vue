@@ -64,7 +64,6 @@
 import { Component, Vue } from "vue-property-decorator";
 import { User } from "@/types/user";
 import { Order } from "@/types/order";
-import { format } from "date-fns";
 import axios from "axios";
 
 @Component
