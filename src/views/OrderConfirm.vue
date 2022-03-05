@@ -442,6 +442,7 @@ export default class OrderConfirm extends Vue {
     if (this.hasError) {
       return;
     }
+    console.log("ここを確認         " + this.deliveryDate.replaceAll("-", "/") + " " + this.deliveryTime +format(new Date(), ":mm:ss"))
     //注文をする機能のメインの処理
     const response = await axios.post(
       "http://153.127.48.168:8080/ecsite-api/order",
@@ -459,8 +460,6 @@ export default class OrderConfirm extends Vue {
         orderItemFormList: this.currentOrder.makeOrderFormList,
       }
     );
-    console.dir(JSON.stringify(response));
-    console.log(this.currentUser.id);
     if (response.data.status === "success") {
       this.$store.commit("updateCurrentUser", {
         name: this.destinationName,

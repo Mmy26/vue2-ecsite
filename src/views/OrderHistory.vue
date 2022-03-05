@@ -77,9 +77,10 @@ export default class OrderHistory extends Vue {
     }
     this.currentUser = this.$store.getters.getCurrentUser;
     const response = await axios.get(
-      'http://153.127.48.168:8080/ecsite-api/order/orders/coffee/' + this.currentUser.id
+      "http://153.127.48.168:8080/ecsite-api/order/orders/coffee/" +
+        this.currentUser.id
     );
-    for (const order of response.data.orders ) {
+    for (const order of response.data.orders) {
       this.currentOrderHistoryInfoList.push(
         new Order(
           order.id,
@@ -102,13 +103,13 @@ export default class OrderHistory extends Vue {
     this.currentUser = this.$store.getters.getCurrentUser;
   }
   /**
-   * 
+   *
    */
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   formatDeliveryTime(date: unknown): string {
     let targetStr = `${date}`;
     let newArray = targetStr.split("T");
-    return newArray[0];
+    return newArray[0]
   }
 }
 </script>
