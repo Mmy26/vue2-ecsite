@@ -38,7 +38,7 @@
                   {{ order.orderDate }}
                 </th>
                 <th>
-                  {{ order.deliveryTime }}
+                  {{ formatDeliveryTime(order.deliveryTime) }}
                 </th>
                 <th>
                   {{ order.destinationAddress }}
@@ -100,6 +100,15 @@ export default class OrderHistory extends Vue {
       );
     }
     this.currentUser = this.$store.getters.getCurrentUser;
+  }
+  /**
+   * 
+   */
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  formatDeliveryTime(date: unknown): string {
+    let targetStr = `${date}`;
+    let newArray = targetStr.split("T");
+    return newArray[0];
   }
 }
 </script>
