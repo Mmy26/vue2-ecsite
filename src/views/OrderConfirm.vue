@@ -75,14 +75,14 @@
             <div class="row">
               <div class="input-field">
                 <input id="name" type="text" v-model="destinationName" />
-                <label for="name">お名前</label>
+                <label for="name" v-bind:class="{ active: isLogin }">お名前</label>
               </div>
               <div class="error-message">{{ nameErrorMessage }}</div>
             </div>
             <div class="row">
               <div class="input-field">
                 <input id="email" type="email" v-model="destinationEmail" />
-                <label for="email">メールアドレス</label>
+                <label for="email" v-bind:class="{ active: isLogin }">メールアドレス</label>
               </div>
               <div class="error-message">{{ emailErrorMessage }}</div>
             </div>
@@ -94,7 +94,7 @@
                   maxlength="8"
                   v-model="destinationZipcode"
                 />
-                <label for="zipcode">郵便番号</label>
+                <label for="zipcode" v-bind:class="{ active: isLogin }">郵便番号</label>
                 <button class="btn" type="button" v-on:click="getAddress">
                   <span>住所検索</span>
                 </button>
@@ -104,23 +104,23 @@
             <div class="row">
               <div class="input-field">
                 <input id="address" type="text" v-model="destinationAddress" />
-                <label for="address">住所</label>
+                <label for="address" v-bind:class="{ active: isLogin }">住所</label>
               </div>
               <div class="error-message">{{ addressErrorMessage }}</div>
             </div>
             <div class="row">
               <div class="input-field">
                 <input id="tel" type="tel" v-model="destinationTel" />
-                <label for="tel">電話番号</label>
+                <label for="tel" v-bind:class="{ active: isLogin }">電話番号</label>
               </div>
               <div class="error-message">{{ telErrorMessage }}</div>
             </div>
             <div class="row order-confirm-delivery-datetime">
               <div class="input-field">
                 <input id="deliveryDate" type="date" v-model="deliveryDate"/>
-                <label for="address">配達日時</label>
+                <label for="address" v-bind:class="{ active: isLogin }">配達日時</label>
               </div>
-              <label class="order-confirm-delivery-time">
+              <label class="order-confirm-delivery-time" >
                 <input
                   name="deliveryDate"
                   type="radio"
@@ -331,6 +331,7 @@ export default class OrderConfirm extends Vue {
   private delivelyErrorMessage = "";
   //クレジットカード入力フォームのFrag
   private canShow = false;
+  private isLogin = this.$store.getters.getLoginStatus;
 
   /**
    * ショッピングカート一覧を表示させる.
@@ -338,8 +339,6 @@ export default class OrderConfirm extends Vue {
   created(): void {
     this.currentOrder = this.$store.getters.getOrder;
     this.currentUser = this.$store.getters.getCurrentUser;
-    console.log(this.currentOrder);
-    console.log(this.currentUser);
   }
   /**
    * 注文ボタンが押下されたときのメソッド.
