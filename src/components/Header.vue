@@ -98,6 +98,7 @@ header {
 .icon {
   margin-top: 1px;
   margin-right: 4px;
+  vertical-align: -6px;
 }
 
 .fix {
