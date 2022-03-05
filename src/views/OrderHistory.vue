@@ -63,30 +63,44 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { User } from "@/types/user";
-import { OrderHistoryInfo } from "@/types/orderHistoryInfo";
 import { Order } from "@/types/order";
 import { format } from "date-fns";
+import axios from "axios";
 
 @Component
 export default class OrderHistory extends Vue {
   private currentUser = new User(0, "", "", "", "", "", "");
-  private currentOrderHistoryInfoList = new OrderHistoryInfo(
-    -1,
-    new Date(),
-    "",
-    // 配達時間をformatする
-    new Date(),
-    // 注文商品が全表されてる
-    []
-  );
+  private currentOrderHistoryInfoList = new Array<Order>();
 
-  created(): void {
+  async created(): Promise<void> {
     if (this.$store.getters.getLoginStatus === false) {
       this.$router.push("/login");
     }
-    this.$store.dispatch("asyncGetOrderHistoryInfo");
-    this.currentOrderHistoryInfoList =
-      this.$store.getters.getOrderHistoryInfoList;
+    this.currentUser = this.$store.getters.getCurrentUser;
+    const response = await axios.get(
+      'http://153.127.48.168:8080/ecsite-api/order/orders/coffee/' + this.currentUser.id
+    );
+    for (const order of response.data.orders ) {
+      this.currentOrderHistoryInfoList.push(
+        new Order(
+          order.id,
+          order.userId,
+          order.status,
+          order.totalPrice,
+          order.orderDate,
+          order.destinationName,
+          order.destinationEmail,
+          order.destinationZipcode,
+          order.destinationAddress,
+          order.destinationTel,
+          order.deliveryTime,
+          order.paymentMethod,
+          order.user,
+          order.orderItemList
+        )
+      );
+    }
+    this.currentUser = this.$store.getters.getCurrentUser;
   }
 }
 </script>

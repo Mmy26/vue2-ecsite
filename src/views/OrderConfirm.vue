@@ -338,12 +338,21 @@ export default class OrderConfirm extends Vue {
   created(): void {
     this.currentOrder = this.$store.getters.getOrder;
     this.currentUser = this.$store.getters.getCurrentUser;
+    console.log(this.currentOrder);
+    console.log(this.currentUser);
   }
   /**
    * 注文ボタンが押下されたときのメソッド.
    * @returns プロミスオブジェクト
    */
   async order(): Promise<void> {
+  this.errorMessage = "";
+  this.nameErrorMessage = "";
+  this.emailErrorMessage = "";
+  this.zipcodeErrorMessage = "";
+  this.addressErrorMessage = "";
+  this.telErrorMessage = "";
+  this.delivelyErrorMessage = "";
     //入力値チェック
     if (this.destinationName === "") {
       this.nameErrorMessage = "名前を入力して下さい";
@@ -399,7 +408,7 @@ export default class OrderConfirm extends Vue {
       return hasTelError;
     };
     if (telCheck()) {
-      this.telErrorMessage = "電話番号はXXXX-XXXX-XXXXの形式で入力してください";
+      this.telErrorMessage = "電話番号はXXX-XXXX-XXXXの形式で入力してください";
       this.hasError = true;
     }
     if (this.destinationTel === "") {
@@ -438,9 +447,9 @@ export default class OrderConfirm extends Vue {
     const response = await axios.post(
       "http://153.127.48.168:8080/ecsite-api/order",
       {
-        userId: this.currentOrder.user.id,
+        userId: this.currentUser.id,
         status: this.currentOrder.status,
-        totalPrice: this.currentOrder.totalPrice,
+        totalPrice: this.currentOrder.calcTotalPrice,
         destinationName: this.destinationName,
         destinationEmail: this.destinationEmail,
         destinationZipcode: this.destinationZipcode.replace("-", ""),
@@ -451,6 +460,8 @@ export default class OrderConfirm extends Vue {
         orderItemFormList: this.currentOrder.makeOrderFormList,
       }
     );
+    console.dir(JSON.stringify(response));
+    console.log(this.currentUser.id);
     if (response.data.status === "success") {
       this.$store.commit("updateCurrentUser", {
         name: this.destinationName,

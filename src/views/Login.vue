@@ -88,6 +88,8 @@ export default class Login extends Vue {
         address: response.data.responseMap.user.address,
         telephone: response.data.responseMap.user.telephone,
       });
+      console.dir(JSON.stringify(this.$store.state.currentUser))
+      console.dir(JSON.stringify(this.$store.getters.getCurrentUser))
       // ログイン状態をtrueにする
       this.$store.commit("logined");
       if (this.$store.state.order.orderItemList.length >= 1) {
