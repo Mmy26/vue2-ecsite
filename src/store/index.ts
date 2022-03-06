@@ -14,6 +14,8 @@ export default new Vuex.Store({
   state: {
     // ログインしているかどうか
     isLogin: false,
+    // カートに商品が入っているかどうか
+    inCart: false,
     order: new Order(
       0,
       0,
@@ -79,6 +81,20 @@ export default new Vuex.Store({
      */
     logouted(state) {
       state.isLogin = false;
+    },
+    /**
+     * カートに商品がある
+     * @param state - ステート
+     */
+    itemInCart(state) {
+      state.inCart = true;
+    },
+    /**
+     * カートに商品がない
+     * @param state - ステート
+     */
+    itemOutCart(state) {
+      state.inCart = false;
     },
     /**
      * 商品リストを作成し、stateにセットするメソッド.

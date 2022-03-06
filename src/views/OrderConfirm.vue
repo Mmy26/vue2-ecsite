@@ -50,11 +50,6 @@
                       {{ orderItem.calcSubTotalPrice.toLocaleString() }}円
                     </div>
                   </td>
-                  <td>
-                    <button class="btn" type="button">
-                      <span>削除</span>
-                    </button>
-                  </td>
                 </tr>
               </tbody>
             </table>
@@ -308,7 +303,7 @@ export default class OrderConfirm extends Vue {
   //注文者の電話番号
   private destinationTel = this.$store.getters.getCurrentUserTel;
   //配達日時
-  private deliveryDate = ""
+  private deliveryDate = "";
   //配達時間
   private deliveryTime = 10;
   //支払い方法
@@ -416,12 +411,12 @@ export default class OrderConfirm extends Vue {
     }
     const hoursCheck = (): boolean => {
       let currentDate = new Date();
-      
-        let splitedArray = this.deliveryDate.split("-");
-        let yearNum = Number(splitedArray[0])
-        let manthNum = Number(splitedArray[1])
-        let dayNum = Number(splitedArray[2])
-        let targetDate = new Date(yearNum, manthNum -1, dayNum);
+
+      let splitedArray = this.deliveryDate.split("-");
+      let yearNum = Number(splitedArray[0]);
+      let manthNum = Number(splitedArray[1]);
+      let dayNum = Number(splitedArray[2]);
+      let targetDate = new Date(yearNum, manthNum - 1, dayNum);
       return (
         targetDate <=
         new Date(
@@ -436,7 +431,7 @@ export default class OrderConfirm extends Vue {
       this.delivelyErrorMessage = "今から3時間後の日時をご入力ください";
       this.hasError = true;
     }
-    if (this.deliveryDate === "" ) {
+    if (this.deliveryDate === "") {
       this.delivelyErrorMessage = "配達日時を入力してください。";
     }
     if (this.hasError) {
@@ -455,7 +450,11 @@ export default class OrderConfirm extends Vue {
         destinationZipcode: this.destinationZipcode.replace("-", ""),
         destinationAddress: this.destinationAddress,
         destinationTel: this.destinationTel,
-        deliveryTime:  this.deliveryDate.replaceAll("-", "/") + " " + this.deliveryTime +format(new Date(), ":mm:ss"),
+        deliveryTime:
+          this.deliveryDate.replaceAll("-", "/") +
+          " " +
+          this.deliveryTime +
+          format(new Date(), ":mm:ss"),
         paymentMethod: this.paymentMethod,
         orderItemFormList: this.currentOrder.makeOrderFormList,
       }

@@ -313,6 +313,7 @@ export default class ItemDetail extends Vue {
       this.selectToppingList(this.selectTopping)
     );
     this.$store.commit("addItem", orderItem);
+    this.$store.commit("itemInCart");
     //注文確認画面に遷移する
     this.$router.push("/cartList");
   }
