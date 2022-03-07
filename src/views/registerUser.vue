@@ -166,6 +166,17 @@ export default class XXXComponent extends Vue {
    * @returns Promiseオブジェクト
    */
   async registerUser(): Promise<void> {
+    this.errorMessage = "";
+    this.errorLastName = "";
+    this.errorFirstName = "";
+    this.errorMailAddress = "";
+    this.errorZipCode = "";
+    this.errorAddress = "";
+    this.errorTelephone = "";
+    this.errorPassword = "";
+    this.errorPasswordConfirmation = "";
+    this.errorChecker = true;
+
     // 管理者登録処理
     const response = await axios.post(
       `http://153.127.48.168:8080/ecsite-api/user`,
@@ -178,16 +189,6 @@ export default class XXXComponent extends Vue {
         telephone: this.telephone,
       }
     );
-
-    this.errorMessage = "";
-    this.errorLastName = "";
-    this.errorFirstName = "";
-    this.errorMailAddress = "";
-    this.errorZipCode = "";
-    this.errorAddress = "";
-    this.errorTelephone = "";
-    this.errorPassword = "";
-    this.errorPasswordConfirmation = "";
 
     if (this.lastName === "") {
       this.errorLastName = "姓が入力されていません";
@@ -235,7 +236,10 @@ export default class XXXComponent extends Vue {
       this.errorPassword = "パスワードが入力されていません";
       this.errorChecker = false;
     }
-    if (this.password.length < 8 || 16 < this.password.length) {
+    if (
+      (this.password !== "" && this.password.length < 8) ||
+      16 < this.password.length
+    ) {
       this.errorPassword =
         "パスワードは８文字以上１６文字以内で設定してください";
       this.errorChecker = false;
