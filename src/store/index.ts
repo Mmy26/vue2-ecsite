@@ -9,7 +9,6 @@ import axios from "axios";
 import { Topping } from "@/types/topping2";
 
 Vue.use(Vuex);
-
 export default new Vuex.Store({
   state: {
     // ログインしているかどうか

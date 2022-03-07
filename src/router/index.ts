@@ -23,8 +23,17 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: "/itemDetail/:id",
+    // redirect: () => {
+    //   const ItemId=this.$store.getters.getItemId
+    //   if (  ItemId>= 39 && ItemId <= 20) {
+    //     return { path: "/itemDetail/:id" };
+    //   } else {
+    //     return { path: "/error" };
+    //   }
+    // },
     component: () => import("../views/ItemDetail2.vue"),
   },
+
   {
     path: "/registerUser",
     component: () => import("../views/registerUser.vue"),
