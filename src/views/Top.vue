@@ -103,10 +103,21 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import { Component, Vue } from "vue-property-decorator";
+import M from "materialize-css/dist/js/materialize.min";
 @Component
-export default class XXXComponent extends Vue {}
+export default class XXXComponent extends Vue {
+  
+  
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  mounted() {
+    //npmのインストールが必要。mountedだとタイミングが合わないので、時間をずらした。
+    setTimeout(() => {
+      M.AutoInit();
+    }, 100);
+  }
+}
 </script>
 
 <style scoped>
