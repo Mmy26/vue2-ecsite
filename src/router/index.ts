@@ -64,12 +64,7 @@ const routes: Array<RouteConfig> = [
     component: () => import("../views/OrderHistory.vue"),
   },
   {
-    path: "/error",
-    component: () => import("../views/Error.vue"),
-  },
-  {
     path: "*",
-    name: "NotFoundError",
     component: () => import("../views/Error.vue"),
   },
 ];

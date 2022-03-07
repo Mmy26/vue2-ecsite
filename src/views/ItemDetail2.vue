@@ -12,9 +12,31 @@
             </div>
             <div class="item-intro">
               {{ selectItem.discription }}
+              <div class="sns-btn">
+                <a
+                  target="_blank"
+                  href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F192.168.11.12%3A8080%2FitemDetail&amp;src=sdkpreparse"
+                  ><button type="button" class="sns facebook-btn">
+                    Facebook
+                  </button></a
+                >
+                <a
+                  target="_blank"
+                  href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+                  data-show-count="false"
+                >
+                  <button type="button" class="sns twitter-btn">
+                    Twitter
+                  </button></a
+                >
+                <a
+                  target="_blank"
+                  href="https://social-plugins.line.me/lineit/share?url=http://192.168.11.12:8080/itemDetail"
+                  ><button type="button" class="sns line-btn">LINE</button></a
+                >
+              </div>
             </div>
           </div>
-
           <div class="row item-size">
             <div class="item-hedding">サイズ</div>
             <div>
@@ -261,8 +283,18 @@ export default class ItemDetail extends Vue {
   /** 商品をカートに入れる.
    */
   addToCart(): void {
+    const order = this.$store.getters.getOrder;
+    const orderItemList = order.orderItemList;
+
+    const latestOrderItem = orderItemList[orderItemList.length - 1];
+    console.log("latestOrderItem");
+    let newOrderItemId = 0;
+    if (latestOrderItem !== undefined) {
+      newOrderItemId = latestOrderItem.id + 1;
+    }
+    console.dir(JSON.stringify(latestOrderItem));
     const orderItem = new OrderItem(
-      0,
+      newOrderItemId,
       this.selectItem.id,
       1,
       this.selectItemQuantity,
@@ -281,19 +313,21 @@ export default class ItemDetail extends Vue {
       this.selectToppingList(this.selectTopping)
     );
     this.$store.commit("addItem", orderItem);
+    this.$store.commit("itemInCart");
     //注文確認画面に遷移する
     this.$router.push("/cartList");
   }
 
   selectToppingList(selectToppingIdList: Array<number>): Array<orderTopping> {
     const selectOrderToppingList = new Array<orderTopping>();
+    let i = 0;
 
     for (let toppingId of selectToppingIdList) {
       const topping = this.selectItem.toppingList.find((topping) => {
         return topping.id === toppingId;
       });
       if (topping !== undefined) {
-        const aOrderTopping = new orderTopping(0, toppingId, 0, topping);
+        const aOrderTopping = new orderTopping(++i, toppingId, 0, topping);
         selectOrderToppingList.push(aOrderTopping);
       }
     }
@@ -306,5 +340,39 @@ export default class ItemDetail extends Vue {
 @import url("/css/item_detail.css");
 .item-toppings {
   display: inline-block;
+}
+
+.facebook-btn {
+  background-color: #3b5998;
+}
+
+.twitter-btn {
+  background-color: #55acee;
+}
+
+.line-btn {
+  background-color: #14b887;
+}
+
+.sns {
+  width: 80px;
+  height: 25px;
+  font-size: 13px;
+  padding: 5px 12px;
+  color: white;
+  margin-right: 10px;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+}
+
+.sns:hover {
+  opacity: 0.7;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.sns-btn {
+  margin-top: 20px;
 }
 </style>

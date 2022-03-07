@@ -6,7 +6,7 @@
     <div class="top-wrapper">
       <div class="container">
         <h1 class="page-title">ショッピングカート</h1>
-        <div>{{ errorMessage }}</div>
+        <div class="error-message">{{ errorMessage }}</div>
         <!-- table -->
         <div class="cartlist" v-show="canShow">
           <div class="row">
@@ -21,7 +21,7 @@
               </thead>
               <tbody>
                 <tr
-                  v-for="orderItem of this.currentOrder.orderItemList"
+                  v-for="(orderItem, index) of this.currentOrder.orderItemList"
                   v-bind:key="orderItem.id"
                 >
                   <td class="cart-item-name">
@@ -38,10 +38,14 @@
                   <td>
                     <ul>
                       <li
-                        v-for="topping of orderItem.item.toppingList"
-                        v-bind:key="topping.id"
+                        v-for="orderTopping of orderItem.orderToppingList"
+                        v-bind:key="orderTopping.id"
                       >
-                        {{ topping.name }}{{ topping.toppingPrice }}円
+                        {{ orderTopping.topping.name }}
+                        <span v-if="orderItem.size === 'M'"
+                          >{{ orderTopping.topping.priceM }}円</span
+                        >
+                        <span v-else>{{ orderTopping.topping.priceL }}円</span>
                       </li>
                     </ul>
                   </td>
@@ -51,7 +55,11 @@
                     </div>
                   </td>
                   <td>
-                    <button class="btn" type="button">
+                    <button
+                      class="btn"
+                      type="button"
+                      v-on:click="removeFromCart(index)"
+                    >
                       <span>削除</span>
                     </button>
                   </td>
@@ -72,6 +80,13 @@
             <button class="btn" type="button" v-on:click="onOrderClick">
               <span>注文に進む</span>
             </button>
+            <button
+              class="btn continue-shopping"
+              type="button"
+              v-on:click="continueShopping"
+            >
+              <span>買い物を続ける</span>
+            </button>
           </div>
         </div>
       </div>
@@ -87,7 +102,7 @@ import { Order } from "@/types/order";
 import { User } from "@/types/user";
 import { OrderItem } from "@/types/orderItem";
 import { Item } from "@/types/item";
-import { Topping } from "@/types/topping2";
+
 @Component
 export default class XXXComponent extends Vue {
   // 合計金額
@@ -129,6 +144,7 @@ export default class XXXComponent extends Vue {
    */
   created(): void {
     this.currentOrder = this.$store.getters.getOrder;
+
     // カートに商品が1個もなければエラーメッセージを出す
     if (this.currentOrder.orderItemList.length === 0) {
       this.errorMessage = "カートに商品がありません";
@@ -139,11 +155,17 @@ export default class XXXComponent extends Vue {
    * 注文に進む.
    */
   onOrderClick(): void {
-    if (this.$store.getters.getLoginStatus === false) {
-      this.$router.push("/login");
+    if (this.$store.getters.getLoginStatus === true) {
+      this.$router.push("/orderConfirm");
     }
-    //注文確認画面に遷移する
-    this.$router.push("/orderConfirm");
+    this.$router.push("/login");
+  }
+
+  /**
+   * 買い物を続ける
+   */
+  continueShopping(): void {
+    this.$router.push("/itemList");
   }
   /**
    * 商品を削除する.
@@ -157,4 +179,17 @@ export default class XXXComponent extends Vue {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.error-message {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.btn {
+  margin-right: 20px;
+}
+
+.continue-shopping {
+  background-color: rgba(192, 192, 192, 0.849);
+}
+</style>

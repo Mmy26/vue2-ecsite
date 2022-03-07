@@ -13,6 +13,8 @@ export default new Vuex.Store({
   state: {
     // ログインしているかどうか
     isLogin: false,
+    // カートに商品が入っているかどうか
+    inCart: false,
     order: new Order(
       0,
       0,
@@ -33,6 +35,7 @@ export default new Vuex.Store({
     itemList: new Array<Item>(),
     toppings: new Array<Topping>(),
     orderHistoryInfoList: new Array<Order>(),
+    currentUser: new User(0, "", "", "", "", "", ""),
   },
   actions: {
     /**
@@ -53,9 +56,12 @@ export default new Vuex.Store({
     async asyncGetOrderHistoryInfo(context) {
       //一旦ダミーのIDが入っています。
       //ダミーID 129, 134, 139, 148, 150
+      // 下のid部分をthis.state.currentUser.idにする
+      console.log("ここを確認する       ",this.state.currentUser.id);
       const response = await axios.get(
-        "http://153.127.48.168:8080/ecsite-api/order/orders/coffee/129"
+        `http://153.127.48.168:8080/ecsite-api/order/orders/coffee/${this.state.currentUser.id}`
       );
+      console.dir(JSON.stringify(response));
       const payload = response.data;
       context.commit("setOrderHistoryInfo", payload);
     },
@@ -74,6 +80,20 @@ export default new Vuex.Store({
      */
     logouted(state) {
       state.isLogin = false;
+    },
+    /**
+     * カートに商品がある
+     * @param state - ステート
+     */
+    itemInCart(state) {
+      state.inCart = true;
+    },
+    /**
+     * カートに商品がない
+     * @param state - ステート
+     */
+    itemOutCart(state) {
+      state.inCart = false;
     },
     /**
      * 商品リストを作成し、stateにセットするメソッド.
@@ -125,23 +145,6 @@ export default new Vuex.Store({
         );
       }
     },
-
-    // changeOrderStatus(state, payload) {
-    //   // const statusList = {
-    //   //   targetKey: payload.key,
-    //   //   targetValue: payload.value
-    //   // }
-    //   // state.order.statusList.targetKey = statusList.targetValue;
-    //   state.order.status = payload.status;
-    // },
-    // updateOrder(state, payload) {
-    //   state.order.destinationName = payload.destinationName;
-    //   state.order.destinationEmail = payload.destinationEmail;
-    //   state.order.destinationZipcode = payload.destinationZipcode;
-    //   state.order.destinationAddress = payload.destinationAddress;
-    //   state.order.destinationTel = payload.destinationTel;
-    // },
-
     /**
      * 商品を削除する.
      *
@@ -161,6 +164,60 @@ export default new Vuex.Store({
      */
     addItem(state, payload) {
       state.order.orderItemList.push(payload);
+    },
+    /**
+     * ユーザー情報をセットする.
+     * @param state - ステイト
+     * @param payload APIから返ってきたユーザー情報
+     */
+    setCurrentUser(state, payload) {
+      state.currentUser = new User(
+        payload.id,
+        payload.name,
+        payload.email,
+        payload.password,
+        payload.zipcode,
+        payload.address,
+        payload.telephone
+      );
+      console.log(state.currentUser);
+    },
+    /**
+     * 注文テーブルを削除する.
+     *
+     * @param state - ステート
+     * @param payload - 更新する情報
+     */
+    initializeOrder(state) {
+      state.order = new Order(
+        0,
+        state.currentUser.id,
+        0,
+        0,
+        new Date(),
+        "",
+        "",
+        "",
+        "",
+        "",
+        new Date(),
+        0,
+        state.currentUser,
+        []
+      );
+    },
+    /**
+     * ユーザー情報を更新する.
+     * @param state - ステイト
+     * @param payload 更新するユーザー情報
+     */
+    updateCurrentUser(state, payload) {
+      state.currentUser.name = payload.name;
+      state.currentUser.email = payload.email;
+      state.currentUser.zipcode = payload.zipcode;
+      state.currentUser.address = payload.address;
+      state.currentUser.telephone = payload.telephone;
+      console.log(state.currentUser);
     },
   },
 
@@ -190,7 +247,6 @@ export default new Vuex.Store({
         return items[0];
       };
     },
-
     /**
      * IDからトッピングを検索し返す.
      *
@@ -223,5 +279,53 @@ export default new Vuex.Store({
     getOrderHistoryInfoList(state) {
       return state.orderHistoryInfoList;
     },
+    /**
+     * ログインしているユーザーの情報を取得する.
+     * @param state - ステート
+     * @returns Userオブジェクト
+     */
+    getCurrentUser(state) {
+      return state.currentUser;
+    },
+    /**
+     * ログインしているユーザーの名前情報を取得する.
+     * @param state - ステート
+     * @returns ユーザーの名前
+     */
+     getCurrentUserName(state) {
+      return state.currentUser.name;
+    },
+     /**
+     * ログインしているユーザーのメールアドレス情報を取得する.
+     * @param state - ステート
+     * @returns ユーザーのメールアドレス
+     */
+      getCurrentUserEmail(state) {
+        return state.currentUser.email;
+      },
+       /**
+     * ログインしているユーザーの郵便番号情報を取得する.
+     * @param state - ステート
+     * @returns ユーザーの郵便番号
+     */
+     getCurrentUserZipcode(state) {
+      return state.currentUser.zipcode;
+    },
+     /**
+     * ログインしているユーザーの住所情報を取得する.
+     * @param state - ステート
+     * @returns ユーザーの住所
+     */
+      getCurrentUserAddress(state) {
+        return state.currentUser.address;
+      },
+      /**
+     * ログインしているユーザーの電話番号情報を取得する.
+     * @param state - ステート
+     * @returns ユーザーの電話番号
+     */
+       getCurrentUserTel(state) {
+        return state.currentUser.telephone;
+      },
   },
 });

@@ -4,12 +4,14 @@
     フッターの設定
    ======================================== */
 
+footer .container {
+  max-width: 1920px;
+}
 footer img {
   width: 125px;
 }
 
 footer p {
-  color: #b3aeb5;
   font-size: 12px;
 }
 

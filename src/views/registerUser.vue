@@ -1,25 +1,6 @@
 <template>
   <div>
-    <header>
-      <div class="container">
-        <div class="header">
-          <div class="header-left">
-            <a href="top.html">
-              <img class="logo" src="img/header_logo.png" />
-            </a>
-          </div>
-
-          <div class="header-right">
-            <a href="item_list.html">商品一覧</a>
-            <a href="register_admin.html">会員登録</a>
-            <a href="login.html" class="login">
-              <i class="fas fa-sign-in-alt"></i>ログイン
-            </a>
-          </div>
-        </div>
-      </div>
-    </header>
-    <form>
+    <form class="form">
       <div class="top-wrapper">
         <div class="container">
           <div class="row register-page">
@@ -122,8 +103,10 @@
               <button class="btn" type="button" v-on:click="registerUser">
                 <span>登録<i class="material-icons right">done</i></span>
               </button>
+              <button type="button" v-on:click="reset" class="clear-btn">
+                クリア
+              </button>
             </div>
-            <div><button type="button" v-on:click="reset">クリア</button></div>
           </div>
         </div>
       </div>
@@ -195,7 +178,6 @@ export default class XXXComponent extends Vue {
         telephone: this.telephone,
       }
     );
-    console.dir("response" + JSON.stringify(response));
 
     this.errorMessage = "";
     this.errorLastName = "";
@@ -328,4 +310,26 @@ export default class XXXComponent extends Vue {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.form {
+  width: 750px;
+  height: 970px;
+  margin: 0 auto;
+  box-shadow: 0 0 8px silver;
+}
+.clear-btn {
+  width: 90px;
+  height: 37px;
+  margin-left: 30px;
+  cursor: pointer;
+  background-color: silver;
+  border: none;
+  border-radius: 3px;
+  color: white;
+  box-shadow: 0px 1px 2px silver;
+}
+.clear-btn:hover {
+  opacity: 0.7;
+  transition: 0.5;
+}
+</style>
