@@ -100,6 +100,7 @@ export default class OrderHistory extends Vue {
         )
       );
     }
+    console.dir(JSON.stringify(response.data));
     this.currentUser = this.$store.getters.getCurrentUser;
   }
   /**
@@ -109,7 +110,7 @@ export default class OrderHistory extends Vue {
   formatDeliveryTime(date: unknown): string {
     let targetStr = `${date}`;
     let newArray = targetStr.split("T");
-    return newArray[0]
+    return newArray[0];
   }
 }
 </script>

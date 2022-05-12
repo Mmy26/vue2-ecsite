@@ -251,7 +251,6 @@ export default class ItemDetail extends Vue {
    * 選択された商品の小計を求める
    * @returns -数量、サイズ、トッピングの合計金額
    */
-
   private subTotalPrice = 0;
   calcSubTotalPrice(): number {
     if (this.selectSize === "M") {
